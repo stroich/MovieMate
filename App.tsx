@@ -1,11 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import SearchPage from './src/page/SearchPage/SearchPage';
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>
-      <View />
+      <SearchPage />
     </SafeAreaProvider>
   );
 }
