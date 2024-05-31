@@ -7,18 +7,18 @@ import Search from '../../components/Search/Search';
 function SearchPage(): React.JSX.Element {
   const [listOfMovies, setListOfMovies] = useState<ListMoviesType>([]);
 
-  async function changeData() {
+  const getData = useCallback(async () => {
     const data = await getMovies('');
     setListOfMovies(data.Search);
-  }
+  }, []);
 
   const handleSearch = useCallback((value: ListMoviesType) => {
     setListOfMovies(value);
   }, []);
 
   useEffect(() => {
-    changeData();
-  }, []);
+    getData();
+  }, [getData]);
 
   return (
     <View style={styles.container}>
