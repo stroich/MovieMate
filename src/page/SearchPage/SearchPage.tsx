@@ -1,30 +1,26 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import List, {ListMoviesType} from '../../components/ListMovies/ListMovies';
-import {getMovies} from '../../api/apiMovies';
+import {ListMoviesType} from '../../components/ListMovies/ListMovies';
 import Search from '../../components/Search/Search';
 import Footer from '../../components/Footer/Footer';
+import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
 
 function SearchPage(): React.JSX.Element {
-  const [listOfMovies, setListOfMovies] = useState<ListMoviesType>([]);
-
-  const getData = useCallback(async () => {
-    const data = await getMovies('');
-    setListOfMovies(data.Search);
-  }, []);
+  const [listOfMovies, setListOfMovies] = useState<ListMoviesType | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = useCallback((value: ListMoviesType) => {
     setListOfMovies(value);
   }, []);
 
-  useEffect(() => {
-    getData();
-  }, [getData]);
+  const handleLoading = useCallback((value: boolean) => {
+    setIsLoading(value);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Search searchMovies={handleSearch} />
-      <List data={listOfMovies} />
+      <Search searchMovies={handleSearch} handleLoading={handleLoading} />
+      <MoviesComponent isLoading={isLoading} moviesData={listOfMovies} />
       <Footer />
     </View>
   );
@@ -35,7 +31,10 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     flex: 1,
     backgroundColor: '#282c34',
-    justifyContent: 'space-between',
+  },
+  loading: {
+    color: 'white',
+    textAlign: 'center',
   },
 });
 

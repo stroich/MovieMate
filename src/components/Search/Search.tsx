@@ -12,15 +12,18 @@ import {getMovies} from '../../api/apiMovies';
 
 type SearchProps = {
   searchMovies: (value: ListMoviesType) => void;
+  handleLoading: (value: boolean) => void;
 };
 
-function Search({searchMovies}: SearchProps) {
+function Search({searchMovies, handleLoading}: SearchProps) {
   const [queryText, setQueryText] = useState('');
   const insets = useSafeAreaInsets();
 
   const handleSubmit = async () => {
+    handleLoading(true);
     const data = await getMovies(queryText);
-    searchMovies(data.Search);
+    searchMovies(data);
+    handleLoading(false);
   };
 
   return (
