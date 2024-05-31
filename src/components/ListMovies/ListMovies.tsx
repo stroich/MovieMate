@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {MovieCard} from '../MovieCard/MovieCard';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export type dataType = {
   Poster: string;
@@ -14,8 +15,9 @@ type ListProps = {
 };
 
 function List({data}: ListProps) {
+  const insets = useSafeAreaInsets();
   return (
-    <View style={styles.list}>
+    <View style={[styles.list, {marginBottom: insets.bottom}]}>
       <FlatList
         numColumns={2}
         data={data}
@@ -31,6 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 20,
+    paddingBottom: 120,
   },
 });
 
