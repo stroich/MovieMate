@@ -1,13 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {LIST_OF_ICONS as data} from './data';
+import Icon from '../Icon/Icon';
 
 function Footer() {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={[styles.container, {marginBottom: insets.bottom}]}>
-      <Text style={styles.paragraph}>MovieMate</Text>
+      {data.map(({id, name}) => (
+        <Icon name={name} key={id} />
+      ))}
     </View>
   );
 }
@@ -20,11 +24,11 @@ const styles = StyleSheet.create({
     width: '100%',
     alignContent: 'flex-start',
     backgroundColor: '#151618',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  paragraph: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
+  icon: {
+    paddingLeft: 20,
   },
 });
 
