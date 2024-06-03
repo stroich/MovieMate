@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {LIST_OF_ICONS as data} from './data';
 import Icon from '../Icon/Icon';
+import constants from '../../styles/constants';
 
 function Footer() {
   const insets = useSafeAreaInsets();
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     padding: 20,
     width: '100%',
     alignContent: 'flex-start',
-    backgroundColor: '#151618',
+    backgroundColor: constants.colorSecondaryDarkest,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

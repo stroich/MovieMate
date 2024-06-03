@@ -4,8 +4,9 @@ import {ListMoviesType} from '../../components/ListMovies/ListMovies';
 import Search from '../../components/Search/Search';
 import Footer from '../../components/Footer/Footer';
 import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
+import constants from '../../styles/constants';
 
-function SearchPage(): React.JSX.Element {
+function SearchScreen(): React.JSX.Element {
   const [listOfMovies, setListOfMovies] = useState<ListMoviesType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 5,
     flex: 1,
-    backgroundColor: '#282c34',
+    backgroundColor: constants.colorSecondaryDark,
   },
   loading: {
     color: 'white',
@@ -38,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchPage;
+export default SearchScreen;
