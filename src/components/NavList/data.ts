@@ -1,18 +1,18 @@
 export const LIST_OF_ICONS = [
   {
-    id: 1,
+    route: 'home',
     name: 'home',
   },
   {
-    id: 2,
+    route: 'search',
     name: 'search1',
   },
   {
-    id: 3,
+    route: 'heart',
     name: 'heart',
   },
   {
-    id: 4,
+    route: 'setting',
     name: 'setting',
   },
 ];

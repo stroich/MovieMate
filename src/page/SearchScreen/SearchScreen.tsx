@@ -2,7 +2,6 @@ import React, {useCallback, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {ListMoviesType} from '../../components/ListMovies/ListMovies';
 import Search from '../../components/Search/Search';
-import Footer from '../../components/Footer/Footer';
 import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
 import constants from '../../styles/constants';
 
@@ -22,7 +21,6 @@ function SearchScreen(): React.JSX.Element {
     <View style={styles.container}>
       <Search searchMovies={handleSearch} handleLoading={handleLoading} />
       <MoviesComponent isLoading={isLoading} moviesData={listOfMovies} />
-      <Footer />
     </View>
   );
 }
