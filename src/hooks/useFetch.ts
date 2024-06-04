@@ -4,13 +4,16 @@ import {getMovies} from '../api/apiMovies';
 export function useFetch(query: string) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
     setLoading(true);
     getMovies(query)
       .then(res => setData(res))
-      .catch(e => setError(e))
+      .catch(e => {
+        console.log(e);
+        setError('Something went wrong');
+      })
       .finally(() => setLoading(false));
   }, [query]);
 

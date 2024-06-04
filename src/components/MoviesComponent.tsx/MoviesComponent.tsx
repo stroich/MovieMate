@@ -5,13 +5,26 @@ import List, {ListMoviesType} from '../ListMovies/ListMovies';
 type MoviesComponentProps = {
   isLoading: boolean;
   moviesData: ListMoviesType | null;
+  error?: null | string;
 };
 
-function MoviesComponent({isLoading, moviesData}: MoviesComponentProps) {
+function MoviesComponent({
+  isLoading,
+  error = null,
+  moviesData,
+}: MoviesComponentProps) {
   if (isLoading) {
     return (
       <View style={styles.loading}>
         <ActivityIndicator size={'large'} color={'white'} />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>{error}</Text>
       </View>
     );
   }

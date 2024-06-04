@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
 import {useFetch} from '../../hooks/useFetch';
 import constants from '../../styles/constants';
@@ -9,8 +9,7 @@ function MainScreen() {
 
   return (
     <View style={styles.container}>
-      {error && <Text>{error}</Text>}
-      <MoviesComponent isLoading={loading} moviesData={data} />
+      <MoviesComponent isLoading={loading} moviesData={data} error={error} />
     </View>
   );
 }
