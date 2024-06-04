@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ListMoviesType} from '../ListMovies/ListMovies';
 import {getMovies} from '../../api/apiMovies';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useNavigation} from '@react-navigation/native';
 
 type SearchProps = {
   searchMovies: (value: ListMoviesType) => void;
@@ -11,6 +12,7 @@ type SearchProps = {
 };
 
 function Search({searchMovies, handleLoading}: SearchProps) {
+  const navigation = useNavigation();
   const [queryText, setQueryText] = useState('');
   const insets = useSafeAreaInsets();
 
@@ -23,7 +25,7 @@ function Search({searchMovies, handleLoading}: SearchProps) {
 
   return (
     <View style={[styles.container, {marginTop: insets.top}]}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <AntDesign
           style={styles.icon}
           name="arrowleft"
@@ -46,6 +48,7 @@ function Search({searchMovies, handleLoading}: SearchProps) {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
+    paddingBottom: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

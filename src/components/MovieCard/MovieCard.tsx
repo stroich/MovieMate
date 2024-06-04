@@ -1,28 +1,35 @@
 import React from 'react';
-import {Image, Text, View, StyleSheet} from 'react-native';
+import {Image, Text, View, StyleSheet, Pressable} from 'react-native';
 import {dataType} from '../ListMovies/ListMovies';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {RootStackParamList} from '../Navigation/types';
 
 type MovieCardProps = {
   data: dataType;
 };
 
 export function MovieCard({data}: MovieCardProps) {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   if (data.Poster === 'N/A') {
     return null;
   }
+
+  const handlePressCard = () =>
+    navigation.navigate('Details', {itemId: data.imdbID});
+
   return (
-    <View style={styles.card}>
+    <Pressable style={styles.card} onPress={handlePressCard}>
       <Image style={styles.image} source={{uri: data.Poster}} />
       <View style={styles.containerTitle}>
         <Text style={styles.title}>{data.Title}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    width: 200,
+    width: 170,
     margin: 5,
     backgroundColor: '#151618',
     borderRadius: 5,
@@ -31,7 +38,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     width: '100%',
-    height: 250,
+    height: 200,
     resizeMode: 'cover',
   },
   containerTitle: {

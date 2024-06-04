@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 export type dataType = {
   Poster: string;
   Title: string;
+  imdbID: string;
 };
 
 export type ListMoviesType = Array<dataType>;
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 20,
   },
 });
 
