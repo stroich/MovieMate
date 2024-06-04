@@ -1,15 +1,9 @@
 import React, {useState} from 'react';
-import {
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-} from 'react-native';
+import {TextInput, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ListMoviesType} from '../ListMovies/ListMovies';
 import {getMovies} from '../../api/apiMovies';
-// import AntDesign from 'react-native-vector-icons/AntDesign';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 type SearchProps = {
   searchMovies: (value: ListMoviesType) => void;
@@ -30,13 +24,12 @@ function Search({searchMovies, handleLoading}: SearchProps) {
   return (
     <View style={[styles.container, {marginTop: insets.top}]}>
       <TouchableOpacity>
-        {/* <AntDesign
+        <AntDesign
           style={styles.icon}
           name="arrowleft"
           size={24}
           color="white"
-        /> */}
-        <Text>Some</Text>
+        />
       </TouchableOpacity>
       <TextInput
         style={styles.input}

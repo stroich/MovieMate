@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import constants from '../../styles/constants';
-// import AntDesign from 'react-native-vector-icons/AntDesign';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 interface MyTabBarProps extends BottomTabBarProps {}
 
@@ -42,12 +42,11 @@ function renderMyTabBar({state, descriptors, navigation}: MyTabBarProps) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}>
-            {/* <AntDesign
+            <AntDesign
               name={route.name}
               size={24}
               color={isFocused ? constants.colorGold : constants.colorWhite}
-            /> */}
-            <Text>{route.name}</Text>
+            />
           </TouchableOpacity>
         );
       })}

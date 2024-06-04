@@ -33,6 +33,7 @@
 		B040B0732C0DD0DA0012E4D2 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B040B05F2C0DD0DA0012E4D2 /* Octicons.ttf */; };
 		B040B0742C0DD0DA0012E4D2 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B040B0602C0DD0DA0012E4D2 /* SimpleLineIcons.ttf */; };
 		B040B0752C0DD0DA0012E4D2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B040B0612C0DD0DA0012E4D2 /* Zocial.ttf */; };
+		B08E902C2C0F3F8E001D3E5E /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B040B04F2C0DD0DA0012E4D2 /* AntDesign.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B08E902C2C0F3F8E001D3E5E /* AntDesign.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				B040B0642C0DD0DA0012E4D2 /* Entypo.ttf in Resources */,
 				B040B0702C0DD0DA0012E4D2 /* Ionicons.ttf in Resources */,
@@ -681,10 +683,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -756,10 +755,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
