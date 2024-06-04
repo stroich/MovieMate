@@ -11,7 +11,7 @@ export function useFetch(query: string) {
     getMovies(query)
       .then(res => setData(res))
       .catch(e => {
-        console.log(e);
+        console.error(e);
         setError('Something went wrong');
       })
       .finally(() => setLoading(false));

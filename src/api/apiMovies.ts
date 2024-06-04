@@ -3,7 +3,6 @@ import {API_URL} from '../constants';
 async function fetchQuery(query: string, page: number) {
   try {
     const url = `${API_URL}&s=${query}&page=${page}`;
-    console.log(url);
     const response = await fetch(url);
     return await response.json();
   } catch (error) {
