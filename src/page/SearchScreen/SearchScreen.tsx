@@ -1,26 +1,22 @@
 import React, {useCallback, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {ListMoviesType} from '../../components/ListMovies/ListMovies';
 import Search from '../../components/Search/Search';
 import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
 import constants from '../../styles/constants';
+import {useFetch} from '../../hooks/useFetch';
 
 function SearchScreen(): React.JSX.Element {
-  const [listOfMovies, setListOfMovies] = useState<ListMoviesType | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [queryText, setQueryText] = useState('');
+  const {data, loading, error} = useFetch(queryText, 1);
 
-  const handleSearch = useCallback((value: ListMoviesType) => {
-    setListOfMovies(value);
-  }, []);
-
-  const handleLoading = useCallback((value: boolean) => {
-    setIsLoading(value);
+  const handleSearch = useCallback((value: string) => {
+    setQueryText(value);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Search searchMovies={handleSearch} handleLoading={handleLoading} />
-      <MoviesComponent isLoading={isLoading} moviesData={listOfMovies} />
+      <Search searchMovies={handleSearch} />
+      <MoviesComponent isLoading={loading} moviesData={data} error={error} />
     </View>
   );
 }

@@ -5,3 +5,8 @@ export type MoviesType = {
 };
 
 export type ListMoviesType = Array<MoviesType>;
+
+export enum actionType {
+  getAllMovies,
+  getMovie,
+}

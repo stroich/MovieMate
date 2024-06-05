@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
 import SearchScreen from '../../page/SearchScreen/SearchScreen';
 import constants from '../../styles/constants';
-import {SearchStackParamList} from '../types/navigationTypes';
+import {SearchStackParamList} from '../../types/navigationTypes';
 
 const Stack = createNativeStackNavigator<SearchStackParamList>();
 

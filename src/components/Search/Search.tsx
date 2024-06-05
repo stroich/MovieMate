@@ -1,26 +1,20 @@
 import React, {useState} from 'react';
 import {TextInput, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {getMovies} from '../../api/apiMovies';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
-import {ListMoviesType} from '../types/moviesTypes';
 
 type SearchProps = {
-  searchMovies: (value: ListMoviesType) => void;
-  handleLoading: (value: boolean) => void;
+  searchMovies: (value: string) => void;
 };
 
-function Search({searchMovies, handleLoading}: SearchProps) {
+function Search({searchMovies}: SearchProps) {
   const navigation = useNavigation();
   const [queryText, setQueryText] = useState('');
   const insets = useSafeAreaInsets();
 
   const handleSubmit = async () => {
-    handleLoading(true);
-    const data = await getMovies(queryText);
-    searchMovies(data);
-    handleLoading(false);
+    searchMovies(queryText);
   };
 
   return (

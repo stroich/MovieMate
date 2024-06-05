@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, ActivityIndicator, Text} from 'react-native';
 import List from '../ListMovies/ListMovies';
-import {ListMoviesType} from '../types/moviesTypes';
+import {ListMoviesType} from '../../types/moviesTypes';
 
 type MoviesComponentProps = {
   isLoading: boolean;
@@ -37,7 +37,7 @@ function MoviesComponent({
   if (!moviesData.length) {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Movie not found!</Text>
+        <Text style={styles.text}>Movies not found!</Text>
       </View>
     );
   }

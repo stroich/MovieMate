@@ -5,7 +5,7 @@ import {useFetch} from '../../hooks/useFetch';
 import constants from '../../styles/constants';
 
 function MainScreen() {
-  const {data, loading, error} = useFetch('All');
+  const {data, loading, error} = useFetch('All', 1);
 
   return (
     <View style={styles.container}>

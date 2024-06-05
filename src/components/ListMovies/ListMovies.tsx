@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {MovieCard} from '../MovieCard/MovieCard';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ListMoviesType} from '../types/moviesTypes';
+import {ListMoviesType} from '../../types/moviesTypes';
 
 type ListProps = {
   data: ListMoviesType;

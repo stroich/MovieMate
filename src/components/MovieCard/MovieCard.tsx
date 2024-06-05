@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, Text, View, StyleSheet, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {UseNavigationProps} from '../types/navigationTypes';
-import {MoviesType} from '../types/moviesTypes';
+import {UseNavigationProps} from '../../types/navigationTypes';
+import {MoviesType} from '../../types/moviesTypes';
 
 type MovieCardProps = {
   data: MoviesType;
