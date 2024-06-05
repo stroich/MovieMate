@@ -17,7 +17,7 @@ export async function getMovies(query = 'All', page = 1) {
     const url = `${API_URL}&s=${query}&page=${page}`;
     const response = await fetchQuery(url);
     let data = response.Search;
-    if (response.Error === 'Movie not found!') {
+    if (response.Response === 'False') {
       data = [];
     }
     return data;

@@ -1,5 +1,4 @@
 import React from 'react';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -11,16 +10,14 @@ const Tab = createBottomTabNavigator();
 
 function Navigation(): React.JSX.Element {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Tab.Navigator
-          tabBar={renderMyTabBar}
-          screenOptions={{headerShown: false}}>
-          <Tab.Screen name="home" component={HomeStack} />
-          <Tab.Screen name="search1" component={SearchStack} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBar={renderMyTabBar}
+        screenOptions={{headerShown: false}}>
+        <Tab.Screen name="home" component={HomeStack} />
+        <Tab.Screen name="search1" component={SearchStack} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 

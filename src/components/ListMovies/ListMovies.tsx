@@ -10,6 +10,7 @@ type ListProps = {
 
 function List({data}: ListProps) {
   const insets = useSafeAreaInsets();
+
   return (
     <View style={[styles.list, {marginBottom: insets.bottom}]}>
       <FlatList
@@ -24,6 +25,7 @@ function List({data}: ListProps) {
 const styles = StyleSheet.create({
   list: {
     width: '100%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },

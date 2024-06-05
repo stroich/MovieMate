@@ -13,17 +13,10 @@ function SearchStack() {
       screenOptions={{
         headerStyle: {backgroundColor: constants.colorSecondaryDarkest},
         headerTintColor: 'white',
+        headerShown: false,
       }}>
-      <Stack.Screen
-        name="Search"
-        component={SearchScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
-        options={{headerShown: false}}
-      />
+      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
   );
 }

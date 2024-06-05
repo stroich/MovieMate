@@ -24,6 +24,7 @@ function SearchScreen(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 5,
+    paddingBottom: 110,
     flex: 1,
     backgroundColor: constants.colorSecondaryDark,
   },
