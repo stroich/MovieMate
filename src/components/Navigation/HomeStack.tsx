@@ -3,9 +3,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MainScreen from '../../page/MainScreen/MainScreen';
 import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
 import constants from '../../styles/constants';
-import {RootStackParamList} from './types';
+import {HomeStackParamList} from '../types/navigationTypes';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<HomeStackParamList>();
 
 function HomeStack() {
   return (

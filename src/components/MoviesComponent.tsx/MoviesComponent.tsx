@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, ActivityIndicator, Text} from 'react-native';
-import List, {ListMoviesType} from '../ListMovies/ListMovies';
+import List from '../ListMovies/ListMovies';
+import {ListMoviesType} from '../types/moviesTypes';
 
 type MoviesComponentProps = {
   isLoading: boolean;

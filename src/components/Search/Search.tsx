@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {TextInput, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ListMoviesType} from '../ListMovies/ListMovies';
 import {getMovies} from '../../api/apiMovies';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import {ListMoviesType} from '../types/moviesTypes';
 
 type SearchProps = {
   searchMovies: (value: ListMoviesType) => void;

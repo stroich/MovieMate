@@ -1,15 +1,15 @@
 import React from 'react';
 import {Image, Text, View, StyleSheet, Pressable} from 'react-native';
-import {dataType} from '../ListMovies/ListMovies';
-import {useNavigation, NavigationProp} from '@react-navigation/native';
-import {RootStackParamList} from '../Navigation/types';
+import {useNavigation} from '@react-navigation/native';
+import {UseNavigationProps} from '../types/navigationTypes';
+import {MoviesType} from '../types/moviesTypes';
 
 type MovieCardProps = {
-  data: dataType;
+  data: MoviesType;
 };
 
 export function MovieCard({data}: MovieCardProps) {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<UseNavigationProps>();
   if (data.Poster === 'N/A') {
     return null;
   }
