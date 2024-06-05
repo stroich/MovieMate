@@ -13,13 +13,18 @@ function HomeStack() {
       screenOptions={{
         headerStyle: {backgroundColor: constants.colorSecondaryDarkest},
         headerTintColor: 'white',
+        headerBackTitleVisible: false,
       }}>
       <Stack.Screen
         name="Home"
         component={MainScreen}
         options={{title: 'MovieMate'}}
       />
-      <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen
+        name="Details"
+        component={DetailsScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }

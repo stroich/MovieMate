@@ -3,11 +3,11 @@ import {View, StyleSheet} from 'react-native';
 import Search from '../../components/Search/Search';
 import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
 import constants from '../../styles/constants';
-import {useFetch} from '../../hooks/useFetch';
+import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
 
 function SearchScreen(): React.JSX.Element {
   const [queryText, setQueryText] = useState('');
-  const {data, loading, error} = useFetch(queryText, 1);
+  const {data, loading, error} = useFetchForGetMovies(queryText, 1);
 
   const handleSearch = useCallback((value: string) => {
     setQueryText(value);

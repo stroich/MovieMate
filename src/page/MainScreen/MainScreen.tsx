@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
-import {useFetch} from '../../hooks/useFetch';
+import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
 import constants from '../../styles/constants';
 
 function MainScreen() {
-  const {data, loading, error} = useFetch('All', 1);
+  const {data, loading, error} = useFetchForGetMovies('All', 1);
 
   return (
     <View style={styles.container}>
