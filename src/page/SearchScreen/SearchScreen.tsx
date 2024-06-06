@@ -1,28 +1,41 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Search from '../../components/Search/Search';
-import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
 import constants from '../../styles/constants';
 import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
+import Loading from '../../components/Loading/Loading.tsx';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
+import List from '../../components/ListMovies/ListMovies.tsx';
 
 function SearchScreen(): React.JSX.Element {
   const [queryText, setQueryText] = useState('');
   const {data, loading, error, loadMoviesOnScroll} =
     useFetchForGetMovies(queryText);
 
-  const handleSearch = useCallback((value: string) => {
+  const handleSearch = (value: string) => {
     setQueryText(value);
-  }, []);
+  };
+
+  const renderComponents = () => {
+    if (loading) {
+      return <Loading />;
+    }
+
+    if (error) {
+      return <ErrorMessage error={error} />;
+    }
+
+    if (!data) {
+      return null;
+    }
+
+    return <List data={data} onEndReached={loadMoviesOnScroll} />;
+  };
 
   return (
     <View style={styles.container}>
-      <Search searchMovies={handleSearch} />
-      <MoviesComponent
-        isLoading={loading}
-        moviesData={data}
-        error={error}
-        onEndReached={loadMoviesOnScroll}
-      />
+      <Search onSearch={handleSearch} />
+      {renderComponents()}
     </View>
   );
 }

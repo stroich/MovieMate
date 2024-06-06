@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {MovieCard} from '../MovieCard/MovieCard';
 import {ListMoviesType} from '../../types/moviesTypes';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 type ListProps = {
   data: ListMoviesType;
@@ -19,6 +20,7 @@ function List({data, onEndReached}: ListProps) {
       keyExtractor={movie => movie.imdbID}
       onEndReachedThreshold={0.1}
       onEndReached={onEndReached}
+      ListEmptyComponent={<ErrorMessage error="Movies not found!" />}
     />
   );
 }

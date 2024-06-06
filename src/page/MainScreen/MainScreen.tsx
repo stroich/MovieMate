@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import MoviesComponent from '../../components/MoviesComponent.tsx/MoviesComponent';
 import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
 import constants from '../../styles/constants';
+import Loading from '../../components/Loading/Loading.tsx';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
+import List from '../../components/ListMovies/ListMovies.tsx';
 
 function MainScreen() {
   const {data, loading, error, loadMoviesOnScroll} =
@@ -10,12 +12,9 @@ function MainScreen() {
 
   return (
     <View style={styles.container}>
-      <MoviesComponent
-        isLoading={loading}
-        moviesData={data}
-        error={error}
-        onEndReached={loadMoviesOnScroll}
-      />
+      {loading && <Loading />}
+      {error && <ErrorMessage error={error} />}
+      {data && <List data={data} onEndReached={loadMoviesOnScroll} />}
     </View>
   );
 }

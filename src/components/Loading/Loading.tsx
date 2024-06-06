@@ -11,7 +11,9 @@ function Loading() {
 
 const styles = StyleSheet.create({
   loading: {
-    flex: 1,
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },

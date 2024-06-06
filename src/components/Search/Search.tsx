@@ -1,20 +1,28 @@
-import React, {useState} from 'react';
-import {TextInput, StyleSheet, TouchableOpacity, View} from 'react-native';
+import React from 'react';
+import {
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  NativeSyntheticEvent,
+  TextInputSubmitEditingEventData,
+} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 
 type SearchProps = {
-  searchMovies: (value: string) => void;
+  onSearch: (value: string) => void;
 };
 
-function Search({searchMovies}: SearchProps) {
+function Search({onSearch}: SearchProps) {
   const navigation = useNavigation();
-  const [queryText, setQueryText] = useState('');
   const insets = useSafeAreaInsets();
 
-  const handleSubmit = async () => {
-    searchMovies(queryText);
+  const handleSubmit = async (
+    event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
+  ) => {
+    onSearch(event.nativeEvent.text);
   };
 
   return (
@@ -31,8 +39,6 @@ function Search({searchMovies}: SearchProps) {
         style={styles.input}
         placeholder="Search"
         placeholderTextColor="lightgrey"
-        onChangeText={setQueryText}
-        value={queryText}
         onSubmitEditing={handleSubmit}
       />
     </View>
