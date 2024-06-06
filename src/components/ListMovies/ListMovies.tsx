@@ -6,9 +6,10 @@ import {ListMoviesType} from '../../types/moviesTypes';
 
 type ListProps = {
   data: ListMoviesType;
+  onEndReached: () => void;
 };
 
-function List({data}: ListProps) {
+function List({data, onEndReached}: ListProps) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -17,6 +18,9 @@ function List({data}: ListProps) {
         numColumns={2}
         data={data}
         renderItem={({item}) => <MovieCard data={item} />}
+        keyExtractor={movie => movie.imdbID}
+        onEndReachedThreshold={0.1}
+        onEndReached={onEndReached}
       />
     </View>
   );

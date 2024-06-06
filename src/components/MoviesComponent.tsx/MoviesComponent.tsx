@@ -8,12 +8,14 @@ type MoviesComponentProps = {
   isLoading: boolean;
   moviesData: ListMoviesType | null;
   error?: null | string;
+  onEndReached: () => void;
 };
 
 function MoviesComponent({
   isLoading,
   error = null,
   moviesData,
+  onEndReached,
 }: MoviesComponentProps) {
   if (isLoading) {
     return <Loading />;
@@ -31,7 +33,7 @@ function MoviesComponent({
     return <ErrorMessage error={'Movies not found!'} />;
   }
 
-  return <List data={moviesData} />;
+  return <List data={moviesData} onEndReached={onEndReached} />;
 }
 
 export default MoviesComponent;

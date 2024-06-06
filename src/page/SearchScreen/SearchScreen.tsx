@@ -7,7 +7,8 @@ import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
 
 function SearchScreen(): React.JSX.Element {
   const [queryText, setQueryText] = useState('');
-  const {data, loading, error} = useFetchForGetMovies(queryText, 1);
+  const {data, loading, error, loadMoviesOnScroll} =
+    useFetchForGetMovies(queryText);
 
   const handleSearch = useCallback((value: string) => {
     setQueryText(value);
@@ -16,7 +17,12 @@ function SearchScreen(): React.JSX.Element {
   return (
     <View style={styles.container}>
       <Search searchMovies={handleSearch} />
-      <MoviesComponent isLoading={loading} moviesData={data} error={error} />
+      <MoviesComponent
+        isLoading={loading}
+        moviesData={data}
+        error={error}
+        onEndReached={loadMoviesOnScroll}
+      />
     </View>
   );
 }

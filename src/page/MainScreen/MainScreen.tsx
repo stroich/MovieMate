@@ -5,11 +5,17 @@ import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
 import constants from '../../styles/constants';
 
 function MainScreen() {
-  const {data, loading, error} = useFetchForGetMovies('All', 1);
+  const {data, loading, error, loadMoviesOnScroll} =
+    useFetchForGetMovies('All');
 
   return (
     <View style={styles.container}>
-      <MoviesComponent isLoading={loading} moviesData={data} error={error} />
+      <MoviesComponent
+        isLoading={loading}
+        moviesData={data}
+        error={error}
+        onEndReached={loadMoviesOnScroll}
+      />
     </View>
   );
 }
