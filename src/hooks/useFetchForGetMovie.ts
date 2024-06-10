@@ -3,7 +3,7 @@ import {getMovie} from '../api/apiMovies';
 
 export function useFetchForGetMovie(id: string) {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
 
   const fetchData = useCallback(async () => {

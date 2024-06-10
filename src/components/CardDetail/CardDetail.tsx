@@ -1,72 +1,68 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {MovieType} from '../../types/moviesTypes';
+import {CardType, MovieType} from '../../types/moviesTypes';
 import constants from '../../styles/constants';
 import BackButton from '../BackButton/BackButton';
 import Animated, {
-  Easing,
-  runOnUI,
+  interpolateColor,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
-  withSequence,
   withTiming,
 } from 'react-native-reanimated';
 
 type CardDetailProps = {
-  data: MovieType;
+  data: MovieType | CardType;
 };
 
+const isMovieType = (data: MovieType | CardType): data is MovieType => {
+  return 'Genre' in data;
+}; // тайп гард
+
 function CardDetail({data}: CardDetailProps) {
-  const color = useSharedValue(constants.colorLightGold);
+  const progress = useSharedValue(0);
 
   const animatedTitleStyle = useAnimatedStyle(() => {
     return {
-      color: color.value,
+      color: interpolateColor(
+        progress.value,
+        [0, 1],
+        [constants.colorDarkGold, constants.colorGold],
+      ),
     };
   });
 
-  const onAnimation = () => {
-    'worklet';
-    color.value = withRepeat(
-      withSequence(
-        withTiming(constants.colorGold, {
-          duration: 2000,
-          easing: Easing.linear,
-        }),
-        withTiming(constants.colorDarkGold, {
-          duration: 2000,
-          easing: Easing.linear,
-        }),
-      ),
+  useEffect(() => {
+    progress.value = withRepeat(
+      withTiming(1 - progress.value, {duration: 3000}),
       0,
       true,
     );
-  };
-
-  useEffect(() => {
-    runOnUI(onAnimation)();
-  }, []);
+  }, [progress]);
 
   return (
     <View>
       <Animated.Image
-        sharedTransitionTag={data.Title}
+        sharedTransitionTag={data.imdbID}
         style={styles.image}
         source={{uri: data.Poster}}
       />
-      <View style={styles.container}>
-        <Animated.Text style={[styles.title, animatedTitleStyle]}>
-          {data.Title}
-        </Animated.Text>
-        <Text style={styles.textDetails}>{data.Genre}</Text>
-        <View style={styles.containerDetails}>
-          <Text
-            style={styles.textDetails}>{`${data.Year} | ${data.Country}`}</Text>
-          <Text style={styles.textDetails}>{data.Runtime}</Text>
+      {isMovieType(data) && (
+        <View style={styles.container}>
+          <Animated.Text style={[styles.title, animatedTitleStyle]}>
+            {data.Title}
+          </Animated.Text>
+          <Text style={styles.textDetails}>{data.Genre}</Text>
+          <View style={styles.containerDetails}>
+            <Text
+              style={
+                styles.textDetails
+              }>{`${data.Year} | ${data.Country}`}</Text>
+            <Text style={styles.textDetails}>{data.Runtime}</Text>
+          </View>
+          <Text style={styles.text}>{data.Plot}</Text>
         </View>
-        <Text style={styles.text}>{data.Plot}</Text>
-      </View>
+      )}
       <BackButton />
     </View>
   );

@@ -2,33 +2,36 @@ import React from 'react';
 import {Text, View, StyleSheet, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {UseNavigationProps} from '../../types/navigationTypes';
-import {MoviesType} from '../../types/moviesTypes';
+import {CardType} from '../../types/moviesTypes';
 import Animated from 'react-native-reanimated';
 
 type MovieCardProps = {
-  data: MoviesType;
+  data: CardType;
 };
 
 export function MovieCard({data}: MovieCardProps) {
   const navigation = useNavigation<UseNavigationProps>();
+  // const color = useSharedValue('')
   if (data.Poster === 'N/A') {
     return null;
   }
 
   const handlePressCard = () =>
-    navigation.navigate('Details', {itemId: data.imdbID});
+    navigation.navigate('Details', {itemId: data.imdbID, data: data});
 
   return (
-    <Pressable style={styles.card} onPress={handlePressCard}>
-      <Animated.Image
-        sharedTransitionTag={data.Title}
-        style={styles.image}
-        source={{uri: data.Poster}}
-      />
-      <View style={styles.containerTitle}>
-        <Text style={styles.title}>{data.Title}</Text>
-      </View>
-    </Pressable>
+    <Animated.View>
+      <Pressable style={styles.card} onPress={handlePressCard}>
+        <Animated.Image
+          sharedTransitionTag={data.imdbID}
+          style={styles.image}
+          source={{uri: data.Poster}}
+        />
+        <View style={styles.containerTitle}>
+          <Text style={styles.title}>{data.Title}</Text>
+        </View>
+      </Pressable>
+    </Animated.View>
   );
 }
 
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
   image: {
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
-    width: '100%',
+    width: 170,
     height: 200,
     resizeMode: 'cover',
   },

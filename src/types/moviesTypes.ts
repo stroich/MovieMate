@@ -1,10 +1,10 @@
-export type MoviesType = {
+export type CardType = {
   Poster: string;
   Title: string;
   imdbID: string;
 };
 
-export type ListMoviesType = Array<MoviesType>;
+export type ListMoviesType = Array<CardType>;
 
 export enum actionType {
   getAllMovies,
