@@ -1,15 +1,53 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {MovieType} from '../../types/moviesTypes';
 import constants from '../../styles/constants';
 import BackButton from '../BackButton/BackButton';
-import Animated from 'react-native-reanimated';
+import Animated, {
+  Easing,
+  runOnUI,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 
 type CardDetailProps = {
   data: MovieType;
 };
 
 function CardDetail({data}: CardDetailProps) {
+  const color = useSharedValue(constants.colorLightGold);
+
+  const animatedTitleStyle = useAnimatedStyle(() => {
+    return {
+      color: color.value,
+    };
+  });
+
+  const onAnimation = () => {
+    'worklet';
+    color.value = withRepeat(
+      withSequence(
+        withTiming(constants.colorGold, {
+          duration: 2000,
+          easing: Easing.linear,
+        }),
+        withTiming(constants.colorDarkGold, {
+          duration: 2000,
+          easing: Easing.linear,
+        }),
+      ),
+      0,
+      true,
+    );
+  };
+
+  useEffect(() => {
+    runOnUI(onAnimation)();
+  }, []);
+
   return (
     <View>
       <Animated.Image
@@ -18,7 +56,9 @@ function CardDetail({data}: CardDetailProps) {
         source={{uri: data.Poster}}
       />
       <View style={styles.container}>
-        <Text style={styles.title}>{data.Title}</Text>
+        <Animated.Text style={[styles.title, animatedTitleStyle]}>
+          {data.Title}
+        </Animated.Text>
         <Text style={styles.textDetails}>{data.Genre}</Text>
         <View style={styles.containerDetails}>
           <Text
