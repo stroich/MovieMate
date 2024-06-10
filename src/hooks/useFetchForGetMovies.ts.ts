@@ -3,7 +3,7 @@ import {getMovies} from '../api/apiMovies';
 import {ListMoviesType} from '../types/moviesTypes';
 
 export function useFetchForGetMovies(query: string) {
-  const [data, setData] = useState<ListMoviesType>([]);
+  const [data, setData] = useState<ListMoviesType | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
   const [page, setPage] = useState(1);
@@ -25,7 +25,11 @@ export function useFetchForGetMovies(query: string) {
   const loadMoviesOnScroll = async () => {
     const newMovies = await getMovies(query, page + 1);
     setData(prevState => {
-      return [...prevState, ...newMovies];
+      if (prevState) {
+        return [...prevState, ...newMovies];
+      } else {
+        return null;
+      }
     });
     setPage(prevPage => prevPage + 1);
   };
