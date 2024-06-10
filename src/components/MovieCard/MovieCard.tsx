@@ -1,8 +1,9 @@
 import React from 'react';
-import {Image, Text, View, StyleSheet, Pressable} from 'react-native';
+import {Text, View, StyleSheet, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {UseNavigationProps} from '../../types/navigationTypes';
 import {MoviesType} from '../../types/moviesTypes';
+import Animated from 'react-native-reanimated';
 
 type MovieCardProps = {
   data: MoviesType;
@@ -19,7 +20,11 @@ export function MovieCard({data}: MovieCardProps) {
 
   return (
     <Pressable style={styles.card} onPress={handlePressCard}>
-      <Image style={styles.image} source={{uri: data.Poster}} />
+      <Animated.Image
+        sharedTransitionTag={data.Title}
+        style={styles.image}
+        source={{uri: data.Poster}}
+      />
       <View style={styles.containerTitle}>
         <Text style={styles.title}>{data.Title}</Text>
       </View>

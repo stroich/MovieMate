@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {MovieType} from '../../types/moviesTypes';
 import constants from '../../styles/constants';
 import BackButton from '../BackButton/BackButton';
+import Animated from 'react-native-reanimated';
 
 type CardDetailProps = {
   data: MovieType;
@@ -11,7 +12,11 @@ type CardDetailProps = {
 function CardDetail({data}: CardDetailProps) {
   return (
     <View>
-      <Image style={styles.image} source={{uri: data.Poster}} />
+      <Animated.Image
+        sharedTransitionTag={data.Title}
+        style={styles.image}
+        source={{uri: data.Poster}}
+      />
       <View style={styles.container}>
         <Text style={styles.title}>{data.Title}</Text>
         <Text style={styles.textDetails}>{data.Genre}</Text>

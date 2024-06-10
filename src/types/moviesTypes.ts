@@ -21,4 +21,5 @@ export type MovieType = {
   Country: string;
   Poster: string;
   imdbRating: string;
+  imdbID: string;
 };
