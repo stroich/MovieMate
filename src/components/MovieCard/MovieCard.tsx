@@ -11,6 +11,7 @@ type MovieCardProps = {
 
 export function MovieCard({data}: MovieCardProps) {
   const navigation = useNavigation<UseNavigationProps>();
+
   if (data.Poster === 'N/A') {
     return null;
   }
@@ -19,7 +20,7 @@ export function MovieCard({data}: MovieCardProps) {
     navigation.navigate('Details', {itemId: data.imdbID, data: data});
 
   return (
-    <Pressable style={styles.card} onPress={handlePressCard}>
+    <Pressable style={[styles.card]} onPress={handlePressCard}>
       <Animated.Image
         sharedTransitionTag={data.imdbID}
         style={styles.image}
@@ -35,6 +36,7 @@ export function MovieCard({data}: MovieCardProps) {
 const styles = StyleSheet.create({
   card: {
     width: 170,
+    height: 250,
     margin: 5,
     backgroundColor: '#151618',
     borderRadius: 5,
