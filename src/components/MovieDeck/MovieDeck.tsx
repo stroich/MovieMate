@@ -12,8 +12,8 @@ function MovieDeck({data}: MovieDeckProps) {
 
   return (
     <View style={styles.list}>
-      {newData.map(item => (
-        <AnimatedMovieCard key={item.imdbID} data={item} />
+      {newData.map((item, index) => (
+        <AnimatedMovieCard key={item.imdbID} data={item} delay={index * 100} />
       ))}
     </View>
   );

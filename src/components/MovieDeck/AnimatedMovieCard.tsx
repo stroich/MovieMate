@@ -4,25 +4,27 @@ import {CardType} from '../../types/moviesTypes';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import {MovieCard} from '../MovieCard/MovieCard';
 
 type MovieCardProps = {
   data: CardType;
+  delay: number;
 };
 
-export function AnimatedMovieCard({data}: MovieCardProps) {
-  const scaleValue = useSharedValue(1);
+export function AnimatedMovieCard({data, delay}: MovieCardProps) {
+  const animatedPosition = useSharedValue(-500);
   const animatedCardStyle = useAnimatedStyle(() => {
     return {
-      transform: [{scale: scaleValue.value}],
+      transform: [{translateX: animatedPosition.value}, {scale: 2}],
     };
   });
 
   useEffect(() => {
-    scaleValue.value = withTiming(1.5, {duration: 2000});
-  }, [scaleValue]);
+    animatedPosition.value = withDelay(delay, withTiming(0, {duration: 1000}));
+  }, [animatedPosition, delay]);
 
   return (
     <Animated.View style={[styles.container, animatedCardStyle]}>
