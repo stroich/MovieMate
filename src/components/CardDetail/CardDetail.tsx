@@ -17,7 +17,7 @@ type CardDetailProps = {
 
 const isMovieType = (data: MovieType | CardType): data is MovieType => {
   return 'Genre' in data;
-}; // тайп гард
+};
 
 function CardDetail({data}: CardDetailProps) {
   const progress = useSharedValue(0);
