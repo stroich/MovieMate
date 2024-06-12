@@ -33,7 +33,6 @@ export function AnimatedMovieCard({data, delay}: MovieCardProps) {
     })
     .onFinalize(() => {
       const fadeOutAngle = 30;
-      console.log(translateX.value);
       if (Math.abs(translateX.value) > fadeOutAngle) {
         runOnJS(setVisible)(false);
       } else {
@@ -44,11 +43,7 @@ export function AnimatedMovieCard({data, delay}: MovieCardProps) {
 
   const animatedCardStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        {translateX: translateX.value},
-        {scale: 1.7},
-        {rotate: rotate.value},
-      ],
+      transform: [{translateX: translateX.value}, {rotate: rotate.value}],
     };
   });
 
@@ -65,7 +60,7 @@ export function AnimatedMovieCard({data, delay}: MovieCardProps) {
       <Animated.View
         style={[styles.container, animatedCardStyle]}
         exiting={FadeOut}>
-        <MovieCard data={data} />
+        <MovieCard data={data} width={300} height={400} />
       </Animated.View>
     </GestureDetector>
   );

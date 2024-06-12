@@ -7,9 +7,11 @@ import Animated from 'react-native-reanimated';
 
 type MovieCardProps = {
   data: CardType;
+  width: number;
+  height: number;
 };
 
-export function MovieCard({data}: MovieCardProps) {
+export function MovieCard({data, width, height}: MovieCardProps) {
   const navigation = useNavigation<UseNavigationProps>();
 
   if (data.Poster === 'N/A') {
@@ -20,10 +22,10 @@ export function MovieCard({data}: MovieCardProps) {
     navigation.navigate('Details', {itemId: data.imdbID, data: data});
 
   return (
-    <Pressable style={[styles.card]} onPress={handlePressCard}>
+    <Pressable style={[styles.card, {width: width}]} onPress={handlePressCard}>
       <Animated.Image
         sharedTransitionTag={data.imdbID}
-        style={styles.image}
+        style={[styles.image, {width: width, height: height}]}
         source={{uri: data.Poster}}
       />
       <View style={styles.containerTitle}>
@@ -35,8 +37,7 @@ export function MovieCard({data}: MovieCardProps) {
 
 const styles = StyleSheet.create({
   card: {
-    width: 170,
-    height: 250,
+    height: '100%',
     margin: 5,
     backgroundColor: '#151618',
     borderRadius: 5,
@@ -44,8 +45,6 @@ const styles = StyleSheet.create({
   image: {
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
-    width: 170,
-    height: 200,
     resizeMode: 'cover',
   },
   containerTitle: {

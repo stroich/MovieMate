@@ -16,7 +16,9 @@ function List({data, onEndReached}: ListProps) {
       style={styles.list}
       numColumns={2}
       data={data}
-      renderItem={({item}) => <MovieCard data={item} />}
+      renderItem={({item}) => (
+        <MovieCard data={item} width={170} height={200} />
+      )}
       keyExtractor={movie => movie.imdbID}
       onEndReachedThreshold={0.1}
       onEndReached={onEndReached}
