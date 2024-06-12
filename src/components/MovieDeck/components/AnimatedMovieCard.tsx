@@ -1,18 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {CardType} from '../../../types/moviesTypes';
-import Animated, {
-  FadeOut,
-  runOnJS,
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
-  withDelay,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, {FadeOut} from 'react-native-reanimated';
 import {MovieCard} from '../../MovieCard/MovieCard';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import {GestureDetector} from 'react-native-gesture-handler';
 import CustomButton from '../../CustomButton/CustomButton';
+import {SwipeDirectionEnum, useSwipe} from '../hooks/useSwipe';
 
 type MovieCardProps = {
   data: CardType;
@@ -20,60 +13,22 @@ type MovieCardProps = {
   onChangeNumberOfCard: () => void;
 };
 
-type NameIconType = null | 'check' | 'close';
-
 export function AnimatedMovieCard({
   data,
   delay,
   onChangeNumberOfCard,
 }: MovieCardProps) {
   const [visible, setVisible] = useState(true);
-  const [nameIcon, setNameIcon] = useState<NameIconType>(null);
-  const translateX = useSharedValue(-500);
-  const rotateZ = useSharedValue(0);
-  const rotate = useDerivedValue(() => {
-    return `${rotateZ.value / 10}deg`;
-  });
 
-  const handleSwipe = () => {
-    if (translateX.value > 0) {
-      setNameIcon('check');
-    } else {
-      setNameIcon('close');
-    }
-  };
-
-  const endSwipe = () => {
+  const successSwipe = () => {
     onChangeNumberOfCard();
     setVisible(false);
   };
 
-  const pan = Gesture.Pan()
-    .onChange(event => {
-      translateX.value += event.changeX;
-      rotateZ.value += event.changeX;
-      runOnJS(handleSwipe)();
-    })
-    .onFinalize(() => {
-      const fadeOutAngle = 30;
-      if (Math.abs(translateX.value) > fadeOutAngle) {
-        runOnJS(endSwipe)();
-      } else {
-        translateX.value = 0;
-        rotateZ.value = 0;
-        runOnJS(setNameIcon)(null);
-      }
-    });
-
-  const animatedCardStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{translateX: translateX.value}, {rotate: rotate.value}],
-    };
+  const {pan, animatedCardStyle, isSwiped, swipeDirection} = useSwipe({
+    delay,
+    successSwipe,
   });
-
-  useEffect(() => {
-    translateX.value = withDelay(delay, withTiming(0, {duration: 1000}));
-  }, [translateX, delay]);
 
   if (!visible) {
     return null;
@@ -85,7 +40,12 @@ export function AnimatedMovieCard({
         style={[styles.container, animatedCardStyle]}
         exiting={FadeOut}>
         <MovieCard data={data} width={300} height={400} />
-        {nameIcon && <CustomButton nameIcon={nameIcon} />}
+        {isSwiped && swipeDirection === SwipeDirectionEnum.right && (
+          <CustomButton nameIcon={'check'} />
+        )}
+        {isSwiped && swipeDirection === SwipeDirectionEnum.left && (
+          <CustomButton nameIcon={'close'} />
+        )}
       </Animated.View>
     </GestureDetector>
   );
