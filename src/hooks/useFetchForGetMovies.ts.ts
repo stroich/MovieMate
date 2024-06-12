@@ -34,9 +34,23 @@ export function useFetchForGetMovies(query: string) {
     setPage(prevPage => prevPage + 1);
   };
 
+  const addNewPage = useCallback(
+    async (newPage: number) => {
+      const newMovies = await getMovies(query, newPage);
+      setData(prevState => {
+        if (prevState) {
+          return newMovies;
+        } else {
+          return null;
+        }
+      });
+    },
+    [query],
+  );
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  return {data, loading, error, loadMoviesOnScroll};
+  return {data, loading, error, loadMoviesOnScroll, addNewPage};
 }

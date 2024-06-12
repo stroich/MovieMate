@@ -7,13 +7,13 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
 import MovieDeck from '../../components/MovieDeck/MovieDeck.tsx';
 
 function MainScreen() {
-  const {data, loading, error} = useFetchForGetMovies('All');
+  const {data, loading, error, addNewPage} = useFetchForGetMovies('All');
 
   return (
     <View style={styles.container}>
       {loading && <Loading />}
       {error && <ErrorMessage error={error} />}
-      {data && <MovieDeck data={data} />}
+      {data && <MovieDeck data={data} onEndReached={addNewPage} />}
     </View>
   );
 }

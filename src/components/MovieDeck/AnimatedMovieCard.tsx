@@ -16,15 +16,25 @@ import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 type MovieCardProps = {
   data: CardType;
   delay: number;
+  onChangeNumberOfCard: () => void;
 };
 
-export function AnimatedMovieCard({data, delay}: MovieCardProps) {
+export function AnimatedMovieCard({
+  data,
+  delay,
+  onChangeNumberOfCard,
+}: MovieCardProps) {
   const [visible, setVisible] = useState(true);
   const translateX = useSharedValue(-500);
   const rotateZ = useSharedValue(0);
   const rotate = useDerivedValue(() => {
     return `${rotateZ.value / 10}deg`;
   });
+
+  const handleSwipe = () => {
+    onChangeNumberOfCard();
+    setVisible(false);
+  };
 
   const pan = Gesture.Pan()
     .onChange(event => {
@@ -34,7 +44,7 @@ export function AnimatedMovieCard({data, delay}: MovieCardProps) {
     .onFinalize(() => {
       const fadeOutAngle = 30;
       if (Math.abs(translateX.value) > fadeOutAngle) {
-        runOnJS(setVisible)(false);
+        runOnJS(handleSwipe)();
       } else {
         translateX.value = 0;
         rotateZ.value = 0;
