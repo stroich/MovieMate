@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     fontSize: 18,
-    backgroundColor: constants.colorOpasityDark,
+    backgroundColor: constants.colorOpasity75,
     bottom: 0,
     justifyContent: 'space-around',
   },

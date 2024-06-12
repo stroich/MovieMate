@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {CardType} from '../../types/moviesTypes';
+import {CardType} from '../../../types/moviesTypes';
 import Animated, {
   FadeOut,
   runOnJS,
@@ -10,8 +10,9 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import {MovieCard} from '../MovieCard/MovieCard';
+import {MovieCard} from '../../MovieCard/MovieCard';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import CustomButton from '../../CustomButton/CustomButton';
 
 type MovieCardProps = {
   data: CardType;
@@ -19,12 +20,15 @@ type MovieCardProps = {
   onChangeNumberOfCard: () => void;
 };
 
+type NameIconType = null | 'check' | 'close';
+
 export function AnimatedMovieCard({
   data,
   delay,
   onChangeNumberOfCard,
 }: MovieCardProps) {
   const [visible, setVisible] = useState(true);
+  const [nameIcon, setNameIcon] = useState<NameIconType>(null);
   const translateX = useSharedValue(-500);
   const rotateZ = useSharedValue(0);
   const rotate = useDerivedValue(() => {
@@ -32,6 +36,14 @@ export function AnimatedMovieCard({
   });
 
   const handleSwipe = () => {
+    if (translateX.value > 0) {
+      setNameIcon('check');
+    } else {
+      setNameIcon('close');
+    }
+  };
+
+  const endSwipe = () => {
     onChangeNumberOfCard();
     setVisible(false);
   };
@@ -40,14 +52,16 @@ export function AnimatedMovieCard({
     .onChange(event => {
       translateX.value += event.changeX;
       rotateZ.value += event.changeX;
+      runOnJS(handleSwipe)();
     })
     .onFinalize(() => {
       const fadeOutAngle = 30;
       if (Math.abs(translateX.value) > fadeOutAngle) {
-        runOnJS(handleSwipe)();
+        runOnJS(endSwipe)();
       } else {
         translateX.value = 0;
         rotateZ.value = 0;
+        runOnJS(setNameIcon)(null);
       }
     });
 
@@ -71,6 +85,7 @@ export function AnimatedMovieCard({
         style={[styles.container, animatedCardStyle]}
         exiting={FadeOut}>
         <MovieCard data={data} width={300} height={400} />
+        {nameIcon && <CustomButton nameIcon={nameIcon} />}
       </Animated.View>
     </GestureDetector>
   );
