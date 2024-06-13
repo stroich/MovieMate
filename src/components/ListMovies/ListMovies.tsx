@@ -14,6 +14,7 @@ function List({data, onEndReached}: ListProps) {
     <FlatList
       contentContainerStyle={styles.containerList}
       style={styles.list}
+      columnWrapperStyle={styles.row}
       numColumns={2}
       data={data}
       renderItem={({item}) => (
@@ -34,6 +35,9 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
+  },
+  row: {
+    marginBottom: 10,
   },
 });
 

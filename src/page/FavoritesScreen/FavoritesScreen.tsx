@@ -1,12 +1,31 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import constants from '../../styles/constants';
+import {getFavoriteMovies} from '../../utils/asyncStorage/asyncStorage';
+import List from '../../components/ListMovies/ListMovies';
 import {Text} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ListMoviesType} from '../../types/moviesTypes';
 
 function FavoritesScreen() {
+  const insets = useSafeAreaInsets();
+  const [favorites, setFavorites] = useState<ListMoviesType | null>(null);
+
+  const getFavorites = useCallback(async () => {
+    const fav = await getFavoriteMovies();
+    setFavorites(fav);
+  }, []);
+
+  useEffect(() => {
+    getFavorites();
+  }, [getFavorites]);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Your favorites list is empty</Text>
+    <View style={[styles.container, {paddingTop: insets.top}]}>
+      <View style={styles.containerText}>
+        <Text style={styles.text}> In favorites</Text>
+      </View>
+      {favorites && <List data={favorites} onEndReached={() => {}} />}
     </View>
   );
 }
@@ -18,10 +37,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  containerText: {
+    padding: 10,
+  },
   text: {
-    fontSize: 20,
-    color: 'white',
-    textAlign: 'center',
+    color: constants.colorWhite,
+    fontSize: 30,
   },
 });
 

@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react';
-import {getMovie} from '../api/apiMovies';
+import {getMovie} from '../utils/api/apiMovies';
 
 export function useFetchForGetMovie(id: string) {
   const [data, setData] = useState(null);
