@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    backgroundColor: constants.colorOpasityDark,
+    backgroundColor: constants.colorOpasity75,
     borderBottomRightRadius: 30,
   },
 });
