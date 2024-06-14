@@ -9,7 +9,7 @@ export async function setItem<T>(key: string, value: T) {
   }
 }
 
-export async function getFavoriteMovies(): Promise<ListMoviesType | null> {
+export async function getFavoriteMoviesToStorage(): Promise<ListMoviesType | null> {
   try {
     const value = await AsyncStorage.getItem('favorites');
     return value ? JSON.parse(value) : null;
@@ -19,9 +19,9 @@ export async function getFavoriteMovies(): Promise<ListMoviesType | null> {
   }
 }
 
-export async function addFavoriteMovie(movie: CardType) {
+export async function addFavoriteMovieToStorage(movie: CardType) {
   try {
-    const favorites = (await getFavoriteMovies()) ?? [];
+    const favorites = (await getFavoriteMoviesToStorage()) ?? [];
     const hasMovie = favorites.some(item => movie.imdbID === item.imdbID);
     if (!hasMovie) {
       const updateMovie = [...favorites, movie];

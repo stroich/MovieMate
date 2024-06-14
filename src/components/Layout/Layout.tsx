@@ -7,8 +7,8 @@ import React, {
 } from 'react';
 import {CardType, ListMoviesType} from '../../types/moviesTypes';
 import {
-  addFavoriteMovie,
-  getFavoriteMovies,
+  addFavoriteMovieToStorage,
+  getFavoriteMoviesToStorage,
 } from '../../utils/asyncStorage/asyncStorage';
 
 type FavoritesContextType = {
@@ -29,7 +29,7 @@ function Layout({children}: LayoutProps) {
   const [favorites, setFavorites] = useState<ListMoviesType>([]);
 
   const getFavorites = useCallback(async () => {
-    const fav = (await getFavoriteMovies()) ?? [];
+    const fav = (await getFavoriteMoviesToStorage()) ?? [];
     setFavorites(fav);
   }, []);
 
@@ -38,15 +38,11 @@ function Layout({children}: LayoutProps) {
   }, [getFavorites]);
 
   const addFavorites = (value: CardType) => {
-    addFavoriteMovie(value);
-    setFavorites(prevFav => {
-      const hasMovie = prevFav.some(item => value.imdbID === item.imdbID);
-      if (!hasMovie) {
-        return [...prevFav, value];
-      } else {
-        return prevFav;
-      }
-    });
+    const hasMovie = favorites.some(item => value.imdbID === item.imdbID);
+    if (!hasMovie) {
+      addFavoriteMovieToStorage(value);
+      setFavorites(prevFav => [...prevFav, value]);
+    }
   };
 
   return (
