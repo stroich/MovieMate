@@ -3,19 +3,21 @@ import {NavigationProp} from '@react-navigation/native';
 import {CardType} from './moviesTypes';
 
 export type HomeStackParamList = {
-  Home: undefined;
+  home: undefined;
+  search1: undefined;
+  hearto: undefined;
+};
+
+export type RootStackParamList = {
+  Tab: undefined;
   Details: {itemId: string; data: CardType};
 };
 
-export type SearchStackParamList = {
-  Search: undefined;
-  Details: {itemId: string; data: CardType};
-};
-
-export type DetailsScreenProps =
-  | NativeStackScreenProps<HomeStackParamList, 'Details'>
-  | NativeStackScreenProps<SearchStackParamList, 'Details'>;
+export type DetailsScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Details'
+>;
 
 export type UseNavigationProps = NavigationProp<
-  HomeStackParamList | SearchStackParamList
+  HomeStackParamList | RootStackParamList
 >;
