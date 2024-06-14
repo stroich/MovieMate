@@ -11,13 +11,16 @@ import Animated, {
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FavoritesContext} from '../../Layout/Layout';
+import {isInMovieList} from '../../../utils/asyncStorage/asyncStorage';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
 };
 
 function CardMovieDescription({data}: CardMovieDescriptionProps) {
-  const {addFavorites} = useContext(FavoritesContext);
+  const {addFavorites, favorites, removeFavorites} =
+    useContext(FavoritesContext);
+  const isFavorites = isInMovieList(favorites, data.imdbID);
   const heightDescription = useSharedValue(250);
 
   const animatedDescription = useAnimatedStyle(() => {
@@ -37,7 +40,11 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
     });
 
   const addToFavorites = () => {
-    addFavorites(data);
+    if (isFavorites) {
+      removeFavorites(data.imdbID);
+    } else {
+      addFavorites(data);
+    }
   };
 
   return (
@@ -52,7 +59,11 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
         </View>
         <Text style={styles.text}>{data.Plot}</Text>
         <TouchableOpacity style={styles.addButton} onPress={addToFavorites}>
-          <AntDesign name={'heart'} size={26} color="white" />
+          <AntDesign
+            name={'heart'}
+            size={26}
+            color={isFavorites ? constants.colorGold : constants.colorWhite}
+          />
         </TouchableOpacity>
       </Animated.View>
     </GestureDetector>
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: 'absolute',
-    top: 35,
+    top: 55,
     right: 25,
   },
 });

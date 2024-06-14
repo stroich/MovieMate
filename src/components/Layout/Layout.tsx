@@ -9,6 +9,7 @@ import {CardType, ListMoviesType} from '../../types/moviesTypes';
 import {
   addFavoriteMovieToStorage,
   getFavoriteMoviesToStorage,
+  isInMovieList,
   removeFavoriteMovie,
 } from '../../utils/asyncStorage/asyncStorage';
 
@@ -41,7 +42,7 @@ function Layout({children}: LayoutProps) {
   }, [getFavorites]);
 
   const addFavorites = (value: CardType) => {
-    const hasMovie = favorites.some(item => value.imdbID === item.imdbID);
+    const hasMovie = isInMovieList(favorites, value.imdbID);
     if (!hasMovie) {
       addFavoriteMovieToStorage(value);
       setFavorites(prevFav => [...prevFav, value]);

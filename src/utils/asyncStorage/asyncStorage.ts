@@ -9,6 +9,9 @@ export async function setItem<T>(key: string, value: T) {
   }
 }
 
+export const isInMovieList = (favorites: ListMoviesType, imdbID: string) =>
+  favorites.some(item => imdbID === item.imdbID);
+
 export async function getFavoriteMoviesToStorage(): Promise<ListMoviesType | null> {
   try {
     const value = await AsyncStorage.getItem('favorites');
@@ -22,7 +25,7 @@ export async function getFavoriteMoviesToStorage(): Promise<ListMoviesType | nul
 export async function addFavoriteMovieToStorage(movie: CardType) {
   try {
     const favorites = (await getFavoriteMoviesToStorage()) ?? [];
-    const hasMovie = favorites.some(item => movie.imdbID === item.imdbID);
+    const hasMovie = isInMovieList(favorites, movie.imdbID);
     if (!hasMovie) {
       const updateMovie = [...favorites, movie];
       await setItem('favorites', updateMovie);
