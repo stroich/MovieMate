@@ -1,24 +1,14 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import constants from '../../styles/constants';
-import {getFavoriteMovies} from '../../utils/asyncStorage/asyncStorage';
 import List from '../../components/ListMovies/ListMovies';
 import {Text} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ListMoviesType} from '../../types/moviesTypes';
+import {FavoritesContext} from '../../components/Layout/Layout';
 
 function FavoritesScreen() {
   const insets = useSafeAreaInsets();
-  const [favorites, setFavorites] = useState<ListMoviesType | null>(null);
-
-  const getFavorites = useCallback(async () => {
-    const fav = await getFavoriteMovies();
-    setFavorites(fav);
-  }, []);
-
-  useEffect(() => {
-    getFavorites();
-  }, [getFavorites]);
+  const {favorites} = useContext(FavoritesContext);
 
   return (
     <View style={[styles.container, {paddingTop: insets.top}]}>
