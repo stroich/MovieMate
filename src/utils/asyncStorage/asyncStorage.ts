@@ -31,3 +31,13 @@ export async function addFavoriteMovieToStorage(movie: CardType) {
     console.error(error);
   }
 }
+
+export async function removeFavoriteMovie(imdbID: string) {
+  try {
+    const favorites = (await getFavoriteMoviesToStorage()) ?? [];
+    const updateMovie = favorites.filter(item => imdbID !== item.imdbID);
+    await setItem('favorites', updateMovie);
+  } catch (error) {
+    console.error(error);
+  }
+}

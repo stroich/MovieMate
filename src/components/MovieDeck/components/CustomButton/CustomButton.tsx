@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import constants from '../../styles/constants';
+import constants from '../../../../styles/constants';
 
 type CustomButtonProps = {
   nameIcon: string;

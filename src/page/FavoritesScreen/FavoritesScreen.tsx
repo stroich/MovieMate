@@ -15,7 +15,9 @@ function FavoritesScreen() {
       <View style={styles.containerText}>
         <Text style={styles.text}> In favorites</Text>
       </View>
-      {favorites && <List data={favorites} onEndReached={() => {}} />}
+      {favorites && (
+        <List data={favorites} onEndReached={() => {}} hasDeleteButton={true} />
+      )}
     </View>
   );
 }

@@ -9,11 +9,13 @@ import {CardType, ListMoviesType} from '../../types/moviesTypes';
 import {
   addFavoriteMovieToStorage,
   getFavoriteMoviesToStorage,
+  removeFavoriteMovie,
 } from '../../utils/asyncStorage/asyncStorage';
 
 type FavoritesContextType = {
   favorites: ListMoviesType;
   addFavorites: (fav: CardType) => void;
+  removeFavorites: (id: string) => void;
 };
 
 type LayoutProps = {
@@ -23,6 +25,7 @@ type LayoutProps = {
 export const FavoritesContext = createContext<FavoritesContextType>({
   favorites: [],
   addFavorites: () => {},
+  removeFavorites: () => {},
 });
 
 function Layout({children}: LayoutProps) {
@@ -45,9 +48,15 @@ function Layout({children}: LayoutProps) {
     }
   };
 
+  const removeFavorites = (imdbID: string) => {
+    const updateFavorites = favorites.filter(item => imdbID !== item.imdbID);
+    removeFavoriteMovie(imdbID);
+    setFavorites(updateFavorites);
+  };
+
   return (
     <FavoritesContext.Provider
-      value={{favorites: favorites, addFavorites: addFavorites}}>
+      value={{favorites, addFavorites, removeFavorites}}>
       {children}
     </FavoritesContext.Provider>
   );

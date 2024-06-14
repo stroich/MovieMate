@@ -4,7 +4,7 @@ import {CardType} from '../../../types/moviesTypes';
 import Animated, {FadeOut} from 'react-native-reanimated';
 import {MovieCard} from '../../MovieCard/MovieCard';
 import {GestureDetector} from 'react-native-gesture-handler';
-import CustomButton from '../../CustomButton/CustomButton';
+import CustomButton from './CustomButton/CustomButton';
 import {SwipeDirectionEnum, useSwipe} from '../hooks/useSwipe';
 import {FavoritesContext} from '../../Layout/Layout';
 
