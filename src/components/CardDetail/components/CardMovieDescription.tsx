@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, {useContext} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {MovieType} from '../../../types/moviesTypes';
 import constants from '../../../styles/constants';
 import Animated, {
@@ -9,12 +9,15 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {FavoritesContext} from '../../Layout/Layout';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
 };
 
 function CardMovieDescription({data}: CardMovieDescriptionProps) {
+  const {addFavorites} = useContext(FavoritesContext);
   const heightDescription = useSharedValue(250);
 
   const animatedDescription = useAnimatedStyle(() => {
@@ -33,6 +36,10 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
       heightDescription.value = withSpring(250);
     });
 
+  const addToFavorites = () => {
+    addFavorites(data);
+  };
+
   return (
     <GestureDetector gesture={pan}>
       <Animated.View style={[styles.container, animatedDescription]}>
@@ -44,6 +51,9 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
           <Text style={styles.textDetails}>{data.Runtime}</Text>
         </View>
         <Text style={styles.text}>{data.Plot}</Text>
+        <TouchableOpacity style={styles.addButton} onPress={addToFavorites}>
+          <AntDesign name={'heart'} size={26} color="white" />
+        </TouchableOpacity>
       </Animated.View>
     </GestureDetector>
   );
@@ -77,6 +87,11 @@ const styles = StyleSheet.create({
   textDetails: {
     color: constants.colorGrey,
     fontSize: 12,
+  },
+  addButton: {
+    position: 'absolute',
+    top: 35,
+    right: 25,
   },
 });
 
