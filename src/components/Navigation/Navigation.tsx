@@ -1,22 +1,34 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-import renderMyTabBar from '../NavList/renderMyTabBar';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import constants from '../../styles/constants';
 import HomeStack from './HomeStack';
-import SearchStack from './SearchStack';
+import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
+import {RootStackParamList} from '../../types/navigationTypes';
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function Navigation(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        tabBar={renderMyTabBar}
-        screenOptions={{headerShown: false}}>
-        <Tab.Screen name="home" component={HomeStack} />
-        <Tab.Screen name="search1" component={SearchStack} />
-      </Tab.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {backgroundColor: constants.colorSecondaryDarkest},
+          headerTintColor: 'white',
+          headerBackTitleVisible: false,
+          headerShown: false,
+        }}>
+        <Stack.Group>
+          <Stack.Screen name="Tab" component={HomeStack} />
+        </Stack.Group>
+        <Stack.Group screenOptions={{presentation: 'modal'}}>
+          <Stack.Screen
+            name="Details"
+            component={DetailsScreen}
+            options={{headerShown: false}}
+          />
+        </Stack.Group>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

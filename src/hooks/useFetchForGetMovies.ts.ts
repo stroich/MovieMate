@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from 'react';
-import {getMovies} from '../api/apiMovies';
 import {ListMoviesType} from '../types/moviesTypes';
+import {getMovies} from '../utils/api/apiMovies';
 
 export function useFetchForGetMovies(query: string) {
   const [data, setData] = useState<ListMoviesType | null>(null);

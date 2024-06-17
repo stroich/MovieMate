@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, TouchableHighlight} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import constants from '../../styles/constants';
 import {useNavigation} from '@react-navigation/native';
+import constants from '../../../../styles/constants';
 
 function BackButton() {
   const navigation = useNavigation();

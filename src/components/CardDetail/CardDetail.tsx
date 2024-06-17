@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import {CardType, MovieType} from '../../types/moviesTypes';
-import BackButton from '../BackButton/BackButton';
-import Animated from 'react-native-reanimated';
+import BackButton from './components/BackButton/BackButton';
 import CardMovieDescription from './components/CardMovieDescription';
 
 type CardDetailProps = {
@@ -16,11 +15,7 @@ const isMovieType = (data: MovieType | CardType): data is MovieType => {
 function CardDetail({data}: CardDetailProps) {
   return (
     <View>
-      <Animated.Image
-        sharedTransitionTag={data.imdbID}
-        style={styles.image}
-        source={{uri: data.Poster}}
-      />
+      <Image style={styles.image} source={{uri: data.Poster}} />
       {isMovieType(data) && <CardMovieDescription data={data} />}
       <BackButton />
     </View>

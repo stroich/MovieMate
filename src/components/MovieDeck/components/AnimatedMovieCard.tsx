@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {CardType} from '../../../types/moviesTypes';
 import Animated, {FadeOut} from 'react-native-reanimated';
 import {MovieCard} from '../../MovieCard/MovieCard';
 import {GestureDetector} from 'react-native-gesture-handler';
-import CustomButton from '../../CustomButton/CustomButton';
+import CustomButton from './CustomButton/CustomButton';
 import {SwipeDirectionEnum, useSwipe} from '../hooks/useSwipe';
+import {FavoritesContext} from '../../FavoritesProvider/FavoritesProvider';
 
 type MovieCardProps = {
   data: CardType;
@@ -18,16 +19,25 @@ export function AnimatedMovieCard({
   delay,
   onChangeNumberOfCard,
 }: MovieCardProps) {
+  const {addFavorites, removeFavorites} = useContext(FavoritesContext);
   const [visible, setVisible] = useState(true);
 
-  const successSwipe = () => {
+  const successfulSwipe = () => {
     onChangeNumberOfCard();
     setVisible(false);
+    addFavorites(data);
+  };
+
+  const unsuccessfulSwipe = async () => {
+    onChangeNumberOfCard();
+    setVisible(false);
+    removeFavorites(data.imdbID);
   };
 
   const {pan, animatedCardStyle, isSwiped, swipeDirection} = useSwipe({
     delay,
-    successSwipe,
+    unsuccessfulSwipe,
+    successfulSwipe,
   });
 
   if (!visible) {

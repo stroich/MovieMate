@@ -1,31 +1,19 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MainScreen from '../../page/MainScreen/MainScreen';
-import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
-import constants from '../../styles/constants';
-import {HomeStackParamList} from '../../types/navigationTypes';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import renderMyTabBar from '../NavList/renderMyTabBar';
+import SearchScreen from '../../page/SearchScreen/SearchScreen';
+import FavoritesScreen from '../../page/FavoritesScreen/FavoritesScreen';
 
-const Stack = createNativeStackNavigator<HomeStackParamList>();
+const Tab = createBottomTabNavigator();
 
 function HomeStack() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {backgroundColor: constants.colorSecondaryDarkest},
-        headerTintColor: 'white',
-        headerBackTitleVisible: false,
-      }}>
-      <Stack.Screen
-        name="Home"
-        component={MainScreen}
-        options={{title: 'MovieMate'}}
-      />
-      <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
-        options={{headerShown: false}}
-      />
-    </Stack.Navigator>
+    <Tab.Navigator tabBar={renderMyTabBar} screenOptions={{headerShown: false}}>
+      <Tab.Screen name="home" component={MainScreen} />
+      <Tab.Screen name="search1" component={SearchScreen} />
+      <Tab.Screen name="hearto" component={FavoritesScreen} />
+    </Tab.Navigator>
   );
 }
 

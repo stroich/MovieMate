@@ -11,7 +11,8 @@ import {
 
 type UseSwipeProps = {
   delay: number;
-  successSwipe: () => void;
+  successfulSwipe: () => void;
+  unsuccessfulSwipe: () => void;
 };
 
 export enum SwipeDirectionEnum {
@@ -21,7 +22,11 @@ export enum SwipeDirectionEnum {
 
 type SwipeDirectionType = null | SwipeDirectionEnum;
 
-export function useSwipe({successSwipe, delay}: UseSwipeProps) {
+export function useSwipe({
+  successfulSwipe,
+  unsuccessfulSwipe,
+  delay,
+}: UseSwipeProps) {
   const [isSwiped, setIsSwiped] = useState(false);
   const [swipeDirection, setSwipeDirection] =
     useState<SwipeDirectionType>(null);
@@ -45,7 +50,11 @@ export function useSwipe({successSwipe, delay}: UseSwipeProps) {
     .onFinalize(() => {
       const fadeOutAngle = 30;
       if (Math.abs(translateX.value) > fadeOutAngle) {
-        runOnJS(successSwipe)();
+        if (translateX.value > 0) {
+          runOnJS(successfulSwipe)();
+        } else {
+          runOnJS(unsuccessfulSwipe)();
+        }
       } else {
         translateX.value = 0;
         rotateZ.value = 0;

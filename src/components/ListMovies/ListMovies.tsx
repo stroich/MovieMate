@@ -7,17 +7,24 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 type ListProps = {
   data: ListMoviesType;
   onEndReached: () => void;
+  hasDeleteButton?: boolean;
 };
 
-function List({data, onEndReached}: ListProps) {
+function List({data, onEndReached, hasDeleteButton}: ListProps) {
   return (
     <FlatList
       contentContainerStyle={styles.containerList}
       style={styles.list}
+      columnWrapperStyle={styles.row}
       numColumns={2}
       data={data}
       renderItem={({item}) => (
-        <MovieCard data={item} width={170} height={200} />
+        <MovieCard
+          data={item}
+          width={170}
+          height={200}
+          hasDeleteButton={hasDeleteButton}
+        />
       )}
       keyExtractor={movie => movie.imdbID}
       onEndReachedThreshold={0.1}
@@ -34,6 +41,9 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
+  },
+  row: {
+    marginBottom: 10,
   },
 });
 
