@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   addButton: {
     position: 'absolute',
     top: 55,
-    right: 25,
+    right: 10,
   },
 });
 
