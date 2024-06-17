@@ -19,7 +19,7 @@ export function AnimatedMovieCard({
   delay,
   onChangeNumberOfCard,
 }: MovieCardProps) {
-  const {addFavorites} = useContext(FavoritesContext);
+  const {addFavorites, removeFavorites} = useContext(FavoritesContext);
   const [visible, setVisible] = useState(true);
 
   const successfulSwipe = () => {
@@ -31,6 +31,7 @@ export function AnimatedMovieCard({
   const unsuccessfulSwipe = async () => {
     onChangeNumberOfCard();
     setVisible(false);
+    removeFavorites(data.imdbID);
   };
 
   const {pan, animatedCardStyle, isSwiped, swipeDirection} = useSwipe({
