@@ -10,19 +10,16 @@ import Animated, {
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {FavoritesContext} from '../../Layout/Layout';
-import {isInMovieList} from '../../../utils/asyncStorage/asyncStorage';
+import {FavoritesContext} from '../../FavoritesProvider/FavoritesProvider';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
 };
 
 function CardMovieDescription({data}: CardMovieDescriptionProps) {
-  const {addFavorites, favorites, removeFavorites} =
-    useContext(FavoritesContext);
-  const isFavorites = isInMovieList(favorites, data.imdbID);
+  const favorites = useContext(FavoritesContext);
   const heightDescription = useSharedValue(250);
-
+  const isFavorites = favorites.isFavorites(data);
   const animatedDescription = useAnimatedStyle(() => {
     return {
       height: heightDescription.value,
@@ -39,14 +36,6 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
       heightDescription.value = withSpring(250);
     });
 
-  const addToFavorites = () => {
-    if (isFavorites) {
-      removeFavorites(data.imdbID);
-    } else {
-      addFavorites(data);
-    }
-  };
-
   return (
     <GestureDetector gesture={pan}>
       <Animated.View style={[styles.container, animatedDescription]}>
@@ -58,7 +47,9 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
           <Text style={styles.textDetails}>{data.Runtime}</Text>
         </View>
         <Text style={styles.text}>{data.Plot}</Text>
-        <TouchableOpacity style={styles.addButton} onPress={addToFavorites}>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => favorites.toggleFavorites(data)}>
           <AntDesign
             name={'heart'}
             size={26}

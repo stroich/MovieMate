@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import {UseNavigationProps} from '../../types/navigationTypes';
 import {CardType} from '../../types/moviesTypes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {FavoritesContext} from '../Layout/Layout';
+import {FavoritesContext} from '../FavoritesProvider/FavoritesProvider';
 import constants from '../../styles/constants';
 
 type MovieCardProps = {

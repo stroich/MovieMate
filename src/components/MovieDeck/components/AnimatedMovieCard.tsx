@@ -6,7 +6,7 @@ import {MovieCard} from '../../MovieCard/MovieCard';
 import {GestureDetector} from 'react-native-gesture-handler';
 import CustomButton from './CustomButton/CustomButton';
 import {SwipeDirectionEnum, useSwipe} from '../hooks/useSwipe';
-import {FavoritesContext} from '../../Layout/Layout';
+import {FavoritesContext} from '../../FavoritesProvider/FavoritesProvider';
 
 type MovieCardProps = {
   data: CardType;

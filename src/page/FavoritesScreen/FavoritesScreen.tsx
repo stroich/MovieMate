@@ -4,7 +4,7 @@ import constants from '../../styles/constants';
 import List from '../../components/ListMovies/ListMovies';
 import {Text} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {FavoritesContext} from '../../components/Layout/Layout';
+import {FavoritesContext} from '../../components/FavoritesProvider/FavoritesProvider';
 
 function FavoritesScreen() {
   const insets = useSafeAreaInsets();
@@ -16,7 +16,7 @@ function FavoritesScreen() {
         <Text style={styles.text}> In favorites</Text>
       </View>
       {favorites && (
-        <List data={favorites} onEndReached={() => {}} hasDeleteButton={true} />
+        <List data={favorites} onEndReached={() => {}} hasDeleteButton />
       )}
     </View>
   );
