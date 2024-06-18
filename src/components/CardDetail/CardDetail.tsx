@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import {CardType, MovieType} from '../../types/moviesTypes';
-import BackButton from './components/BackButton/BackButton';
+import BackButton from '../BackButton/BackButton';
 import CardMovieDescription from './components/CardMovieDescription';
 
 type CardDetailProps = {

@@ -9,4 +9,5 @@ export default {
   colorDarkGold: '#D1B000',
   colorGrey: '#9a9797',
   colorWhite: '#ffffff',
+  colorRed: '#d42d2c',
 };
