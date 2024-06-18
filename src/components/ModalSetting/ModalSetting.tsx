@@ -1,15 +1,27 @@
 import React from 'react';
-import {View, StyleSheet, Text, Button} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import constants from '../../styles/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useForm} from 'react-hook-form';
 import Input from './component/Input';
 import BackButton from '../BackButton/BackButton';
+import {
+  rulesForEmail,
+  rulesForType,
+  rulesForUsername,
+} from './verificationRules';
 
 export type SettingData = {
   Username: string;
   Email: string;
-  Watchlists: string;
+  Type: string;
 };
 
 function ModalSettings() {
@@ -22,28 +34,46 @@ function ModalSettings() {
     defaultValues: {
       Username: '',
       Email: '',
-      Watchlists: '',
+      Type: '',
     },
   });
-  const onSubmit = (data: SettingData) => console.log(data);
+  const onSubmit = (data: SettingData) => {
+    console.log(data);
+    console.log(errors);
+  };
 
   return (
-    <View style={[styles.container, {paddingTop: insets.top}]}>
+    <KeyboardAvoidingView
+      style={[styles.container, {paddingTop: insets.top}]}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <View style={styles.containerTitle}>
         <Text style={styles.title}>Change Personal Settings</Text>
       </View>
-      <Input control={control} name="Username" errors={errors.Username} />
-      <Input control={control} name="Email" errors={errors.Email} />
-      <Input control={control} name="Watchlists" errors={errors.Watchlists} />
-      <View style={styles.containerButton}>
-        <Button
-          title="Submit"
-          onPress={handleSubmit(onSubmit)}
-          color={constants.colorGold}
-        />
-      </View>
+      <Input
+        control={control}
+        name="Username"
+        errors={errors.Username}
+        rules={rulesForUsername}
+      />
+      <Input
+        control={control}
+        name="Email"
+        errors={errors.Email}
+        rules={rulesForEmail}
+      />
+      <Input
+        control={control}
+        name="Type"
+        errors={errors.Type}
+        rules={rulesForType}
+      />
+      <Button
+        title="Submit"
+        onPress={handleSubmit(onSubmit)}
+        color={constants.colorGold}
+      />
       <BackButton />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -75,9 +105,6 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
-  },
-  containerButton: {
-    padding: 10,
   },
 });
 

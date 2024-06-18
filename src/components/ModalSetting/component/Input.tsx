@@ -1,23 +1,27 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import constants from '../../../styles/constants';
-import {Control, Controller, FieldErrors} from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  RegisterOptions,
+} from 'react-hook-form';
 import {SettingData} from '../ModalSetting';
 
 type InputProps = {
   control: Control<SettingData, any>;
   name: keyof SettingData;
   errors: FieldErrors<SettingData>[keyof FieldErrors<SettingData>];
+  rules: RegisterOptions<SettingData, keyof SettingData>;
 };
 
-function Input({control, name, errors}: InputProps) {
+function Input({control, name, errors, rules}: InputProps) {
   return (
     <View style={styles.container}>
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        rules={rules}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
             style={styles.input}
@@ -30,7 +34,7 @@ function Input({control, name, errors}: InputProps) {
         )}
         name={name}
       />
-      {errors && <Text style={styles.text}>This is required.</Text>}
+      {errors && <Text style={styles.text}>{errors.message}</Text>}
     </View>
   );
 }
