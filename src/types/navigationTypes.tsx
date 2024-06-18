@@ -11,6 +11,7 @@ export type HomeStackParamList = {
 export type RootStackParamList = {
   Tab: undefined;
   Details: {itemId: string; data: CardType};
+  ModalSettings: undefined;
 };
 
 export type DetailsScreenProps = NativeStackScreenProps<
@@ -18,6 +19,4 @@ export type DetailsScreenProps = NativeStackScreenProps<
   'Details'
 >;
 
-export type UseNavigationProps = NavigationProp<
-  HomeStackParamList | RootStackParamList
->;
+export type UseNavigationProps = NavigationProp<RootStackParamList>;
