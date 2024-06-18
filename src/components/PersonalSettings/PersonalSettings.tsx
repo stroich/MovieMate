@@ -1,28 +1,47 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import constants from '../../styles/constants';
 import {FlatList} from 'react-native-gesture-handler';
-import {PERSONAL_INFORMATION as data} from './data';
 import SettingItem from '../../components/SettingItem/SettingItem';
-import {useNavigation} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {UseNavigationProps} from '../../types/navigationTypes';
+import ModalSettings from '../ModalSetting/ModalSetting';
+import {PersonalSettingsType} from '../../types/settingType';
 
 function PersonalSetting() {
-  const navigation = useNavigation<UseNavigationProps>();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [personalSettings, setPersonalSettings] =
+    useState<PersonalSettingsType>({
+      Username: '',
+      Email: '',
+      Type: '',
+    });
+
+  const changeVisible = () => {
+    setModalVisible(false);
+  };
+
+  const changePersonalSetting = (value: PersonalSettingsType) => {
+    setPersonalSettings(value);
+    setModalVisible(false);
+  };
 
   return (
     <View style={[styles.container]}>
       <View style={styles.containerText}>
         <Text style={styles.text}>Personal Settings</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('ModalSettings')}>
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
           <AntDesign name="edit" size={24} color="white" />
         </TouchableOpacity>
       </View>
       <FlatList
-        data={data}
+        data={Object.entries(personalSettings)}
         renderItem={({item}) => <SettingItem data={item} />}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item[0]}
+      />
+      <ModalSettings
+        visible={modalVisible}
+        onCloseModal={changeVisible}
+        onSubmit={changePersonalSetting}
       />
     </View>
   );
@@ -32,7 +51,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: constants.colorSecondaryDark,
-    paddingHorizontal: 16,
   },
   containerText: {
     paddingVertical: 16,

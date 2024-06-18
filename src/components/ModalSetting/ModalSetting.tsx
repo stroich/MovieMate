@@ -6,17 +6,19 @@ import {
   Button,
   KeyboardAvoidingView,
   Platform,
+  Modal,
+  TouchableOpacity,
 } from 'react-native';
 import constants from '../../styles/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useForm} from 'react-hook-form';
 import Input from './component/Input';
-import BackButton from '../BackButton/BackButton';
 import {
   rulesForEmail,
   rulesForType,
   rulesForUsername,
 } from './verificationRules';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export type SettingData = {
   Username: string;
@@ -24,7 +26,13 @@ export type SettingData = {
   Type: string;
 };
 
-function ModalSettings() {
+type ModalSettingsProps = {
+  visible: boolean;
+  onCloseModal: () => void;
+  onSubmit: (value: SettingData) => void;
+};
+
+function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
   const insets = useSafeAreaInsets();
   const {
     control,
@@ -37,43 +45,48 @@ function ModalSettings() {
       Type: '',
     },
   });
-  const onSubmit = (data: SettingData) => {
-    console.log(data);
-    console.log(errors);
-  };
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.container, {paddingTop: insets.top}]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <View style={styles.containerTitle}>
-        <Text style={styles.title}>Change Personal Settings</Text>
-      </View>
-      <Input
-        control={control}
-        name="Username"
-        errors={errors.Username}
-        rules={rulesForUsername}
-      />
-      <Input
-        control={control}
-        name="Email"
-        errors={errors.Email}
-        rules={rulesForEmail}
-      />
-      <Input
-        control={control}
-        name="Type"
-        errors={errors.Type}
-        rules={rulesForType}
-      />
-      <Button
-        title="Submit"
-        onPress={handleSubmit(onSubmit)}
-        color={constants.colorGold}
-      />
-      <BackButton />
-    </KeyboardAvoidingView>
+    <Modal animationType="slide" transparent={true} visible={visible}>
+      <KeyboardAvoidingView
+        style={[styles.container, {paddingTop: insets.top}]}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <TouchableOpacity style={styles.containerIcon} onPress={onCloseModal}>
+          <AntDesign
+            style={styles.icon}
+            name="arrowleft"
+            size={24}
+            color="white"
+          />
+        </TouchableOpacity>
+        <View style={styles.containerTitle}>
+          <Text style={styles.title}>Change Personal Settings</Text>
+        </View>
+        <Input
+          control={control}
+          name="Username"
+          errors={errors.Username}
+          rules={rulesForUsername}
+        />
+        <Input
+          control={control}
+          name="Email"
+          errors={errors.Email}
+          rules={rulesForEmail}
+        />
+        <Input
+          control={control}
+          name="Type"
+          errors={errors.Type}
+          rules={rulesForType}
+        />
+        <Button
+          title="Submit"
+          onPress={handleSubmit((data: SettingData) => onSubmit(data))}
+          color={constants.colorGold}
+        />
+      </KeyboardAvoidingView>
+    </Modal>
   );
 }
 
@@ -105,6 +118,15 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
+  },
+  containerIcon: {
+    position: 'absolute',
+    top: 30,
+    left: 10,
+  },
+  icon: {
+    backgroundColor: constants.colorOpasity75,
+    borderBottomRightRadius: 30,
   },
 });
 

@@ -5,7 +5,6 @@ import constants from '../../styles/constants';
 import HomeStack from './HomeStack';
 import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
 import {RootStackParamList} from '../../types/navigationTypes';
-import ModalSettings from '../ModalSetting/ModalSetting';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -28,7 +27,6 @@ function Navigation(): React.JSX.Element {
             component={DetailsScreen}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="ModalSettings" component={ModalSettings} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

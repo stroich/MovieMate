@@ -1,19 +1,18 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native';
-import {settingItemType} from '../PersonalSettings/data';
 import constants from '../../styles/constants';
 
 type SettingItemProps = {
-  data: settingItemType;
+  data: [string, string];
 };
 
-function SettingItem({data}: SettingItemProps) {
+function SettingItem({data: [title, value]}: SettingItemProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{data.text}</Text>
+      <Text style={styles.text}>{title}</Text>
       <View style={styles.textValue}>
-        <Text style={styles.text}> </Text>
+        <Text style={styles.text}> {value}</Text>
       </View>
     </View>
   );
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   textValue: {
-    width: '50%',
+    width: '60%',
     borderBottomWidth: 1,
     borderBottomColor: constants.colorGrey,
   },
