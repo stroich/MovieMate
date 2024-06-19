@@ -13,7 +13,7 @@ function PersonalSetting() {
     useState<PersonalSettingsType>({
       Username: '',
       Email: '',
-      Type: '',
+      Preferences: '',
     });
 
   const changeVisible = () => {

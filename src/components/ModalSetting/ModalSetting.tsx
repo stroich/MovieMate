@@ -19,12 +19,7 @@ import {
   rulesForUsername,
 } from './verificationRules';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
-export type SettingData = {
-  Username: string;
-  Email: string;
-  Type: string;
-};
+import {PersonalSettingsType as SettingData} from '../../types/settingType';
 
 type ModalSettingsProps = {
   visible: boolean;
@@ -42,7 +37,7 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
     defaultValues: {
       Username: '',
       Email: '',
-      Type: '',
+      Preferences: '',
     },
   });
 
@@ -76,8 +71,8 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
         />
         <Input
           control={control}
-          name="Type"
-          errors={errors.Type}
+          name="Preferences"
+          errors={errors.Preferences}
           rules={rulesForType}
         />
         <Button

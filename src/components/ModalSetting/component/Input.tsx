@@ -7,7 +7,7 @@ import {
   FieldErrors,
   RegisterOptions,
 } from 'react-hook-form';
-import {SettingData} from '../ModalSetting';
+import {PersonalSettingsType as SettingData} from '../../../types/settingType';
 
 type InputProps = {
   control: Control<SettingData, any>;
