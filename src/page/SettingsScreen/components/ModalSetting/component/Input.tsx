@@ -27,7 +27,10 @@ function Input({control, name, errors, rules}: InputProps) {
         rules={rules}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
-            style={[styles.input, {backgroundColor: colors.colorInput}]}
+            style={[
+              styles.input,
+              {backgroundColor: colors.colorInput, color: colors.colorText},
+            ]}
             placeholder={name}
             placeholderTextColor={colors.colorGray}
             onBlur={onBlur}

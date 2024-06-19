@@ -14,7 +14,7 @@ function SettingItem({data: [title, value]}: SettingItemProps) {
     <View style={styles.container}>
       <Text style={[styles.text, {color: colors.colorGray}]}>{title}</Text>
       <View style={[styles.textValue, {borderBottomColor: colors.colorGray}]}>
-        <Text style={styles.text}> {value}</Text>
+        <Text style={[styles.text, {color: colors.colorGray}]}> {value}</Text>
       </View>
     </View>
   );

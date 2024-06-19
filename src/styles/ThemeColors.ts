@@ -9,6 +9,7 @@ export const constants = {
     colorGray: '#9a9797',
     colorForDetails: '#9a9797',
     colorText: '#ffffff',
+    colorButton: '#B8860B',
   },
   light: {
     colorSecondaryDark: '#efebd5',
@@ -20,6 +21,7 @@ export const constants = {
     colorGray: '#524f4f',
     colorForDetails: '#fdf2c0',
     colorText: '#000000',
+    colorButton: '#B8860B',
   },
 };
 export type ColorType = typeof constants.dark;
