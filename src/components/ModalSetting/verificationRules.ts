@@ -1,13 +1,16 @@
 import {RegisterOptions} from 'react-hook-form';
-import {SettingData} from './ModalSetting';
+import {PersonalSettingsType} from '../../types/settingType';
 
-type rulesType = RegisterOptions<SettingData, keyof SettingData>;
+type RulesType = RegisterOptions<
+  PersonalSettingsType,
+  keyof PersonalSettingsType
+>;
 
-export const rulesForUsername: rulesType = {
+const rulesForUsername: RulesType = {
   required: 'This field is required',
 };
 
-export const rulesForEmail: rulesType = {
+const rulesForEmail: RulesType = {
   required: 'This field is required',
   pattern: {value: /^\S+@\S+$/, message: 'Invalid email address'},
 };
@@ -18,9 +21,15 @@ export enum VideoType {
   episode,
 }
 
-export const rulesForType: rulesType = {
+const rulesForPreferences: RulesType = {
   required: 'This field is required',
   validate: value =>
     Object.values(VideoType).includes(value) ||
     'Valid types are: movie, series, episode.',
+};
+
+export const verificationRules = {
+  Username: rulesForUsername,
+  Email: rulesForEmail,
+  Preferences: rulesForPreferences,
 };

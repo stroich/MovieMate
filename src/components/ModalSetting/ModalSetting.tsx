@@ -13,11 +13,7 @@ import constants from '../../styles/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useForm} from 'react-hook-form';
 import Input from './component/Input';
-import {
-  rulesForEmail,
-  rulesForType,
-  rulesForUsername,
-} from './verificationRules';
+import {verificationRules} from './verificationRules';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {PersonalSettingsType as SettingData} from '../../types/settingType';
 
@@ -29,16 +25,21 @@ type ModalSettingsProps = {
 
 function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
   const insets = useSafeAreaInsets();
+
+  const defaultValues = {
+    Username: '',
+    Email: '',
+    Preferences: '',
+  };
+
+  const keysValue = Object.keys(defaultValues) as Array<keyof SettingData>;
+
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm<SettingData>({
-    defaultValues: {
-      Username: '',
-      Email: '',
-      Preferences: '',
-    },
+    defaultValues: defaultValues,
   });
 
   return (
@@ -57,24 +58,15 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
         <View style={styles.containerTitle}>
           <Text style={styles.title}>Change Personal Settings</Text>
         </View>
-        <Input
-          control={control}
-          name="Username"
-          errors={errors.Username}
-          rules={rulesForUsername}
-        />
-        <Input
-          control={control}
-          name="Email"
-          errors={errors.Email}
-          rules={rulesForEmail}
-        />
-        <Input
-          control={control}
-          name="Preferences"
-          errors={errors.Preferences}
-          rules={rulesForType}
-        />
+        {keysValue.map((item, index) => (
+          <Input
+            key={index}
+            control={control}
+            name={item}
+            errors={errors[item]}
+            rules={verificationRules[item]}
+          />
+        ))}
         <Button
           title="Submit"
           onPress={handleSubmit((data: SettingData) => onSubmit(data))}
@@ -98,6 +90,12 @@ const styles = StyleSheet.create({
   title: {
     color: constants.colorWhite,
     fontSize: 25,
+  },
+  containerList: {
+    width: '100%',
+  },
+  list: {
+    width: '100%',
   },
   input: {
     height: 40,
