@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import constants from '../../styles/constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {ThemeContext} from '../ThemeProvider/ThemeProvider';
 
 interface MyTabBarProps extends BottomTabBarProps {}
 
-function renderMyTabBar({state, descriptors, navigation}: MyTabBarProps) {
+function MyTabBar({state, descriptors, navigation}: MyTabBarProps) {
+  const {colors} = useContext(ThemeContext);
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: colors.colorSecondaryDarkest},
+      ]}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
 
@@ -59,8 +66,7 @@ const styles = StyleSheet.create({
     padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: constants.colorSecondaryDarkest,
   },
 });
 
-export default renderMyTabBar;
+export default MyTabBar;

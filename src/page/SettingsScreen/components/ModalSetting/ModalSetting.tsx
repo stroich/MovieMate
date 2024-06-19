@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   Button,
   KeyboardAvoidingView,
   Platform,
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import constants from '../../styles/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useForm} from 'react-hook-form';
 import Input from './component/Input';
 import {verificationRules} from './verificationRules';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {PersonalSettingsType as SettingData} from '../../types/settingType';
+import {PersonalSettingsType as SettingData} from '../../../../types/settingType';
+import {ThemeContext} from '../../../../components/ThemeProvider/ThemeProvider';
+import ThemedText from '../../../../components/ThemedText/ThemedText';
 
 type ModalSettingsProps = {
   visible: boolean;
@@ -25,6 +25,7 @@ type ModalSettingsProps = {
 
 function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
   const insets = useSafeAreaInsets();
+  const {colors} = useContext(ThemeContext);
 
   const defaultValues = {
     Username: '',
@@ -45,18 +46,21 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
   return (
     <Modal animationType="slide" transparent={true} visible={visible}>
       <KeyboardAvoidingView
-        style={[styles.container, {paddingTop: insets.top}]}
+        style={[
+          styles.container,
+          {paddingTop: insets.top, backgroundColor: colors.colorSecondaryDark},
+        ]}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableOpacity style={styles.containerIcon} onPress={onCloseModal}>
           <AntDesign
             style={styles.icon}
             name="arrowleft"
             size={24}
-            color="white"
+            color={colors.colorText}
           />
         </TouchableOpacity>
         <View style={styles.containerTitle}>
-          <Text style={styles.title}>Change Personal Settings</Text>
+          <ThemedText style={styles.title}>Change Personal Settings</ThemedText>
         </View>
         {keysValue.map((item, index) => (
           <Input
@@ -70,7 +74,7 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
         <Button
           title="Submit"
           onPress={handleSubmit((data: SettingData) => onSubmit(data))}
-          color={constants.colorGold}
+          color={colors.colorGold}
         />
       </KeyboardAvoidingView>
     </Modal>
@@ -80,7 +84,6 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: constants.colorSecondaryDark,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -88,7 +91,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   title: {
-    color: constants.colorWhite,
     fontSize: 25,
   },
   containerList: {
@@ -104,7 +106,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: '#343536CC',
     borderColor: '#606265',
     color: 'white',
   },
@@ -118,7 +119,6 @@ const styles = StyleSheet.create({
     left: 10,
   },
   icon: {
-    backgroundColor: constants.colorOpasity75,
     borderBottomRightRadius: 30,
   },
 });

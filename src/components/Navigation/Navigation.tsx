@@ -1,19 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import constants from '../../styles/constants';
 import HomeStack from './HomeStack';
 import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
 import {RootStackParamList} from '../../types/navigationTypes';
+import {ThemeContext} from '../ThemeProvider/ThemeProvider';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function Navigation(): React.JSX.Element {
+  const {colors} = useContext(ThemeContext);
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerStyle: {backgroundColor: constants.colorSecondaryDarkest},
+          headerStyle: {backgroundColor: colors.colorSecondaryDarkest},
           headerTintColor: 'white',
           headerBackTitleVisible: false,
           headerShown: false,

@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import constants from '../../styles/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import PersonalSetting from '../../components/PersonalSettings/PersonalSettings';
-import GeneralSettings from '../../components/GeneralSettings/GeneralSettings';
+import {ThemeContext} from '../../components/ThemeProvider/ThemeProvider';
+import GeneralSettings from './components/GeneralSettings/GeneralSettings';
+import PersonalSetting from './components/PersonalSettings/PersonalSettings';
 
 function SettingsScreen() {
   const insets = useSafeAreaInsets();
+  const {colors} = useContext(ThemeContext);
 
   return (
-    <View style={[styles.container, {paddingTop: insets.top}]}>
+    <View
+      style={[
+        styles.container,
+        {paddingTop: insets.top, backgroundColor: colors.colorSecondaryDark},
+      ]}>
       <GeneralSettings />
       <PersonalSetting />
     </View>
@@ -19,7 +24,6 @@ function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: constants.colorSecondaryDark,
     paddingHorizontal: 16,
   },
 });

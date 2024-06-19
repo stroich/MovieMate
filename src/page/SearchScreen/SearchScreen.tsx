@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Search from '../../components/Search/Search';
-import constants from '../../styles/constants';
 import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
 import Loading from '../../components/Loading/Loading.tsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
 import List from '../../components/ListMovies/ListMovies.tsx';
+import {ThemeContext} from '../../components/ThemeProvider/ThemeProvider.tsx';
 
 function SearchScreen(): React.JSX.Element {
   const [queryText, setQueryText] = useState('');
+  const {colors} = useContext(ThemeContext);
   const {data, loading, error, loadMoviesOnScroll} =
     useFetchForGetMovies(queryText);
 
@@ -33,7 +34,8 @@ function SearchScreen(): React.JSX.Element {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {backgroundColor: colors.colorSecondaryDark}]}>
       <Search onSearch={handleSearch} />
       {renderComponents()}
     </View>
@@ -44,7 +46,6 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 5,
     flex: 1,
-    backgroundColor: constants.colorSecondaryDark,
   },
   loading: {
     color: 'white',

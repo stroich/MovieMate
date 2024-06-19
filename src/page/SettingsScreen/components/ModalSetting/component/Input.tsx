@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import constants from '../../../styles/constants';
 import {
   Control,
   Controller,
   FieldErrors,
   RegisterOptions,
 } from 'react-hook-form';
-import {PersonalSettingsType as SettingData} from '../../../types/settingType';
+import {PersonalSettingsType as SettingData} from '../../../../../types/settingType';
+import {ThemeContext} from '../../../../../components/ThemeProvider/ThemeProvider';
+import constants from '../../../../../styles/constants';
 
 type InputProps = {
   control: Control<SettingData, any>;
@@ -17,6 +18,8 @@ type InputProps = {
 };
 
 function Input({control, name, errors, rules}: InputProps) {
+  const {colors} = useContext(ThemeContext);
+
   return (
     <View style={styles.container}>
       <Controller
@@ -24,9 +27,9 @@ function Input({control, name, errors, rules}: InputProps) {
         rules={rules}
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
-            style={styles.input}
+            style={[styles.input, {backgroundColor: colors.colorInput}]}
             placeholder={name}
-            placeholderTextColor={constants.colorGray}
+            placeholderTextColor={colors.colorGray}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
@@ -53,7 +56,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: '#343536CC',
     borderColor: '#606265',
     color: 'white',
   },

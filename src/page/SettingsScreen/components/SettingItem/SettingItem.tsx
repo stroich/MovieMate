@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native';
-import constants from '../../styles/constants';
+import {ThemeContext} from '../../../../components/ThemeProvider/ThemeProvider';
 
 type SettingItemProps = {
   data: [string, string];
 };
 
 function SettingItem({data: [title, value]}: SettingItemProps) {
+  const {colors} = useContext(ThemeContext);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
-      <View style={styles.textValue}>
+      <Text style={[styles.text, {color: colors.colorGray}]}>{title}</Text>
+      <View style={[styles.textValue, {borderBottomColor: colors.colorGray}]}>
         <Text style={styles.text}> {value}</Text>
       </View>
     </View>
@@ -25,14 +27,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text: {
-    color: constants.colorGray,
     fontSize: 18,
     textAlign: 'center',
   },
   textValue: {
     width: '60%',
     borderBottomWidth: 1,
-    borderBottomColor: constants.colorGray,
   },
 });
 
