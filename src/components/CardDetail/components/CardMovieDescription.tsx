@@ -11,6 +11,7 @@ import Animated, {
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FavoritesContext} from '../../FavoritesProvider/FavoritesProvider';
+import {ThemeContext} from '../../ThemeProvider/ThemeProvider';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
@@ -18,6 +19,7 @@ type CardMovieDescriptionProps = {
 
 function CardMovieDescription({data}: CardMovieDescriptionProps) {
   const favorites = useContext(FavoritesContext);
+  const {colors} = useContext(ThemeContext);
   const heightDescription = useSharedValue(250);
   const isFavorites = favorites.isFavorites(data);
   const animatedDescription = useAnimatedStyle(() => {
@@ -38,13 +40,27 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
 
   return (
     <GestureDetector gesture={pan}>
-      <Animated.View style={[styles.container, animatedDescription]}>
-        <Text style={[styles.title]}>{data.Title}</Text>
-        <Text style={styles.textDetails}>{data.Genre}</Text>
+      <Animated.View
+        style={[
+          styles.container,
+          {backgroundColor: colors.colorOpasity75},
+          animatedDescription,
+        ]}>
+        <Text style={[styles.title, {color: colors.colorGold}]}>
+          {data.Title}
+        </Text>
+        <Text style={[styles.textDetails, {color: colors.colorForDetails}]}>
+          {data.Genre}
+        </Text>
         <View style={styles.containerDetails}>
           <Text
-            style={styles.textDetails}>{`${data.Year} | ${data.Country}`}</Text>
-          <Text style={styles.textDetails}>{data.Runtime}</Text>
+            style={[
+              styles.textDetails,
+              {color: colors.colorForDetails},
+            ]}>{`${data.Year} | ${data.Country}`}</Text>
+          <Text style={[styles.textDetails, {color: colors.colorForDetails}]}>
+            {data.Runtime}
+          </Text>
         </View>
         <Text style={styles.text}>{data.Plot}</Text>
         <TouchableOpacity
@@ -53,7 +69,7 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
           <AntDesign
             name={'heart'}
             size={26}
-            color={isFavorites ? constants.colorGold : constants.colorWhite}
+            color={isFavorites ? colors.colorGold : constants.colorWhite}
           />
         </TouchableOpacity>
       </Animated.View>
@@ -67,7 +83,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     fontSize: 18,
-    backgroundColor: constants.colorOpasity75,
     bottom: 0,
   },
   containerDetails: {
@@ -83,11 +98,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   text: {
+    color: '#ffffff',
     fontSize: 15,
-    color: constants.colorWhite,
   },
   textDetails: {
-    color: constants.colorGray,
     fontSize: 12,
   },
   addButton: {

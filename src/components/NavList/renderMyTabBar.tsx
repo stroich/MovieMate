@@ -52,7 +52,7 @@ function MyTabBar({state, descriptors, navigation}: MyTabBarProps) {
             <AntDesign
               name={route.name}
               size={24}
-              color={isFocused ? constants.colorGold : constants.colorWhite}
+              color={isFocused ? constants.colorGold : colors.colorText}
             />
           </TouchableOpacity>
         );

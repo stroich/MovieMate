@@ -72,9 +72,9 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
           />
         ))}
         <Button
-          title="Submit"
+          title="SUBMIT"
           onPress={handleSubmit((data: SettingData) => onSubmit(data))}
-          color={colors.colorGold}
+          color={colors.colorText}
         />
       </KeyboardAvoidingView>
     </Modal>
