@@ -26,7 +26,7 @@ function Input({control, name, errors, rules}: InputProps) {
           <TextInput
             style={styles.input}
             placeholder={name}
-            placeholderTextColor={constants.colorGrey}
+            placeholderTextColor={constants.colorGray}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}

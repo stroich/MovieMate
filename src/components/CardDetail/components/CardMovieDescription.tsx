@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     color: constants.colorWhite,
   },
   textDetails: {
-    color: constants.colorGrey,
+    color: constants.colorGray,
     fontSize: 12,
   },
   addButton: {

@@ -7,7 +7,9 @@ export default {
   colorLightGold: '#FFD700',
   colorGold: '#B8860B',
   colorDarkGold: '#D1B000',
-  colorGrey: '#9a9797',
+  colorGray: '#9a9797',
   colorWhite: '#ffffff',
+  colorBlack: '#000000',
   colorRed: '#d42d2c',
+  colorDarkGray: '#3e3e3e',
 };

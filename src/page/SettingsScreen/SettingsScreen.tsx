@@ -3,12 +3,14 @@ import {View, StyleSheet} from 'react-native';
 import constants from '../../styles/constants';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import PersonalSetting from '../../components/PersonalSettings/PersonalSettings';
+import GeneralSettings from '../../components/GeneralSettings/GeneralSettings';
 
 function SettingsScreen() {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={[styles.container, {paddingTop: insets.top}]}>
+      <GeneralSettings />
       <PersonalSetting />
     </View>
   );
@@ -19,15 +21,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: constants.colorSecondaryDark,
     paddingHorizontal: 16,
-  },
-  containerText: {
-    paddingVertical: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  text: {
-    color: 'white',
-    fontSize: 20,
   },
 });
 

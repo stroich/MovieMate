@@ -25,14 +25,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text: {
-    color: constants.colorGrey,
+    color: constants.colorGray,
     fontSize: 18,
     textAlign: 'center',
   },
   textValue: {
     width: '60%',
     borderBottomWidth: 1,
-    borderBottomColor: constants.colorGrey,
+    borderBottomColor: constants.colorGray,
   },
 });
 
