@@ -20,10 +20,13 @@ type ItemType = {
 
 type DropdownProps = {
   data: Array<ItemType>;
+  onChange: (value: string) => void;
+  value: string;
 };
 
-function Dropdown({data}: DropdownProps) {
-  const [selected, setSelected] = useState('Select options');
+function Dropdown({data, onChange, value}: DropdownProps) {
+  const initialSelected = value ? value : 'Select options';
+  const [selected, setSelected] = useState(initialSelected);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const {colors} = useContext(ThemeContext);
   const [inputValue, setInputValue] = useState('');
@@ -37,6 +40,7 @@ function Dropdown({data}: DropdownProps) {
 
   const handlePressSelected = (item: ItemType) => {
     setSelected(item.value);
+    onChange(item.value);
     setIsOpenOptions(prevState => !prevState);
     setInputValue('');
     setSortedData(data);
@@ -48,10 +52,18 @@ function Dropdown({data}: DropdownProps) {
     const newText = event.nativeEvent.text;
     setInputValue(newText);
     if (inputValue) {
-      setSortedData(() => data.filter(el => el.value.startsWith(newText)));
+      setSortedData(() => {
+        const newData = data.filter(el => el.value.startsWith(newText));
+
+        return newData;
+      });
     } else {
       setSortedData(() => data.filter(el => el.value.startsWith(newText)));
     }
+  };
+
+  const handleSubmit = () => {
+    onChange(inputValue);
   };
 
   return (
@@ -80,13 +92,17 @@ function Dropdown({data}: DropdownProps) {
               value={inputValue}
               onChange={handleChange}
               placeholder="Search"
+              onSubmitEditing={handleSubmit}
             />
             <TouchableOpacity style={styles.button} onPress={onPressSelected}>
               <AntDesign name="close" size={20} color={colors.colorText} />
             </TouchableOpacity>
           </View>
           <FlatList
-            contentContainerStyle={styles.containerList}
+            contentContainerStyle={[
+              styles.containerList,
+              {borderWidth: sortedData.length ? 1 : 0},
+            ]}
             style={styles.list}
             data={sortedData}
             renderItem={({item}) => (
@@ -148,7 +164,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     width: '100%',
     paddingLeft: 20,
-    borderWidth: 1,
     borderRadius: 20,
     borderColor: '#606265',
   },

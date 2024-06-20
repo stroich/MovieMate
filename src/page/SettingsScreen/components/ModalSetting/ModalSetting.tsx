@@ -16,6 +16,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {PersonalSettingsType as SettingData} from '../../../../types/settingType';
 import {ThemeContext} from '../../../../components/ThemeProvider/ThemeProvider';
 import ThemedText from '../../../../components/ThemedText/ThemedText';
+import DropdownForForm from './component/DropdownForForm';
 
 type ModalSettingsProps = {
   visible: boolean;
@@ -32,8 +33,6 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
     Email: '',
     Preferences: '',
   };
-
-  const keysValue = Object.keys(defaultValues) as Array<keyof SettingData>;
 
   const {
     control,
@@ -59,23 +58,41 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
             color={colors.colorText}
           />
         </TouchableOpacity>
-        <View style={styles.containerTitle}>
-          <ThemedText style={styles.title}>Change Personal Settings</ThemedText>
-        </View>
-        {keysValue.map((item, index) => (
-          <Input
-            key={index}
-            control={control}
-            name={item}
-            errors={errors[item]}
-            rules={verificationRules[item]}
+        <View style={styles.containerSettings}>
+          <View style={styles.containerTitle}>
+            <ThemedText style={styles.title}>
+              Change Personal Settings
+            </ThemedText>
+          </View>
+          <View style={styles.containerList}>
+            <Input
+              control={control}
+              name="Username"
+              errors={errors.Username}
+              rules={verificationRules.Username}
+            />
+            <Input
+              control={control}
+              name="Email"
+              errors={errors.Email}
+              rules={verificationRules.Email}
+            />
+            <DropdownForForm
+              control={control}
+              name="Preferences"
+              rules={verificationRules.Preferences}
+              errors={errors.Preferences}
+            />
+          </View>
+
+          <Button
+            title=" SAVE "
+            onPress={handleSubmit((data: SettingData) => onSubmit(data))}
+            color={
+              Platform.OS === 'ios' ? colors.colorText : colors.colorButton
+            }
           />
-        ))}
-        <Button
-          title=" SAVE "
-          onPress={handleSubmit((data: SettingData) => onSubmit(data))}
-          color={Platform.OS === 'ios' ? colors.colorText : colors.colorButton}
-        />
+        </View>
       </KeyboardAvoidingView>
     </Modal>
   );
@@ -84,8 +101,11 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerSettings: {
+    width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: '40%',
   },
   containerTitle: {
     paddingBottom: 20,
@@ -94,7 +114,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   containerList: {
-    width: '100%',
+    width: '80%',
+    marginBottom: 30,
   },
   list: {
     width: '100%',

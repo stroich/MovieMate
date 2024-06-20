@@ -16,16 +16,16 @@ const rulesForEmail: RulesType = {
 };
 
 export enum VideoType {
-  movie = 'Movie',
-  series = 'Series',
-  episode = 'Episode',
+  Movie = 'Movie',
+  Series = 'Series',
+  Episode = 'Episode',
 }
 
 const rulesForPreferences: RulesType = {
   required: 'This field is required',
   validate: value =>
     Object.keys(VideoType).includes(value) ||
-    'Valid types are: movie, series, episode.',
+    'Valid types are: Movie, Series, Episode.',
 };
 
 export const verificationRules = {
