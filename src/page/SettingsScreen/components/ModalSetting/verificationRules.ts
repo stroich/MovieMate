@@ -16,15 +16,15 @@ const rulesForEmail: RulesType = {
 };
 
 export enum VideoType {
-  movie,
-  series,
-  episode,
+  movie = 'Movie',
+  series = 'Series',
+  episode = 'Episode',
 }
 
 const rulesForPreferences: RulesType = {
   required: 'This field is required',
   validate: value =>
-    Object.values(VideoType).includes(value) ||
+    Object.keys(VideoType).includes(value) ||
     'Valid types are: movie, series, episode.',
 };
 
