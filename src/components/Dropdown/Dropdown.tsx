@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TextInput,
   TextInputChangeEventData,
-  TouchableHighlight,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -99,16 +98,19 @@ function Dropdown({data, onChange, value}: DropdownProps) {
             </TouchableOpacity>
           </View>
           <FlatList
-            contentContainerStyle={[
-              styles.containerList,
-              {borderWidth: sortedData.length ? 1 : 0},
-            ]}
+            contentContainerStyle={
+              sortedData.length
+                ? styles.containerList
+                : styles.containerEmptyList
+            }
             style={styles.list}
             data={sortedData}
             renderItem={({item}) => (
-              <TouchableHighlight onPress={() => handlePressSelected(item)}>
-                <ThemedText style={styles.text}>{item.value}</ThemedText>
-              </TouchableHighlight>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => handlePressSelected(item)}>
+                <ThemedText style={[styles.text]}>{item.value}</ThemedText>
+              </TouchableOpacity>
             )}
             keyExtractor={item => item.id}
           />
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 40,
     width: '100%',
-    paddingHorizontal: 20,
+    paddingRight: 20,
     borderWidth: 1,
     borderRadius: 20,
     borderColor: '#606265',
@@ -163,15 +165,20 @@ const styles = StyleSheet.create({
   containerList: {
     marginTop: 5,
     width: '100%',
-    paddingLeft: 20,
     borderRadius: 20,
+    borderWidth: 1,
     borderColor: '#606265',
+  },
+  containerEmptyList: {
+    marginTop: 5,
+    width: '100%',
   },
   list: {
     width: '100%',
   },
   text: {
-    padding: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     fontSize: 15,
   },
 });
