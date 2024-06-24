@@ -18,6 +18,4 @@ export type DetailsScreenProps = NativeStackScreenProps<
   'Details'
 >;
 
-export type UseNavigationProps = NavigationProp<
-  HomeStackParamList | RootStackParamList
->;
+export type UseNavigationProps = NavigationProp<RootStackParamList>;

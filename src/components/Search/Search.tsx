@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   TextInput,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import {ThemeContext} from '../ThemeProvider/ThemeProvider';
 
 type SearchProps = {
   onSearch: (value: string) => void;
@@ -18,6 +19,7 @@ type SearchProps = {
 function Search({onSearch}: SearchProps) {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const {colors} = useContext(ThemeContext);
 
   const handleSubmit = async (
     event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
@@ -32,13 +34,16 @@ function Search({onSearch}: SearchProps) {
           style={styles.icon}
           name="arrowleft"
           size={24}
-          color="white"
+          color={colors.colorText}
         />
       </TouchableOpacity>
       <TextInput
-        style={styles.input}
+        style={[
+          styles.input,
+          {backgroundColor: colors.colorInput, color: colors.colorText},
+        ]}
         placeholder="Search"
-        placeholderTextColor="lightgrey"
+        placeholderTextColor={colors.colorGray}
         onSubmitEditing={handleSubmit}
       />
     </View>
@@ -61,10 +66,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: '#343536CC',
     borderColor: '#606265',
     paddingLeft: 20,
-    color: 'white',
   },
 });
 

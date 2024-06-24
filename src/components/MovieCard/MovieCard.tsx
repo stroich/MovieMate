@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {
-  Text,
   View,
   StyleSheet,
   Pressable,
@@ -12,7 +11,8 @@ import {UseNavigationProps} from '../../types/navigationTypes';
 import {CardType} from '../../types/moviesTypes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FavoritesContext} from '../FavoritesProvider/FavoritesProvider';
-import constants from '../../styles/constants';
+import {ThemeContext} from '../ThemeProvider/ThemeProvider';
+import ThemedText from '../ThemedText/ThemedText';
 
 type MovieCardProps = {
   data: CardType;
@@ -29,6 +29,7 @@ export function MovieCard({
 }: MovieCardProps) {
   const navigation = useNavigation<UseNavigationProps>();
   const {removeFavorites} = useContext(FavoritesContext);
+  const {colors} = useContext(ThemeContext);
 
   if (data.Poster === 'N/A') {
     return null;
@@ -42,17 +43,25 @@ export function MovieCard({
   };
 
   return (
-    <Pressable style={[styles.card, {width: width}]} onPress={handlePressCard}>
+    <Pressable
+      style={[
+        styles.card,
+        {width: width, backgroundColor: colors.colorSecondaryDarkest},
+      ]}
+      onPress={handlePressCard}>
       <Image
         style={[styles.image, {width: width, height: height}]}
         source={{uri: data.Poster}}
       />
-      <View style={styles.containerTitle}>
-        <Text style={styles.title}>{data.Title}</Text>
+      <View style={[styles.containerTitle]}>
+        <ThemedText style={styles.title}>{data.Title}</ThemedText>
       </View>
       {hasDeleteButton && (
         <TouchableOpacity
-          style={styles.removeButton}
+          style={[
+            styles.removeButton,
+            {backgroundColor: colors.colorOpasity75},
+          ]}
           onPress={removeFromFavorites}>
           <AntDesign name={'closecircleo'} size={26} color="white" />
         </TouchableOpacity>
@@ -64,9 +73,8 @@ export function MovieCard({
 const styles = StyleSheet.create({
   card: {
     height: '100%',
-    margin: 5,
-    backgroundColor: '#151618',
     borderRadius: 5,
+    marginHorizontal: 5,
   },
   image: {
     borderTopLeftRadius: 5,
@@ -74,18 +82,17 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   containerTitle: {
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
   },
   title: {
     textAlign: 'center',
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 14,
   },
   removeButton: {
     position: 'absolute',
-    backgroundColor: constants.colorOpasity75,
     borderRadius: 30,
-    right: 5,
+    right: 0,
+    top: 0,
   },
 });
