@@ -11,6 +11,7 @@ const Tab = createBottomTabNavigator();
 function HomeStack() {
   return (
     <Tab.Navigator
+      // eslint-disable-next-line react/no-unstable-nested-components -- false positive component detection
       tabBar={props => <MyTabBar {...props} />}
       screenOptions={{headerShown: false}}>
       <Tab.Screen name="home" component={MainScreen} />

@@ -1,10 +1,8 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import {
   FlatList,
-  NativeSyntheticEvent,
   StyleSheet,
   TextInput,
-  TextInputChangeEventData,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -24,17 +22,20 @@ type DropdownProps = {
 };
 
 function Dropdown({data, onChange, value}: DropdownProps) {
-  const initialSelected = value ? value : 'Select options';
+  const initialSelected = value || 'Select options';
+  const {colors} = useContext(ThemeContext);
   const [selected, setSelected] = useState(initialSelected);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
-  const {colors} = useContext(ThemeContext);
   const [inputValue, setInputValue] = useState('');
-  const [sortedData, setSortedData] = useState(data);
+
+  const sortedData = useMemo(
+    () => data.filter(el => el.value.startsWith(inputValue)),
+    [inputValue, data],
+  );
 
   const onPressSelected = () => {
     setIsOpenOptions(prevState => !prevState);
     setInputValue('');
-    setSortedData(data);
   };
 
   const handlePressSelected = (item: ItemType) => {
@@ -42,23 +43,6 @@ function Dropdown({data, onChange, value}: DropdownProps) {
     onChange(item.value);
     setIsOpenOptions(prevState => !prevState);
     setInputValue('');
-    setSortedData(data);
-  };
-
-  const handleChange = (
-    event: NativeSyntheticEvent<TextInputChangeEventData>,
-  ) => {
-    const newText = event.nativeEvent.text;
-    setInputValue(newText);
-    if (inputValue) {
-      setSortedData(() => {
-        const newData = data.filter(el => el.value.startsWith(newText));
-
-        return newData;
-      });
-    } else {
-      setSortedData(() => data.filter(el => el.value.startsWith(newText)));
-    }
   };
 
   const handleSubmit = () => {
@@ -89,7 +73,7 @@ function Dropdown({data, onChange, value}: DropdownProps) {
                 {backgroundColor: colors.colorInput, color: colors.colorText},
               ]}
               value={inputValue}
-              onChange={handleChange}
+              onChangeText={setInputValue}
               placeholder="Search"
               onSubmitEditing={handleSubmit}
             />
