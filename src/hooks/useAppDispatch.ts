@@ -8,6 +8,7 @@ import {
 } from '../store/slices/favoritesSlice';
 import {bindActionCreators} from '@reduxjs/toolkit';
 import {useMemo} from 'react';
+import {toggleTheme} from '../store/slices/themeSlice';
 
 export function useAppDispatch() {
   const appDispatch = useDispatch<AppDispatch>();
@@ -20,6 +21,7 @@ export function useAppDispatch() {
           removeFavorites,
           toggleFavorites,
           fetchFavoritesFromStorage,
+          toggleTheme,
         },
         appDispatch,
       ),

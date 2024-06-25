@@ -1,13 +1,13 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ThemeContext} from '../../components/ThemeProvider/ThemeProvider';
 import GeneralSettings from './components/GeneralSettings/GeneralSettings';
 import PersonalSetting from './components/PersonalSettings/PersonalSettings';
+import {useAppSelector} from '../../hooks/useAppDispatch';
 
 function SettingsScreen() {
   const insets = useSafeAreaInsets();
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   return (
     <View

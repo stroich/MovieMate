@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {
   TextInput,
   StyleSheet,
@@ -10,7 +10,7 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
-import {ThemeContext} from '../ThemeProvider/ThemeProvider';
+import {useAppSelector} from '../../hooks/useAppDispatch';
 
 type SearchProps = {
   onSearch: (value: string) => void;
@@ -19,7 +19,7 @@ type SearchProps = {
 function Search({onSearch}: SearchProps) {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   const handleSubmit = async (
     event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,

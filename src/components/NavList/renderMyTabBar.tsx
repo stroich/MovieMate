@@ -1,14 +1,14 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import constants from '../../styles/constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {ThemeContext} from '../ThemeProvider/ThemeProvider';
+import {useAppSelector} from '../../hooks/useAppDispatch';
 
 interface MyTabBarProps extends BottomTabBarProps {}
 
 function MyTabBar({state, descriptors, navigation}: MyTabBarProps) {
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(stateRedux => stateRedux.theme.color);
 
   return (
     <View

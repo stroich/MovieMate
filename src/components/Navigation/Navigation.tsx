@@ -1,15 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeStack from './HomeStack';
 import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
 import {RootStackParamList} from '../../types/navigationTypes';
-import {ThemeContext} from '../ThemeProvider/ThemeProvider';
+import {useAppSelector} from '../../hooks/useAppDispatch';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function Navigation(): React.JSX.Element {
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   return (
     <NavigationContainer>

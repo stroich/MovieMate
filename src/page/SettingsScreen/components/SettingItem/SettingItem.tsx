@@ -1,14 +1,14 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native';
-import {ThemeContext} from '../../../../components/ThemeProvider/ThemeProvider';
+import {useAppSelector} from '../../../../hooks/useAppDispatch';
 
 type SettingItemProps = {
   data: [string, string];
 };
 
 function SettingItem({data: [title, value]}: SettingItemProps) {
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   return (
     <View style={styles.container}>

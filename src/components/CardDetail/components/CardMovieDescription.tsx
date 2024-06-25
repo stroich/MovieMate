@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {MovieType} from '../../../types/moviesTypes';
 import constants from '../../../styles/constants';
@@ -10,7 +10,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {ThemeContext} from '../../ThemeProvider/ThemeProvider';
 import {useAppDispatch, useAppSelector} from '../../../hooks/useAppDispatch';
 import {isInMovieList} from '../../../utils/asyncStorage/asyncStorage';
 
@@ -20,8 +19,8 @@ type CardMovieDescriptionProps = {
 
 function CardMovieDescription({data}: CardMovieDescriptionProps) {
   const favorites = useAppSelector(state => state.favorites.favorites);
-  const {colors} = useContext(ThemeContext);
-  const heightDescription = useSharedValue(250);
+  const colors = useAppSelector(state => state.theme.color);
+  const heightDescription = useSharedValue(280);
   const isFavorites = isInMovieList(favorites, data.imdbID);
   const animatedDescription = useAnimatedStyle(() => {
     return {
@@ -33,11 +32,11 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
   const pan = Gesture.Pan()
     .onChange(event => {
       if (event.translationY < 0) {
-        heightDescription.value = clamp(heightDescription.value + 1, 250, 300);
+        heightDescription.value = clamp(heightDescription.value + 1, 280, 300);
       }
     })
     .onFinalize(() => {
-      heightDescription.value = withSpring(250);
+      heightDescription.value = withSpring(280);
     });
 
   return (
@@ -81,7 +80,8 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingVertical: 30,
+    paddingHorizontal: 20,
     position: 'absolute',
     width: '100%',
     fontSize: 18,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: 'absolute',
-    top: 55,
+    top: 15,
     right: 10,
   },
 });
