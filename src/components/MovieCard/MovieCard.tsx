@@ -10,9 +10,9 @@ import {useNavigation} from '@react-navigation/native';
 import {UseNavigationProps} from '../../types/navigationTypes';
 import {CardType} from '../../types/moviesTypes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {FavoritesContext} from '../FavoritesProvider/FavoritesProvider';
 import {ThemeContext} from '../ThemeProvider/ThemeProvider';
 import ThemedText from '../ThemedText/ThemedText';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
 
 type MovieCardProps = {
   data: CardType;
@@ -28,7 +28,7 @@ export function MovieCard({
   hasDeleteButton,
 }: MovieCardProps) {
   const navigation = useNavigation<UseNavigationProps>();
-  const {removeFavorites} = useContext(FavoritesContext);
+  const {removeFavorites} = useAppDispatch();
   const {colors} = useContext(ThemeContext);
 
   if (data.Poster === 'N/A') {

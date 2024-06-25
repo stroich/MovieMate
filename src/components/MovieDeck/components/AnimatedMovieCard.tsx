@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {CardType} from '../../../types/moviesTypes';
 import Animated, {FadeOut} from 'react-native-reanimated';
@@ -6,7 +6,7 @@ import {MovieCard} from '../../MovieCard/MovieCard';
 import {GestureDetector} from 'react-native-gesture-handler';
 import CustomButton from './CustomButton/CustomButton';
 import {SwipeDirectionEnum, useSwipe} from '../hooks/useSwipe';
-import {FavoritesContext} from '../../FavoritesProvider/FavoritesProvider';
+import {useAppDispatch} from '../../../hooks/useAppDispatch';
 
 type MovieCardProps = {
   data: CardType;
@@ -19,7 +19,7 @@ export function AnimatedMovieCard({
   delay,
   onChangeNumberOfCard,
 }: MovieCardProps) {
-  const {addFavorites, removeFavorites} = useContext(FavoritesContext);
+  const {addFavorites, removeFavorites} = useAppDispatch();
   const [visible, setVisible] = useState(true);
 
   const successfulSwipe = () => {
