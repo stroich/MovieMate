@@ -1,18 +1,18 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {DetailsScreenProps} from '../../types/navigationTypes';
-import {useFetchForGetMovie} from '../../hooks/useFetchForGetMovie';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import CardDetail from '../../components/CardDetail/CardDetail';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useGetMovieQuery} from '../../store/api/movieApi';
+import Loading from '../../components/Loading/Loading';
 
 function DetailsScreen({route}: DetailsScreenProps) {
   const colors = useAppSelector(state => state.theme.color);
   const {itemId, data: dataParam} = route.params;
   const insets = useSafeAreaInsets();
-  const results = useFetchForGetMovie(itemId);
-  const {data, error} = results;
+  const {data, isLoading, error} = useGetMovieQuery(itemId);
 
   return (
     <View
@@ -20,8 +20,9 @@ function DetailsScreen({route}: DetailsScreenProps) {
         styles.container,
         {paddingTop: insets.top, backgroundColor: colors.colorSecondaryDark},
       ]}>
+      {isLoading && <Loading />}
       {error && <ErrorMessage error={error} />}
-      {!error && <CardDetail data={data ?? dataParam} />}
+      {data && <CardDetail data={data ?? dataParam} />}
     </View>
   );
 }
