@@ -4,14 +4,15 @@ import Loading from '../../components/Loading/Loading.tsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
 import MovieDeck from '../../components/MovieDeck/MovieDeck.tsx';
 import {useAppSelector} from '../../hooks/useAppDispatch.ts';
-import {useGetMoviesQuery} from '../../store/api/movieApi.ts';
+import {useQuery} from '@tanstack/react-query';
+import {getMovies} from '../../utils/api/apiMovies.ts';
 
 function MainScreen() {
   const colors = useAppSelector(state => state.theme.color);
   const [page, setPage] = useState(1);
-  const {data, isLoading, error} = useGetMoviesQuery({
-    search: 'All',
-    page,
+  const {data, isLoading, error} = useQuery({
+    queryKey: ['movies', page],
+    queryFn: () => getMovies('All', page),
   });
 
   const handlePage = () => {

@@ -5,16 +5,17 @@ import Loading from '../../components/Loading/Loading.tsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
 import List from '../../components/ListMovies/ListMovies.tsx';
 import {useAppSelector} from '../../hooks/useAppDispatch.ts';
-import {useGetMoviesQuery} from '../../store/api/movieApi.ts';
 import {ListMoviesType} from '../../types/moviesTypes.ts';
+import {useQuery} from '@tanstack/react-query';
+import {getMovies} from '../../utils/api/apiMovies.ts';
 
 function SearchScreen(): React.JSX.Element {
   const [queryText, setQueryText] = useState('');
   const colors = useAppSelector(state => state.theme.color);
   const [page, setPage] = useState(1);
-  const {data, isLoading, error} = useGetMoviesQuery({
-    search: queryText,
-    page,
+  const {data, isLoading, error} = useQuery({
+    queryKey: ['movies', page, queryText],
+    queryFn: () => getMovies(queryText, page),
   });
   const [listMovies, setListMovies] = useState<ListMoviesType>([]);
 
