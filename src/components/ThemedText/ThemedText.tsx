@@ -1,7 +1,7 @@
 import React from 'react';
-import {ReactNode, useContext} from 'react';
-import {ThemeContext} from '../ThemeProvider/ThemeProvider';
+import {ReactNode} from 'react';
 import {StyleSheet, Text, TextStyle} from 'react-native';
+import {useAppSelector} from '../../hooks/useAppDispatch';
 
 type ThemedTextProps = {
   children: ReactNode;
@@ -9,7 +9,7 @@ type ThemedTextProps = {
 };
 
 function ThemedText({children, style}: ThemedTextProps) {
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   return (
     <Text style={[styles.text, {color: colors.colorText}, style]}>

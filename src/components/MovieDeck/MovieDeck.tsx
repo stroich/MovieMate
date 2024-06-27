@@ -6,13 +6,12 @@ import constants from '../../styles/constants';
 
 type MovieDeckProps = {
   data: ListMoviesType;
-  onEndReached: (page: number) => void;
+  handlePage: () => void;
 };
 
-function MovieDeck({data, onEndReached}: MovieDeckProps) {
+function MovieDeck({data, handlePage}: MovieDeckProps) {
   const newData = data.filter(item => item.Poster !== 'N/A');
   const [numberOfCards, setNumberOfCards] = useState(data.length);
-  const [_, setPage] = useState(1);
 
   const onChangeNumberOfCard = () => {
     setNumberOfCards(prevState => prevState - 1);
@@ -20,14 +19,10 @@ function MovieDeck({data, onEndReached}: MovieDeckProps) {
 
   useEffect(() => {
     if (!numberOfCards) {
-      setPage(prevPage => {
-        onEndReached(prevPage + 1);
-        return prevPage + 1;
-      });
-
+      handlePage();
       setNumberOfCards(newData.length);
     }
-  }, [numberOfCards, newData.length, onEndReached]);
+  }, [numberOfCards, newData.length, handlePage]);
 
   return (
     <View style={styles.list}>

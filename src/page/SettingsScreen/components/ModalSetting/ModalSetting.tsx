@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -14,9 +14,9 @@ import Input from './component/Input';
 import {verificationRules} from './verificationRules';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {PersonalSettingsType as SettingData} from '../../../../types/settingType';
-import {ThemeContext} from '../../../../components/ThemeProvider/ThemeProvider';
 import ThemedText from '../../../../components/ThemedText/ThemedText';
 import DropdownForForm from './component/DropdownForForm';
+import {useAppSelector} from '../../../../hooks/useAppDispatch';
 
 type ModalSettingsProps = {
   visible: boolean;
@@ -26,7 +26,7 @@ type ModalSettingsProps = {
 
 function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
   const insets = useSafeAreaInsets();
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   const defaultValues = {
     Username: '',

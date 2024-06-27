@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {
   Control,
@@ -7,8 +7,8 @@ import {
   RegisterOptions,
 } from 'react-hook-form';
 import {PersonalSettingsType as SettingData} from '../../../../../types/settingType';
-import {ThemeContext} from '../../../../../components/ThemeProvider/ThemeProvider';
 import constants from '../../../../../styles/constants';
+import {useAppSelector} from '../../../../../hooks/useAppDispatch';
 
 type InputProps = {
   control: Control<SettingData, any>;
@@ -18,7 +18,7 @@ type InputProps = {
 };
 
 function Input({control, name, errors, rules}: InputProps) {
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   return (
     <View style={styles.container}>

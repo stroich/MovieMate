@@ -1,24 +1,33 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Search from '../../components/Search/Search';
-import {useFetchForGetMovies} from '../../hooks/useFetchForGetMovies.ts';
 import Loading from '../../components/Loading/Loading.tsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
 import List from '../../components/ListMovies/ListMovies.tsx';
-import {ThemeContext} from '../../components/ThemeProvider/ThemeProvider.tsx';
+import {useAppSelector} from '../../hooks/useAppDispatch.ts';
+import {ListMoviesType} from '../../types/moviesTypes.ts';
+import {useInfiniteQuery} from '@tanstack/react-query';
+import {getMovies} from '../../utils/api/apiMovies.ts';
 
 function SearchScreen(): React.JSX.Element {
   const [queryText, setQueryText] = useState('');
-  const {colors} = useContext(ThemeContext);
-  const {data, loading, error, loadMoviesOnScroll} =
-    useFetchForGetMovies(queryText);
+  const colors = useAppSelector(state => state.theme.color);
+  const {data, isLoading, error, fetchNextPage} = useInfiniteQuery({
+    enabled: false,
+    queryKey: ['movies', queryText],
+    queryFn: ({pageParam}) => getMovies(queryText, pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (_, pages) => pages.length + 1,
+  });
+
+  const movies = data?.pages.flat() as ListMoviesType;
 
   const handleSearch = (value: string) => {
     setQueryText(value);
   };
 
   const renderComponents = () => {
-    if (loading) {
+    if (isLoading) {
       return <Loading />;
     }
 
@@ -26,11 +35,11 @@ function SearchScreen(): React.JSX.Element {
       return <ErrorMessage error={error} />;
     }
 
-    if (!data) {
+    if (!queryText) {
       return null;
     }
 
-    return <List data={data} onEndReached={loadMoviesOnScroll} />;
+    return <List data={movies} onEndReached={fetchNextPage} />;
   };
 
   return (

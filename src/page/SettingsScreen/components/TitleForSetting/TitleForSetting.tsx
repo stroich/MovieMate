@@ -1,10 +1,10 @@
 import React from 'react';
-import {ReactNode, useContext} from 'react';
-import {ThemeContext} from '../../../../components/ThemeProvider/ThemeProvider';
+import {ReactNode} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {View} from 'react-native';
 import ThemedText from '../../../../components/ThemedText/ThemedText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useAppSelector} from '../../../../hooks/useAppDispatch';
 
 type ThemedTextProps = {
   children: ReactNode;
@@ -13,7 +13,7 @@ type ThemedTextProps = {
 };
 
 function TitleForSetting({children, isEdit, onPressEdit}: ThemedTextProps) {
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
 
   return (
     <View style={[styles.containerText, {borderBottomColor: colors.colorText}]}>

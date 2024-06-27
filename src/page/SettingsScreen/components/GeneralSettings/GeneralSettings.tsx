@@ -1,15 +1,17 @@
-import React, {useContext, useState} from 'react';
-import {Appearance, StyleSheet, Switch, Text, View} from 'react-native';
-import {ThemeContext} from '../../../../components/ThemeProvider/ThemeProvider';
+import React, {useState} from 'react';
+import {StyleSheet, Switch, Text, View} from 'react-native';
 import constants from '../../../../styles/constants';
 import TitleForSetting from '../TitleForSetting/TitleForSetting';
+import {useAppDispatch, useAppSelector} from '../../../../hooks/useAppDispatch';
 
 function GeneralSettings() {
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
+  const {toggleTheme} = useAppDispatch();
   const [isEnabled, setIsEnabled] = useState(false);
+
   const toggleSwitch = () => {
     setIsEnabled(prevState => {
-      Appearance.setColorScheme(prevState ? 'dark' : 'light');
+      toggleTheme();
       return !prevState;
     });
   };

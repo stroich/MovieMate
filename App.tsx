@@ -2,18 +2,21 @@ import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Navigation from './src/components/Navigation/Navigation';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import FavoritesProvider from './src/components/FavoritesProvider/FavoritesProvider';
-import ThemeProvider from './src/components/ThemeProvider/ThemeProvider';
+import {Provider} from 'react-redux';
+import {store} from './src/store/store';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView>
-        <ThemeProvider>
-          <FavoritesProvider>
+        <Provider store={store}>
+          <QueryClientProvider client={queryClient}>
             <Navigation />
-          </FavoritesProvider>
-        </ThemeProvider>
+          </QueryClientProvider>
+        </Provider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );

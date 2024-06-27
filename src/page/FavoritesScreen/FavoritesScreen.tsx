@@ -1,15 +1,27 @@
-import React, {useContext} from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import List from '../../components/ListMovies/ListMovies';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {FavoritesContext} from '../../components/FavoritesProvider/FavoritesProvider';
-import {ThemeContext} from '../../components/ThemeProvider/ThemeProvider';
 import ThemedText from '../../components/ThemedText/ThemedText';
+import {useAppDispatch, useAppSelector} from '../../hooks/useAppDispatch';
+import {setFavoriteMoviesToStorage} from '../../utils/asyncStorage/asyncStorage';
 
 function FavoritesScreen() {
   const insets = useSafeAreaInsets();
-  const {colors} = useContext(ThemeContext);
-  const {favorites} = useContext(FavoritesContext);
+  const colors = useAppSelector(state => state.theme.color);
+  const favorites = useAppSelector(state => state.favorites.favorites);
+  const loading = useAppSelector(state => state.favorites.loading);
+  const {fetchFavoritesFromStorage} = useAppDispatch();
+
+  useEffect(() => {
+    fetchFavoritesFromStorage();
+  }, [fetchFavoritesFromStorage]);
+
+  useEffect(() => {
+    if (!loading) {
+      setFavoriteMoviesToStorage(favorites);
+    }
+  }, [favorites, loading]);
 
   return (
     <View

@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {ThemeContext} from '../ThemeProvider/ThemeProvider';
 import ThemedText from '../ThemedText/ThemedText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useAppSelector} from '../../hooks/useAppDispatch';
 
 type ItemType = {
   id: string;
@@ -23,7 +23,7 @@ type DropdownProps = {
 
 function Dropdown({data, onChange, value}: DropdownProps) {
   const initialSelected = value || 'Select options';
-  const {colors} = useContext(ThemeContext);
+  const colors = useAppSelector(state => state.theme.color);
   const [selected, setSelected] = useState(initialSelected);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [inputValue, setInputValue] = useState('');
