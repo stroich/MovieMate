@@ -3,14 +3,16 @@ import {StyleSheet, Switch, Text, View} from 'react-native';
 import constants from '../../../../styles/constants';
 import TitleForSetting from '../TitleForSetting/TitleForSetting';
 import {useSnapshot} from 'valtio';
-import themeState from '../../../../store/GlobalStores/themeState';
+import themeState, {
+  toggleTheme,
+} from '../../../../store/GlobalStores/themeState';
 
 function GeneralSettings() {
   const state = useSnapshot(themeState);
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => {
-    themeState.toggleTheme();
+    toggleTheme();
     setIsEnabled(prevState => {
       return !prevState;
     });

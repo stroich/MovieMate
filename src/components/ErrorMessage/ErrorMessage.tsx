@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 type ErrorMessageProps = {
-  error: string;
+  error: Error | null;
 };
 
 function ErrorMessage({error}: ErrorMessageProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{error}</Text>
+      <Text style={styles.text}>{error?.message ?? 'Not found'}</Text>
     </View>
   );
 }

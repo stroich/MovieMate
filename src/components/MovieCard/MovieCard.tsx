@@ -13,7 +13,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import ThemedText from '../ThemedText/ThemedText';
 import {useSnapshot} from 'valtio';
 import themeState from '../../store/GlobalStores/themeState';
-import favoritesState from '../../store/GlobalStores/favoritesState';
+import {removeFavorites} from '../../store/GlobalStores/favoritesState';
 
 type MovieCardProps = {
   data: CardType;
@@ -39,7 +39,7 @@ export function MovieCard({
     navigation.navigate('Details', {itemId: data.imdbID, data: data});
 
   const removeFromFavorites = () => {
-    favoritesState.removeFavorites(data.imdbID);
+    removeFavorites(data.imdbID);
   };
 
   return (

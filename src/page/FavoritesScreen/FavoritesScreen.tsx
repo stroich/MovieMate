@@ -1,29 +1,16 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import List from '../../components/ListMovies/ListMovies';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ThemedText from '../../components/ThemedText/ThemedText';
-import {setFavoriteMoviesToStorage} from '../../utils/asyncStorage/asyncStorage';
 import {useSnapshot} from 'valtio';
 import themeState from '../../store/GlobalStores/themeState';
-import favoritesState, {
-  getFavorites,
-} from '../../store/GlobalStores/favoritesState';
+import favoritesState from '../../store/GlobalStores/favoritesState';
 
 function FavoritesScreen() {
   const insets = useSafeAreaInsets();
   const {colors} = useSnapshot(themeState);
-  const {favorites, loading} = useSnapshot(favoritesState);
-
-  useEffect(() => {
-    getFavorites();
-  }, []);
-
-  useEffect(() => {
-    if (!loading) {
-      setFavoriteMoviesToStorage(favorites);
-    }
-  }, [favorites, loading]);
+  const {favorites} = useSnapshot(favoritesState);
 
   return (
     <View

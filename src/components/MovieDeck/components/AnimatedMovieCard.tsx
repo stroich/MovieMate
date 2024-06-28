@@ -6,7 +6,10 @@ import {MovieCard} from '../../MovieCard/MovieCard';
 import {GestureDetector} from 'react-native-gesture-handler';
 import CustomButton from './CustomButton/CustomButton';
 import {SwipeDirectionEnum, useSwipe} from '../hooks/useSwipe';
-import favoritesState from '../../../store/GlobalStores/favoritesState';
+import {
+  addFavorites,
+  removeFavorites,
+} from '../../../store/GlobalStores/favoritesState';
 
 type MovieCardProps = {
   data: CardType;
@@ -24,13 +27,13 @@ export function AnimatedMovieCard({
   const successfulSwipe = () => {
     onChangeNumberOfCard();
     setVisible(false);
-    favoritesState.addFavorites(data);
+    addFavorites(data);
   };
 
   const unsuccessfulSwipe = async () => {
     onChangeNumberOfCard();
     setVisible(false);
-    favoritesState.removeFavorites(data.imdbID);
+    removeFavorites(data.imdbID);
   };
 
   const {pan, animatedCardStyle, isSwiped, swipeDirection} = useSwipe({

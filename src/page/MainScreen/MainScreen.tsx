@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Loading from '../../components/Loading/Loading.tsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
@@ -7,6 +7,9 @@ import {useQuery} from '@tanstack/react-query';
 import {getMovies} from '../../utils/api/apiMovies.ts';
 import {useSnapshot} from 'valtio';
 import themeState from '../../store/GlobalStores/themeState.ts';
+import favoritesState, {
+  getFavorites,
+} from '../../store/GlobalStores/favoritesState.ts';
 
 function MainScreen() {
   const {colors} = useSnapshot(themeState);
@@ -15,6 +18,13 @@ function MainScreen() {
     queryKey: ['movies', page],
     queryFn: () => getMovies('All', page),
   });
+
+  useEffect(() => {
+    getFavorites();
+    return () => {
+      favoritesState.loading = true;
+    };
+  }, []);
 
   const handlePage = () => {
     setPage(prevPage => prevPage + 1);

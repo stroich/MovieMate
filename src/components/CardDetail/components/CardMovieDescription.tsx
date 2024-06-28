@@ -13,7 +13,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {isInMovieList} from '../../../utils/asyncStorage/asyncStorage';
 import {useSnapshot} from 'valtio';
 import themeState from '../../../store/GlobalStores/themeState';
-import favoritesState from '../../../store/GlobalStores/favoritesState';
+import favoritesState, {
+  toggleFavorites,
+} from '../../../store/GlobalStores/favoritesState';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
@@ -67,7 +69,7 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
         <Text style={styles.text}>{data.Plot}</Text>
         <TouchableOpacity
           style={styles.addButton}
-          onPress={() => favoritesState.toggleFavorites(data)}>
+          onPress={() => toggleFavorites(data)}>
           <AntDesign
             name={'heart'}
             size={26}
