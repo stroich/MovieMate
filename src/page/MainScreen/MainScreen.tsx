@@ -3,12 +3,13 @@ import {View, StyleSheet} from 'react-native';
 import Loading from '../../components/Loading/Loading.tsx';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
 import MovieDeck from '../../components/MovieDeck/MovieDeck.tsx';
-import {useAppSelector} from '../../hooks/useAppDispatch.ts';
 import {useQuery} from '@tanstack/react-query';
 import {getMovies} from '../../utils/api/apiMovies.ts';
+import {useSnapshot} from 'valtio';
+import themeState from '../../store/GlobalStores/themeState.ts';
 
 function MainScreen() {
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
   const [page, setPage] = useState(1);
   const {data, isLoading, error} = useQuery({
     queryKey: ['movies', page],

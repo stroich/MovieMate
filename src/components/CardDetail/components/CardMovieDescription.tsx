@@ -10,16 +10,18 @@ import Animated, {
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useAppDispatch, useAppSelector} from '../../../hooks/useAppDispatch';
 import {isInMovieList} from '../../../utils/asyncStorage/asyncStorage';
+import {useSnapshot} from 'valtio';
+import themeState from '../../../store/GlobalStores/themeState';
+import favoritesState from '../../../store/GlobalStores/favoritesState';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
 };
 
 function CardMovieDescription({data}: CardMovieDescriptionProps) {
-  const favorites = useAppSelector(state => state.favorites.favorites);
-  const colors = useAppSelector(state => state.theme.color);
+  const {favorites} = useSnapshot(favoritesState);
+  const {colors} = useSnapshot(themeState);
   const heightDescription = useSharedValue(280);
   const isFavorites = isInMovieList(favorites, data.imdbID);
   const animatedDescription = useAnimatedStyle(() => {
@@ -27,7 +29,6 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
       height: heightDescription.value,
     };
   });
-  const {toggleFavorites} = useAppDispatch();
 
   const pan = Gesture.Pan()
     .onChange(event => {
@@ -66,7 +67,7 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
         <Text style={styles.text}>{data.Plot}</Text>
         <TouchableOpacity
           style={styles.addButton}
-          onPress={() => toggleFavorites(data)}>
+          onPress={() => favoritesState.toggleFavorites(data)}>
           <AntDesign
             name={'heart'}
             size={26}

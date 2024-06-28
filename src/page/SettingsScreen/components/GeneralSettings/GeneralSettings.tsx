@@ -2,16 +2,16 @@ import React, {useState} from 'react';
 import {StyleSheet, Switch, Text, View} from 'react-native';
 import constants from '../../../../styles/constants';
 import TitleForSetting from '../TitleForSetting/TitleForSetting';
-import {useAppDispatch, useAppSelector} from '../../../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../../../store/GlobalStores/themeState';
 
 function GeneralSettings() {
-  const colors = useAppSelector(state => state.theme.color);
-  const {toggleTheme} = useAppDispatch();
+  const state = useSnapshot(themeState);
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => {
+    themeState.toggleTheme();
     setIsEnabled(prevState => {
-      toggleTheme();
       return !prevState;
     });
   };
@@ -20,14 +20,17 @@ function GeneralSettings() {
     <View style={[styles.container]}>
       <TitleForSetting>General Settings</TitleForSetting>
       <View style={styles.containerSwitch}>
-        <Text style={[styles.text, {color: colors.colorGray}]}> Theme: </Text>
+        <Text style={[styles.text, {color: state.colors.colorGray}]}>
+          {' '}
+          Theme:{' '}
+        </Text>
         <Switch
           trackColor={{
-            false: colors.colorGray,
-            true: colors.colorSecondaryDarkest,
+            false: state.colors.colorGray,
+            true: state.colors.colorSecondaryDarkest,
           }}
           thumbColor={isEnabled ? constants.colorWhite : constants.colorBlack}
-          ios_backgroundColor={colors.colorGray}
+          ios_backgroundColor={state.colors.colorGray}
           onValueChange={toggleSwitch}
           value={isEnabled}
         />

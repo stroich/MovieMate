@@ -16,7 +16,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {PersonalSettingsType as SettingData} from '../../../../types/settingType';
 import ThemedText from '../../../../components/ThemedText/ThemedText';
 import DropdownForForm from './component/DropdownForForm';
-import {useAppSelector} from '../../../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../../../store/GlobalStores/themeState';
 
 type ModalSettingsProps = {
   visible: boolean;
@@ -26,7 +27,7 @@ type ModalSettingsProps = {
 
 function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
   const insets = useSafeAreaInsets();
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   const defaultValues = {
     Username: '',
