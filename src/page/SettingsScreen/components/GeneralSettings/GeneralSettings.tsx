@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Switch, Text, View} from 'react-native';
 import constants from '../../../../styles/constants';
 import TitleForSetting from '../TitleForSetting/TitleForSetting';
@@ -9,13 +9,9 @@ import themeState, {
 
 function GeneralSettings() {
   const state = useSnapshot(themeState);
-  const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => {
     toggleTheme();
-    setIsEnabled(prevState => {
-      return !prevState;
-    });
   };
 
   return (
@@ -26,16 +22,29 @@ function GeneralSettings() {
           {' '}
           Theme:{' '}
         </Text>
-        <Switch
-          trackColor={{
-            false: state.colors.colorGray,
-            true: state.colors.colorSecondaryDarkest,
-          }}
-          thumbColor={isEnabled ? constants.colorWhite : constants.colorBlack}
-          ios_backgroundColor={state.colors.colorGray}
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
+        {state.theme !== 'dark' ? (
+          <Switch
+            trackColor={{
+              false: state.colors.colorGray,
+              true: state.colors.colorSecondaryDarkest,
+            }}
+            thumbColor={constants.colorWhite}
+            ios_backgroundColor={state.colors.colorGray}
+            onValueChange={toggleSwitch}
+            value
+          />
+        ) : (
+          <Switch
+            trackColor={{
+              false: state.colors.colorGray,
+              true: state.colors.colorSecondaryDarkest,
+            }}
+            thumbColor={constants.colorBlack}
+            ios_backgroundColor={state.colors.colorGray}
+            onValueChange={toggleSwitch}
+            value={false}
+          />
+        )}
       </View>
     </View>
   );
