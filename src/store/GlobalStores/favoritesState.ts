@@ -39,24 +39,23 @@ export const toggleFavorites = (movie: CardType) => {
 };
 
 export const getFavorites = async () => {
-  favoritesState.loading = false;
   const fav = (await getFavoriteMoviesToStorage()) ?? [];
   favoritesState.favorites = fav;
 };
 
 subscribe(favoritesState, () => {
-  let unsubscribe;
-
-  unsubscribe = subscribe(favoritesState, () => {
-    const isEmpty = favoritesState.favorites.length === 0;
-    if (!isEmpty) {
-      setFavoriteMoviesToStorage(favoritesState.favorites);
-    }
-  });
-
-  if (favoritesState.loading) {
-    unsubscribe();
+  if (!favoritesState.loading) {
+    setFavoriteMoviesToStorage(favoritesState.favorites);
+  } else {
+    favoritesState.loading = false;
   }
 });
+
+// subscribe(favoritesState.favorites, () =>
+//   console.log(
+//     'favoritesState.favorites has changed to',
+//     favoritesState.favorites,
+//   ),
+// );
 
 export default favoritesState;
