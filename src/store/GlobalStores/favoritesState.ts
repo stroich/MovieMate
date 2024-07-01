@@ -10,17 +10,11 @@ interface FavoritesStateType {
   favorites: ListMoviesType;
 }
 
-interface LoadingStateType {
-  loading: boolean;
-}
-
 const favoritesState = proxy<FavoritesStateType>({
   favorites: [],
 });
 
-const loadingState = proxy<LoadingStateType>({
-  loading: true,
-});
+let loading = true;
 
 export const addFavorites = (movie: CardType) => {
   const hasMovie = isInMovieList(favoritesState.favorites, movie.imdbID);
@@ -44,16 +38,17 @@ export const toggleFavorites = (movie: CardType) => {
   }
 };
 
-export const getFavorites = async () => {
+export const loadFavorites = async () => {
   const fav = (await getFavoriteMoviesToStorage()) ?? [];
   favoritesState.favorites = fav;
+  loading = false;
 };
 
+loadFavorites();
+
 subscribe(favoritesState, () => {
-  if (!loadingState.loading) {
+  if (!loading) {
     setFavoriteMoviesToStorage(favoritesState.favorites);
-  } else {
-    loadingState.loading = false;
   }
 });
 
