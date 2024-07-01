@@ -3,11 +3,12 @@ import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import GeneralSettings from './components/GeneralSettings/GeneralSettings';
 import PersonalSetting from './components/PersonalSettings/PersonalSettings';
-import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../store/GlobalStores/themeState';
 
 function SettingsScreen() {
   const insets = useSafeAreaInsets();
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   return (
     <View

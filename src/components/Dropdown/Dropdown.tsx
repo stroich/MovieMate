@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import ThemedText from '../ThemedText/ThemedText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../store/GlobalStores/themeState';
 
 type ItemType = {
   id: string;
@@ -23,7 +24,7 @@ type DropdownProps = {
 
 function Dropdown({data, onChange, value}: DropdownProps) {
   const initialSelected = value || 'Select options';
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
   const [selected, setSelected] = useState(initialSelected);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [inputValue, setInputValue] = useState('');

@@ -10,7 +10,8 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
-import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../store/GlobalStores/themeState';
 
 type SearchProps = {
   onSearch: (value: string) => void;
@@ -19,7 +20,7 @@ type SearchProps = {
 function Search({onSearch}: SearchProps) {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   const handleSubmit = async (
     event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,

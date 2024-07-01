@@ -1,7 +1,8 @@
 import React from 'react';
 import {ReactNode} from 'react';
 import {StyleSheet, Text, TextStyle} from 'react-native';
-import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../store/GlobalStores/themeState';
 
 type ThemedTextProps = {
   children: ReactNode;
@@ -9,7 +10,7 @@ type ThemedTextProps = {
 };
 
 function ThemedText({children, style}: ThemedTextProps) {
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   return (
     <Text style={[styles.text, {color: colors.colorText}, style]}>

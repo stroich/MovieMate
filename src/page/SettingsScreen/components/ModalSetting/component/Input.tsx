@@ -8,7 +8,8 @@ import {
 } from 'react-hook-form';
 import {PersonalSettingsType as SettingData} from '../../../../../types/settingType';
 import constants from '../../../../../styles/constants';
-import {useAppSelector} from '../../../../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../../../../store/GlobalStores/themeState';
 
 type InputProps = {
   control: Control<SettingData, any>;
@@ -18,7 +19,7 @@ type InputProps = {
 };
 
 function Input({control, name, errors, rules}: InputProps) {
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   return (
     <View style={styles.container}>

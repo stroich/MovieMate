@@ -4,7 +4,8 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {View} from 'react-native';
 import ThemedText from '../../../../components/ThemedText/ThemedText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useAppSelector} from '../../../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../../../store/GlobalStores/themeState';
 
 type ThemedTextProps = {
   children: ReactNode;
@@ -13,7 +14,7 @@ type ThemedTextProps = {
 };
 
 function TitleForSetting({children, isEdit, onPressEdit}: ThemedTextProps) {
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   return (
     <View style={[styles.containerText, {borderBottomColor: colors.colorText}]}>

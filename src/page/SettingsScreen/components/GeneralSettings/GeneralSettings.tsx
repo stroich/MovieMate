@@ -1,36 +1,50 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Switch, Text, View} from 'react-native';
 import constants from '../../../../styles/constants';
 import TitleForSetting from '../TitleForSetting/TitleForSetting';
-import {useAppDispatch, useAppSelector} from '../../../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState, {
+  toggleTheme,
+} from '../../../../store/GlobalStores/themeState';
 
 function GeneralSettings() {
-  const colors = useAppSelector(state => state.theme.color);
-  const {toggleTheme} = useAppDispatch();
-  const [isEnabled, setIsEnabled] = useState(false);
+  const state = useSnapshot(themeState);
 
   const toggleSwitch = () => {
-    setIsEnabled(prevState => {
-      toggleTheme();
-      return !prevState;
-    });
+    toggleTheme();
   };
 
   return (
     <View style={[styles.container]}>
       <TitleForSetting>General Settings</TitleForSetting>
       <View style={styles.containerSwitch}>
-        <Text style={[styles.text, {color: colors.colorGray}]}> Theme: </Text>
-        <Switch
-          trackColor={{
-            false: colors.colorGray,
-            true: colors.colorSecondaryDarkest,
-          }}
-          thumbColor={isEnabled ? constants.colorWhite : constants.colorBlack}
-          ios_backgroundColor={colors.colorGray}
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
+        <Text style={[styles.text, {color: state.colors.colorGray}]}>
+          {' '}
+          Theme:{' '}
+        </Text>
+        {state.theme !== 'dark' ? (
+          <Switch
+            trackColor={{
+              false: state.colors.colorGray,
+              true: state.colors.colorSecondaryDarkest,
+            }}
+            thumbColor={constants.colorWhite}
+            ios_backgroundColor={state.colors.colorGray}
+            onValueChange={toggleSwitch}
+            value
+          />
+        ) : (
+          <Switch
+            trackColor={{
+              false: state.colors.colorGray,
+              true: state.colors.colorSecondaryDarkest,
+            }}
+            thumbColor={constants.colorBlack}
+            ios_backgroundColor={state.colors.colorGray}
+            onValueChange={toggleSwitch}
+            value={false}
+          />
+        )}
       </View>
     </View>
   );

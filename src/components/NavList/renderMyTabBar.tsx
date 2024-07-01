@@ -3,12 +3,13 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import constants from '../../styles/constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../store/GlobalStores/themeState';
 
 interface MyTabBarProps extends BottomTabBarProps {}
 
 function MyTabBar({state, descriptors, navigation}: MyTabBarProps) {
-  const colors = useAppSelector(stateRedux => stateRedux.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   return (
     <View

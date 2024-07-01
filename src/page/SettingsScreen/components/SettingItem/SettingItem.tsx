@@ -1,14 +1,15 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native';
-import {useAppSelector} from '../../../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../../../store/GlobalStores/themeState';
 
 type SettingItemProps = {
   data: [string, string];
 };
 
 function SettingItem({data: [title, value]}: SettingItemProps) {
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   return (
     <View style={styles.container}>
