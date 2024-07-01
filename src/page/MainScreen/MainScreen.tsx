@@ -7,9 +7,7 @@ import {useQuery} from '@tanstack/react-query';
 import {getMovies} from '../../utils/api/apiMovies.ts';
 import {useSnapshot} from 'valtio';
 import themeState from '../../store/GlobalStores/themeState.ts';
-import favoritesState, {
-  getFavorites,
-} from '../../store/GlobalStores/favoritesState.ts';
+import {getFavorites} from '../../store/GlobalStores/favoritesState.ts';
 
 function MainScreen() {
   const {colors} = useSnapshot(themeState);
@@ -21,9 +19,6 @@ function MainScreen() {
 
   useEffect(() => {
     getFavorites();
-    return () => {
-      favoritesState.loading = true;
-    };
   }, []);
 
   const handlePage = () => {

@@ -6,13 +6,19 @@ import {
   setFavoriteMoviesToStorage,
 } from '../../utils/asyncStorage/asyncStorage';
 
-export interface FavoritesStateType {
+interface FavoritesStateType {
   favorites: ListMoviesType;
+}
+
+interface LoadingStateType {
   loading: boolean;
 }
 
 const favoritesState = proxy<FavoritesStateType>({
   favorites: [],
+});
+
+const loadingState = proxy<LoadingStateType>({
   loading: true,
 });
 
@@ -44,18 +50,11 @@ export const getFavorites = async () => {
 };
 
 subscribe(favoritesState, () => {
-  if (!favoritesState.loading) {
+  if (!loadingState.loading) {
     setFavoriteMoviesToStorage(favoritesState.favorites);
   } else {
-    favoritesState.loading = false;
+    loadingState.loading = false;
   }
 });
-
-// subscribe(favoritesState.favorites, () =>
-//   console.log(
-//     'favoritesState.favorites has changed to',
-//     favoritesState.favorites,
-//   ),
-// );
 
 export default favoritesState;
