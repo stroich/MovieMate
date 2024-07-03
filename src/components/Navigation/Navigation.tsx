@@ -4,12 +4,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeStack from './HomeStack';
 import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
 import {RootStackParamList} from '../../types/navigationTypes';
-import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useSnapshot} from 'valtio';
+import themeState from '../../store/GlobalStores/themeState';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function Navigation(): React.JSX.Element {
-  const colors = useAppSelector(state => state.theme.color);
+  const {colors} = useSnapshot(themeState);
 
   return (
     <NavigationContainer>
