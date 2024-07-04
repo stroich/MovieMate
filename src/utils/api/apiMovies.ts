@@ -1,4 +1,4 @@
-import {API_KEY, API_URL} from '../../constants';
+import Config from 'react-native-config';
 
 async function fetchQuery(url: string) {
   try {
@@ -14,7 +14,7 @@ export async function getMovies(query = 'All', page = 1) {
     if (!query) {
       return null;
     }
-    const url = `${API_URL}?apikey=${API_KEY}&s=${query}&page=${page}`;
+    const url = `${Config.API_URL}?apikey=${Config.API_KEY}&s=${query}&page=${page}`;
     const response = await fetchQuery(url);
     let data = response.Search;
     if (response.Response === 'False') {
@@ -28,7 +28,7 @@ export async function getMovies(query = 'All', page = 1) {
 
 export async function getMovie(id: string) {
   try {
-    const url = `${API_URL}?apikey=${API_KEY}&i=${id}`;
+    const url = `${Config.API_URL}?apikey=${Config.API_KEY}&i=${id}`;
     const response = await fetchQuery(url);
     let data = response;
     return data;
