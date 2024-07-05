@@ -9,7 +9,8 @@ function BackButton() {
   return (
     <TouchableHighlight
       style={styles.backButton}
-      onPress={() => navigation.goBack()}>
+      onPress={() => navigation.goBack()}
+      testID="backButton">
       <AntDesign style={styles.icon} name="arrowleft" size={24} color="white" />
     </TouchableHighlight>
   );
