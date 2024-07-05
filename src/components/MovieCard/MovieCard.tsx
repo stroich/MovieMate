@@ -36,7 +36,7 @@ export function MovieCard({
   }
 
   const handlePressCard = () =>
-    navigation.navigate('Details', {itemId: data.imdbID, data: data});
+    navigation.navigate('Details', {itemId: data.imdbID});
 
   const removeFromFavorites = () => {
     removeFavorites(data.imdbID);
@@ -48,10 +48,12 @@ export function MovieCard({
         styles.card,
         {width: width, backgroundColor: colors.colorSecondaryDarkest},
       ]}
-      onPress={handlePressCard}>
+      onPress={handlePressCard}
+      testID={`Button-${data.imdbID}`}>
       <Image
         style={[styles.image, {width: width, height: height}]}
         source={{uri: data.Poster}}
+        testID={`Poster-${data.imdbID}`}
       />
       <View style={[styles.containerTitle]}>
         <ThemedText style={styles.title}>{data.Title}</ThemedText>
@@ -62,7 +64,8 @@ export function MovieCard({
             styles.removeButton,
             {backgroundColor: colors.colorOpasity75},
           ]}
-          onPress={removeFromFavorites}>
+          onPress={removeFromFavorites}
+          testID={`RemoveButton-${data.imdbID}`}>
           <AntDesign name={'closecircleo'} size={26} color="white" />
         </TouchableOpacity>
       )}

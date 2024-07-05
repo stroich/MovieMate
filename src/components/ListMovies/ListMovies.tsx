@@ -13,6 +13,7 @@ type ListProps = {
 function List({data, onEndReached, hasDeleteButton}: ListProps) {
   return (
     <FlatList
+      testID="ListOfMovies"
       contentContainerStyle={styles.containerList}
       style={styles.list}
       columnWrapperStyle={styles.row}
@@ -29,7 +30,7 @@ function List({data, onEndReached, hasDeleteButton}: ListProps) {
       keyExtractor={movie => movie.imdbID}
       onEndReachedThreshold={0.1}
       onEndReached={onEndReached}
-      ListEmptyComponent={<ThemedText>"Movies not found!"</ThemedText>}
+      ListEmptyComponent={<ThemedText>Movies not found!</ThemedText>}
     />
   );
 }

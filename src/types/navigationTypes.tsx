@@ -1,6 +1,5 @@
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigationProp} from '@react-navigation/native';
-import {CardType} from './moviesTypes';
 
 export type HomeStackParamList = {
   home: undefined;
@@ -10,7 +9,7 @@ export type HomeStackParamList = {
 
 export type RootStackParamList = {
   Tab: undefined;
-  Details: {itemId: string; data: CardType};
+  Details: {itemId: string};
 };
 
 export type DetailsScreenProps = NativeStackScreenProps<
