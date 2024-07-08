@@ -10,12 +10,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {isInMovieList} from '../../../utils/asyncStorage/asyncStorage';
 import {useSnapshot} from 'valtio';
 import themeState from '../../../store/GlobalStores/themeState';
 import favoritesState, {
   toggleFavorites,
 } from '../../../store/GlobalStores/favoritesState';
+import {isInMovieList} from '../../../utils/helpers';
 
 type CardMovieDescriptionProps = {
   data: MovieType;

@@ -1,9 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ListMoviesType} from '../../types/moviesTypes';
 
-export const isInMovieList = (favorites: ListMoviesType, imdbID: string) =>
-  favorites.some(item => imdbID === item.imdbID);
-
 export async function getFavoriteMoviesToStorage(): Promise<ListMoviesType | null> {
   const value = await AsyncStorage.getItem('favorites');
   return value ? JSON.parse(value) : null;
