@@ -40,6 +40,20 @@ describe('renders MovieCard', () => {
     expect(removeButton).toBeNull();
   });
 
+  it('the movie card should not be drawn in the absence of a poster', async () => {
+    const {debug, queryByText} = render(
+      <MovieCard
+        data={mockListMovies[2]}
+        width={200}
+        height={300}
+        hasDeleteButton={false}
+      />,
+    );
+    const titleButton = queryByText('Harry Potter and the Prisoner of Azkaban');
+    debug();
+    expect(titleButton).toBeNull();
+  });
+
   it('should go to details page', async () => {
     const {getByTestId} = render(
       <MovieCard

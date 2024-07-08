@@ -16,8 +16,7 @@ export const mockListMovies = [
     imdbID: 'tt0241527',
   },
   {
-    Poster:
-      'https://m.media-amazon.com/images/M/MV5BMTY4NTIwODg0N15BMl5BanBnXkFtZTcwOTc0MjEzMw@@._V1_SX300.jpg',
+    Poster: 'N/A',
     Title: 'Harry Potter and the Prisoner of Azkaban',
     Type: 'movie',
     Year: '2004',
