@@ -39,18 +39,22 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
       }
     })
     .onFinalize(() => {
-      heightDescription.value = withSpring(280);
-    });
+      heightDescription.value = withSpring(300);
+    })
+    .withTestId('pan');
 
   return (
     <GestureDetector gesture={pan}>
       <Animated.View
+        testID={`DetailsPage-AnimatedView-${data.imdbID}`}
         style={[
           styles.container,
           {backgroundColor: colors.colorOpasity75},
           animatedDescription,
         ]}>
-        <Text style={[styles.title, {color: colors.colorGold}]}>
+        <Text
+          testID={`DetailsPage-Title-${data.imdbID}`}
+          style={[styles.title, {color: colors.colorGold}]}>
           {data.Title}
         </Text>
         <Text style={[styles.textDetails, {color: colors.colorForDetails}]}>
@@ -68,6 +72,7 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
         </View>
         <Text style={styles.text}>{data.Plot}</Text>
         <TouchableOpacity
+          testID={`DetailsPage-FavoritesButton-${data.imdbID}`}
           style={styles.addButton}
           onPress={() => toggleFavorites(data)}>
           <AntDesign

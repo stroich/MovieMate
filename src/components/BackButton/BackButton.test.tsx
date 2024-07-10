@@ -14,8 +14,6 @@ jest.mock('@react-navigation/native', () => ({
   },
 }));
 
-jest.mock('react-native-vector-icons/AntDesign', () => 'AntDesign');
-
 describe('renders BackButton', () => {
   it('should render BackButton', () => {
     const {getByTestId} = render(<BackButton />);

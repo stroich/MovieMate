@@ -19,8 +19,6 @@ jest.mock('../../store/GlobalStores/favoritesState', () => ({
   removeFavorites: jest.fn(),
 }));
 
-jest.mock('react-native-vector-icons/AntDesign', () => 'AntDesign');
-
 describe('renders MovieCard', () => {
   it('should render MovieCard without remove button', async () => {
     const {getByTestId, getByText, queryByTestId} = render(
@@ -41,7 +39,7 @@ describe('renders MovieCard', () => {
   });
 
   it('the movie card should not be drawn in the absence of a poster', async () => {
-    const {debug, queryByText} = render(
+    const {queryByText} = render(
       <MovieCard
         data={mockListMovies[2]}
         width={200}
@@ -50,7 +48,6 @@ describe('renders MovieCard', () => {
       />,
     );
     const titleButton = queryByText('Harry Potter and the Prisoner of Azkaban');
-    debug();
     expect(titleButton).toBeNull();
   });
 

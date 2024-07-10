@@ -1,3 +1,5 @@
+import {MovieType} from '../types/moviesTypes';
+
 export const mockListMovies = [
   {
     Poster:
@@ -23,3 +25,16 @@ export const mockListMovies = [
     imdbID: 'tt0304141',
   },
 ];
+
+export const mockCardDetails: MovieType = {
+  Actors: 'Liam Neeson, Ed Harris, Joel Kinnaman',
+  Country: 'United States',
+  Genre: 'Action, Crime, Thriller',
+  Plot: 'Mobster and hit man Jimmy Conlon has one night to figure out where his loyalties lie: with his estranged son, Mike, whose life is in danger, or his longtime best friend, mob boss Shawn Maguire, who wants Mike to pay for the death ...',
+  Poster: 'https://m.media-amazon.com/300.jpg',
+  Runtime: '114 min',
+  Title: 'Run All Night',
+  Year: '2015',
+  imdbID: 'tt2199571',
+  imdbRating: '6.6',
+};
