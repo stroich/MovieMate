@@ -83,6 +83,7 @@ function Dropdown({data, onChange, value}: DropdownProps) {
             </TouchableOpacity>
           </View>
           <FlatList
+            testID={'Settings-Modal-Dropdawn-Flatlist'}
             contentContainerStyle={
               sortedData.length
                 ? styles.containerList
