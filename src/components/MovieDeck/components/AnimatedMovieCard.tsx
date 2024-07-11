@@ -5,11 +5,12 @@ import Animated, {FadeOut} from 'react-native-reanimated';
 import {MovieCard} from '../../MovieCard/MovieCard';
 import {GestureDetector} from 'react-native-gesture-handler';
 import CustomButton from './CustomButton/CustomButton';
-import {SwipeDirectionEnum, useSwipe} from '../hooks/useSwipe';
+import {useSwipe} from '../hooks/useSwipe';
 import {
   addFavorites,
   removeFavorites,
 } from '../../../store/GlobalStores/favoritesState';
+import {SwipeDirectionEnum} from '../hooks/swipeType';
 
 type MovieCardProps = {
   data: CardType;
@@ -30,7 +31,7 @@ export function AnimatedMovieCard({
     addFavorites(data);
   };
 
-  const unsuccessfulSwipe = async () => {
+  const unsuccessfulSwipe = () => {
     onChangeNumberOfCard();
     setVisible(false);
     removeFavorites(data.imdbID);
@@ -49,6 +50,7 @@ export function AnimatedMovieCard({
   return (
     <GestureDetector gesture={pan}>
       <Animated.View
+        testID={`Main-AnimatedCard-${data.imdbID}`}
         style={[styles.container, animatedCardStyle]}
         exiting={FadeOut}>
         <MovieCard data={data} width={300} height={400} />

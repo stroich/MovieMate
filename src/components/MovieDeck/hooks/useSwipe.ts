@@ -8,17 +8,13 @@ import {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
+import {SwipeDirectionEnum} from './swipeType';
 
 type UseSwipeProps = {
   delay: number;
   successfulSwipe: () => void;
   unsuccessfulSwipe: () => void;
 };
-
-export enum SwipeDirectionEnum {
-  right,
-  left,
-}
 
 type SwipeDirectionType = null | SwipeDirectionEnum;
 

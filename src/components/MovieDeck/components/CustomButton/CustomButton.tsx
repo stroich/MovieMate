@@ -10,7 +10,7 @@ type CustomButtonProps = {
 
 function CustomButton({nameIcon}: CustomButtonProps) {
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity testID={nameIcon} style={styles.card}>
       <AntDesign name={nameIcon} size={48} color="white" />
     </TouchableOpacity>
   );
