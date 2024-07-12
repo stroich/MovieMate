@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
 
-async function fetchQuery(url: string) {
+export async function fetchQuery(url: string) {
   try {
     const response = await fetch(url);
     return await response.json();
