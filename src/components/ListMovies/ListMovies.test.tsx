@@ -27,12 +27,12 @@ describe('renders ListMovies', () => {
 
   it('should render ListMovies with movie titles', async () => {
     const mockOnEndReached = jest.fn();
-    const {getByText} = render(
+    const {queryByText} = render(
       <List data={mockListMovies} onEndReached={mockOnEndReached} />,
     );
-    mockListMovies.forEach(movie => {
-      expect(getByText(movie.Title)).toBeTruthy();
-    });
+    expect(
+      mockListMovies.map(movie => !!queryByText(movie.Title)),
+    ).toStrictEqual([true, true, true]);
   });
 
   it('should render ListMovies with additional movie downloads when scrolling', async () => {

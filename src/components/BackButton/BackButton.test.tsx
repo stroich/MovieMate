@@ -2,17 +2,12 @@ import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
 import '@react-navigation/native';
 import BackButton from './BackButton';
+import {useNavigation} from '@react-navigation/native';
 
 const mockGoBack = jest.fn();
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => {
-    const navigation = {
-      goBack: mockGoBack,
-    };
-    return navigation;
-  },
-}));
+jest.mock('@react-navigation/native');
+jest.mocked(useNavigation).mockReturnValue({goBack: mockGoBack});
 
 describe('renders BackButton', () => {
   it('should render BackButton', () => {

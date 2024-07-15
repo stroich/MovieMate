@@ -3,17 +3,12 @@ import {fireEvent, render} from '@testing-library/react-native';
 import {MovieCard} from './MovieCard';
 import {mockListMovies} from '../../mock/MockData';
 import {removeFavorites} from '../../store/GlobalStores/favoritesState';
+import {useNavigation} from '@react-navigation/native';
 
 const mockNavigate = jest.fn();
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => {
-    const navigation = {
-      navigate: mockNavigate,
-    };
-    return navigation;
-  },
-}));
+jest.mock('@react-navigation/native');
+jest.mocked(useNavigation).mockReturnValue({navigate: mockNavigate});
 
 jest.mock('../../store/GlobalStores/favoritesState', () => ({
   removeFavorites: jest.fn(),
@@ -32,7 +27,7 @@ describe('renders MovieCard', () => {
     getByText('Harry Potter and the Deathly Hallows: Part 2');
     const image = getByTestId('Poster-tt1201607');
     expect(image.props.source).toEqual({
-      uri: 'https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg',
+      uri: mockListMovies[0].Poster,
     });
     const removeButton = queryByTestId('RemoveButton-tt1201607');
     expect(removeButton).toBeNull();
@@ -78,7 +73,7 @@ describe('renders MovieCard', () => {
     getByText('Harry Potter and the Deathly Hallows: Part 2');
     const image = getByTestId('Poster-tt1201607');
     expect(image.props.source).toEqual({
-      uri: 'https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg',
+      uri: mockListMovies[0].Poster,
     });
     getByTestId('RemoveButton-tt1201607');
   });

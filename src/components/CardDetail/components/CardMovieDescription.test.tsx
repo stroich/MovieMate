@@ -18,22 +18,12 @@ const style = {
 };
 
 describe('renders CardMovieDescription', () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
-  });
-
   it('render CardMovieDescription', () => {
-    const {getByTestId, debug} = render(
+    const {getByTestId} = render(
       <CardMovieDescription data={mockCardDetails} />,
     );
     getByTestId('DetailsPage-Title-tt2199571');
     const view = getByTestId('DetailsPage-AnimatedView-tt2199571');
-    debug();
     expect(view).toHaveAnimatedStyle(style);
   });
 

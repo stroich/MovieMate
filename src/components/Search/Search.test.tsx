@@ -1,6 +1,7 @@
 import React from 'react';
 import {fireEvent, render} from '@testing-library/react-native';
 import Search from './Search';
+import {useNavigation} from '@react-navigation/native';
 
 jest.mock('react-native-safe-area-context', () => {
   const inset = {top: 0, right: 0, bottom: 0, left: 0};
@@ -15,14 +16,8 @@ jest.mock('react-native-safe-area-context', () => {
 
 const mockGoBack = jest.fn();
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => {
-    const navigation = {
-      goBack: mockGoBack,
-    };
-    return navigation;
-  },
-}));
+jest.mock('@react-navigation/native');
+jest.mocked(useNavigation).mockReturnValue({goBack: mockGoBack});
 
 jest.mock('react-native-vector-icons/AntDesign', () => 'AntDesign');
 

@@ -14,16 +14,14 @@ describe('renders Dropdown', () => {
     const {getByText} = render(
       <Dropdown data={listOfOption} value="" onChange={() => {}} />,
     );
-    const selected = getByText('Select options');
-    expect(selected).toBeTruthy();
+    getByText('Select options');
   });
 
   it('should render Dropdown with Action', () => {
     const {getByText} = render(
       <Dropdown data={listOfOption} value="Action" onChange={() => {}} />,
     );
-    const selected = getByText('Action');
-    expect(selected).toBeTruthy();
+    getByText('Action');
   });
 
   it('should open the dropdown when pressed', () => {
@@ -34,9 +32,9 @@ describe('renders Dropdown', () => {
     const selected = getByText('Select options');
     fireEvent.press(selected);
 
-    expect(getByText('Action')).toBeTruthy();
-    expect(getByText('Adventure')).toBeTruthy();
-    expect(getByText('Fantasy')).toBeTruthy();
+    getByText('Action');
+    getByText('Adventure');
+    getByText('Fantasy');
   });
 
   it('should select an option when pressed', () => {
@@ -50,7 +48,7 @@ describe('renders Dropdown', () => {
     const fantasyOption = getByText('Fantasy');
     fireEvent.press(fantasyOption);
 
-    expect(getByText('Fantasy')).toBeTruthy();
+    getByText('Fantasy');
     expect(queryByText('Action')).toBeFalsy();
     expect(queryByText('Adventure')).toBeFalsy();
   });

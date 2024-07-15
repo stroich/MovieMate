@@ -4,6 +4,7 @@ import {AnimatedMovieCard} from './AnimatedMovieCard';
 import {mockListMovies} from '../../../mock/MockData';
 import * as swipe from '../hooks/useSwipe';
 import {SwipeDirectionEnum} from '../hooks/swipeType';
+import {useNavigation} from '@react-navigation/native';
 
 const {result} = renderHook(() =>
   swipe.useSwipe({
@@ -20,14 +21,8 @@ jest.mock('../../../utils/asyncStorage/asyncStorage', () => ({
   setFavoriteMoviesToStorage: jest.fn(),
 }));
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => {
-    const navigation = {
-      goBack: jest.fn(),
-    };
-    return navigation;
-  },
-}));
+jest.mock('@react-navigation/native');
+jest.mocked(useNavigation).mockReturnValue({goBack: jest.fn()});
 
 const mockUseSwipe = jest.spyOn(swipe, 'useSwipe');
 
