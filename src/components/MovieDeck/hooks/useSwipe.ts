@@ -57,7 +57,8 @@ export function useSwipe({
       }
       runOnJS(setIsSwiped)(false);
       runOnJS(setSwipeDirection)(null);
-    });
+    })
+    .withTestId('panSwipe');
 
   const animatedCardStyle = useAnimatedStyle(() => {
     return {
