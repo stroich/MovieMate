@@ -48,7 +48,7 @@ describe('renders Dropdown', () => {
     const fantasyOption = getByText('Fantasy');
     fireEvent.press(fantasyOption);
 
-    getByText('Fantasy');
+    expect(queryByText('Fantasy')).toBeTruthy();
     expect(queryByText('Action')).toBeFalsy();
     expect(queryByText('Adventure')).toBeFalsy();
   });

@@ -5,10 +5,6 @@ import {
 } from './asyncStorage';
 import {mockListMovies} from '../../mock/MockData';
 
-// jest.mock('@react-native-async-storage/async-storage', () => ({
-//   default: jest.fn(),
-// }));
-
 describe('AsyncStorage functions', () => {
   describe('getFavoriteMoviesToStorage', () => {
     it('should call with favorites property', async () => {
