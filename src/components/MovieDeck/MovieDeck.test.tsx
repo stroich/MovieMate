@@ -46,17 +46,15 @@ describe('renders MovieDeck', () => {
       {state: State.END, translationX: 50},
     ];
 
-    await waitFor(async () => {
-      await fireGestureHandler<PanGestureHandler>(
-        getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
-        stateForSwipe,
-      );
+    fireGestureHandler<PanGestureHandler>(
+      getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
+      stateForSwipe,
+    );
 
-      await fireGestureHandler<PanGestureHandler>(
-        getByGestureTestId(`panSwipe-${mockListMovies[1].imdbID}`),
-        stateForSwipe,
-      );
-    });
+    fireGestureHandler<PanGestureHandler>(
+      getByGestureTestId(`panSwipe-${mockListMovies[1].imdbID}`),
+      stateForSwipe,
+    );
 
     await waitFor(() => {
       expect(mockHandlePage).toHaveBeenCalledTimes(1);

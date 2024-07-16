@@ -21,11 +21,11 @@ jest.mocked(useNavigation).mockReturnValue({goBack: jest.fn()});
 
 describe('renders AnimatedMovieCard', () => {
   describe('check animation for CardMovieDescription', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       jest.useFakeTimers();
     });
 
-    afterEach(() => {
+    afterAll(() => {
       jest.runOnlyPendingTimers();
       jest.useRealTimers();
     });
@@ -41,23 +41,21 @@ describe('renders AnimatedMovieCard', () => {
 
       jest.advanceTimersByTime(2000);
 
-      await waitFor(async () => {
-        await fireGestureHandler<PanGestureHandler>(
-          getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
-          [
-            {state: State.BEGAN, translationX: 0},
-            {
-              state: State.ACTIVE,
-              translationX: 0,
-            },
-            {
-              state: State.ACTIVE,
-              translationX: 50,
-            },
-            {state: State.END, translationX: 50},
-          ],
-        );
-      });
+      fireGestureHandler<PanGestureHandler>(
+        getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
+        [
+          {state: State.BEGAN, translationX: 0},
+          {
+            state: State.ACTIVE,
+            translationX: 0,
+          },
+          {
+            state: State.ACTIVE,
+            translationX: 50,
+          },
+          {state: State.END, translationX: 50},
+        ],
+      );
 
       await waitFor(() => {
         const title = queryByText(mockListMovies[0].Title);
@@ -76,23 +74,21 @@ describe('renders AnimatedMovieCard', () => {
 
       jest.advanceTimersByTime(2000);
 
-      await waitFor(async () => {
-        await fireGestureHandler<PanGestureHandler>(
-          getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
-          [
-            {state: State.BEGAN, translationX: 0},
-            {
-              state: State.ACTIVE,
-              translationX: 0,
-            },
-            {
-              state: State.ACTIVE,
-              translationX: -50,
-            },
-            {state: State.END, translationX: -50},
-          ],
-        );
-      });
+      fireGestureHandler<PanGestureHandler>(
+        getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
+        [
+          {state: State.BEGAN, translationX: 0},
+          {
+            state: State.ACTIVE,
+            translationX: 0,
+          },
+          {
+            state: State.ACTIVE,
+            translationX: -50,
+          },
+          {state: State.END, translationX: -50},
+        ],
+      );
 
       await waitFor(() => {
         const title = queryByText(mockListMovies[0].Title);

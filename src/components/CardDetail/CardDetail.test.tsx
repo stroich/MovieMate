@@ -1,11 +1,7 @@
 import React from 'react';
 import {render} from '@testing-library/react-native';
 import CardDetail from './CardDetail';
-import {mockCardDetails} from '../../mock/MockData';
-
-jest.mock('./components/CardMovieDescription', () => {
-  return () => 'Text';
-});
+import {mockCardDetails, mockListMovies} from '../../mock/MockData';
 
 jest.mock('../BackButton/BackButton', () => {
   const {View} = require('react-native');
@@ -13,11 +9,26 @@ jest.mock('../BackButton/BackButton', () => {
 });
 
 describe('renders CardDetail', () => {
-  it('render CardDetail', () => {
-    const {getByTestId} = render(<CardDetail data={mockCardDetails} />);
-    const image = getByTestId('DetailsPage-Poster-tt2199571');
+  it('render CardDetail with details data', () => {
+    const {getByTestId, queryByTestId} = render(
+      <CardDetail data={mockCardDetails} />,
+    );
+    const image = getByTestId(`DetailsPage-Poster-${mockCardDetails.imdbID}`);
     expect(image.props.source).toEqual({
-      uri: 'https://m.media-amazon.com/300.jpg',
+      uri: mockCardDetails.Poster,
     });
+
+    const title = queryByTestId(
+      `DetailsPage-AnimatedView-${mockCardDetails.imdbID}`,
+    );
+    expect(title).toBeTruthy();
+  });
+
+  it('render CardDetail with common data', () => {
+    const {queryByTestId} = render(<CardDetail data={mockListMovies[0]} />);
+    const title = queryByTestId(
+      `DetailsPage-AnimatedView-${mockCardDetails.imdbID}`,
+    );
+    expect(title).toBeFalsy();
   });
 });

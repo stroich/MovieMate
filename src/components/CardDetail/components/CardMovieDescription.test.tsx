@@ -3,19 +3,17 @@ import {fireEvent, render} from '@testing-library/react-native';
 import CardMovieDescription from './CardMovieDescription';
 import {mockCardDetails} from '../../../mock/MockData';
 import '../../../utils/asyncStorage/asyncStorage';
-import * as favoritesState from '../../../store/GlobalStores/favoritesState';
 import {PanGesture, State} from 'react-native-gesture-handler';
 import {
   fireGestureHandler,
   getByGestureTestId,
 } from 'react-native-gesture-handler/jest-utils';
+import favoritesState from '../../../store/GlobalStores/favoritesState';
 
 jest.mock('../../../utils/asyncStorage/asyncStorage', () => ({
   getFavoriteMoviesToStorage: jest.fn(),
   setFavoriteMoviesToStorage: jest.fn(),
 }));
-
-const mockedToggleFavorites = jest.spyOn(favoritesState, 'toggleFavorites');
 
 const style = {
   height: 280,
@@ -27,8 +25,10 @@ describe('renders CardMovieDescription', () => {
     const {getByTestId} = render(
       <CardMovieDescription data={mockCardDetails} />,
     );
-    getByTestId('DetailsPage-Title-tt2199571');
-    const view = getByTestId('DetailsPage-AnimatedView-tt2199571');
+    getByTestId(`DetailsPage-Title-${mockCardDetails.imdbID}`);
+    const view = getByTestId(
+      `DetailsPage-AnimatedView-${mockCardDetails.imdbID}`,
+    );
     expect(view).toHaveAnimatedStyle(style);
   });
 
@@ -36,17 +36,20 @@ describe('renders CardMovieDescription', () => {
     const {getByTestId} = render(
       <CardMovieDescription data={mockCardDetails} />,
     );
-    const button = getByTestId('DetailsPage-FavoritesButton-tt2199571');
+    const button = getByTestId(
+      `DetailsPage-FavoritesButton-${mockCardDetails.imdbID}`,
+    );
+    expect(favoritesState.favorites).toEqual([]);
     fireEvent.press(button);
-    expect(mockedToggleFavorites).toHaveBeenCalled();
+    expect(favoritesState.favorites).toEqual([mockCardDetails]);
   });
 
   describe('check animation for CardMovieDescription', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       jest.useFakeTimers();
     });
 
-    afterEach(() => {
+    afterAll(() => {
       jest.runOnlyPendingTimers();
       jest.useRealTimers();
     });
@@ -67,7 +70,7 @@ describe('renders CardMovieDescription', () => {
       jest.advanceTimersByTime(2000);
 
       expect(
-        getByTestId('DetailsPage-AnimatedView-tt2199571'),
+        getByTestId(`DetailsPage-AnimatedView-${mockCardDetails.imdbID}`),
       ).toHaveAnimatedStyle({
         height: 300,
       });
@@ -87,7 +90,7 @@ describe('renders CardMovieDescription', () => {
       jest.advanceTimersByTime(500);
 
       expect(
-        getByTestId('DetailsPage-AnimatedView-tt2199571'),
+        getByTestId(`DetailsPage-AnimatedView-${mockCardDetails.imdbID}`),
       ).not.toHaveAnimatedStyle({
         height: 250,
       });

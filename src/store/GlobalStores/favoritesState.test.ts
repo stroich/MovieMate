@@ -8,7 +8,7 @@ import {
   setFavoriteMoviesToStorage,
 } from '../../utils/asyncStorage/asyncStorage';
 import {mockListMovies} from '../../mock/MockData';
-import {waitFor} from '@testing-library/react-native';
+import {act, waitFor} from '@testing-library/react-native';
 
 jest.mock('../../utils/asyncStorage/asyncStorage', () => ({
   getFavoriteMoviesToStorage: jest.fn(),
@@ -18,8 +18,13 @@ jest.mock('../../utils/asyncStorage/asyncStorage', () => ({
 describe('favoritesState', () => {
   describe('favoritesState without data from async storage', () => {
     beforeEach(() => {
-      (getFavoriteMoviesToStorage as jest.Mock).mockResolvedValueOnce(null);
+      (getFavoriteMoviesToStorage as jest.Mock).mockResolvedValue(null);
+    });
+
+    afterEach(async () => {
       favoritesState.favorites = [];
+      await act(() => Promise.resolve());
+      jest.clearAllMocks();
     });
 
     it('setFavoriteMoviesToStorage should not call with loading true', () => {
@@ -33,7 +38,7 @@ describe('favoritesState', () => {
       expect(favoritesState.favorites).toEqual([movie]);
 
       await waitFor(() => {
-        expect(setFavoriteMoviesToStorage).toHaveBeenCalled();
+        expect(setFavoriteMoviesToStorage).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -45,7 +50,7 @@ describe('favoritesState', () => {
       expect(favoritesState.favorites).toEqual([movie]);
 
       await waitFor(() => {
-        expect(setFavoriteMoviesToStorage).toHaveBeenCalled();
+        expect(setFavoriteMoviesToStorage).toHaveBeenCalledTimes(0);
       });
     });
 
@@ -53,11 +58,12 @@ describe('favoritesState', () => {
       expect(favoritesState.favorites).toEqual([]);
       const movie = mockListMovies[0];
       favoritesState.favorites = [movie];
+      await act(() => Promise.resolve());
       removeFavorites(movie.imdbID);
       expect(favoritesState.favorites).toEqual([]);
 
       await waitFor(() => {
-        expect(setFavoriteMoviesToStorage).toHaveBeenCalled();
+        expect(setFavoriteMoviesToStorage).toHaveBeenCalledTimes(2);
       });
     });
 
@@ -68,7 +74,7 @@ describe('favoritesState', () => {
       expect(favoritesState.favorites).toEqual([movie]);
 
       await waitFor(() => {
-        expect(setFavoriteMoviesToStorage).toHaveBeenCalled();
+        expect(setFavoriteMoviesToStorage).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -76,11 +82,13 @@ describe('favoritesState', () => {
       expect(favoritesState.favorites).toEqual([]);
       const movie = mockListMovies[0];
       toggleFavorites(movie);
+      await act(() => Promise.resolve());
+      expect(favoritesState.favorites).toEqual([movie]);
       toggleFavorites(movie);
       expect(favoritesState.favorites).toEqual([]);
 
       await waitFor(() => {
-        expect(setFavoriteMoviesToStorage).toHaveBeenCalled();
+        expect(setFavoriteMoviesToStorage).toHaveBeenCalledTimes(2);
       });
     });
   });

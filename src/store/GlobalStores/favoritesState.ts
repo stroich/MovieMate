@@ -50,7 +50,6 @@ loadFavorites();
 
 subscribe(favoritesState, () => {
   if (!loading) {
-    console.log(loading);
     setFavoriteMoviesToStorage(favoritesState.favorites);
   }
 });

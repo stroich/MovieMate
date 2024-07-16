@@ -32,7 +32,7 @@ describe('renders ListMovies', () => {
     );
     expect(
       mockListMovies.map(movie => !!queryByText(movie.Title)),
-    ).toStrictEqual([true, true, true]);
+    ).toStrictEqual(mockListMovies.map(() => true));
   });
 
   it('should render ListMovies with additional movie downloads when scrolling', async () => {
