@@ -43,7 +43,7 @@ describe('renders AnimatedMovieCard', () => {
 
       await waitFor(async () => {
         await fireGestureHandler<PanGestureHandler>(
-          getByGestureTestId('panSwipe'),
+          getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
           [
             {state: State.BEGAN, translationX: 0},
             {
@@ -78,7 +78,7 @@ describe('renders AnimatedMovieCard', () => {
 
       await waitFor(async () => {
         await fireGestureHandler<PanGestureHandler>(
-          getByGestureTestId('panSwipe'),
+          getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
           [
             {state: State.BEGAN, translationX: 0},
             {
@@ -108,14 +108,11 @@ describe('renders AnimatedMovieCard', () => {
         delay: 300,
         successfulSwipe: jest.fn(),
         unsuccessfulSwipe: jest.fn(),
+        testID: 'test',
       }),
     );
     const pan = result.current.pan;
     const animatedCardStyle = result.current.animatedCardStyle;
-
-    afterAll(() => {
-      jest.resetModules();
-    });
 
     it('should render AnimatedMovieCard', async () => {
       mockUseSwipe.mockImplementation(() => {

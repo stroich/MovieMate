@@ -23,6 +23,7 @@ export function AnimatedMovieCard({
   delay,
   onChangeNumberOfCard,
 }: MovieCardProps) {
+  const testID = data.imdbID;
   const [visible, setVisible] = useState(true);
 
   const successfulSwipe = () => {
@@ -41,6 +42,7 @@ export function AnimatedMovieCard({
     delay,
     unsuccessfulSwipe,
     successfulSwipe,
+    testID,
   });
 
   if (!visible) {

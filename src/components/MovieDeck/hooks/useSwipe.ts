@@ -14,6 +14,7 @@ type UseSwipeProps = {
   delay: number;
   successfulSwipe: () => void;
   unsuccessfulSwipe: () => void;
+  testID: string;
 };
 
 type SwipeDirectionType = null | SwipeDirectionEnum;
@@ -22,6 +23,7 @@ export function useSwipe({
   successfulSwipe,
   unsuccessfulSwipe,
   delay,
+  testID,
 }: UseSwipeProps) {
   const [isSwiped, setIsSwiped] = useState(false);
   const [swipeDirection, setSwipeDirection] =
@@ -58,7 +60,7 @@ export function useSwipe({
       runOnJS(setIsSwiped)(false);
       runOnJS(setSwipeDirection)(null);
     })
-    .withTestId('panSwipe');
+    .withTestId(`panSwipe-${testID}`);
 
   const animatedCardStyle = useAnimatedStyle(() => {
     return {
