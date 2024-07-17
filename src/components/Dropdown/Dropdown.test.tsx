@@ -9,22 +9,22 @@ const listOfOption = [
   {id: '3', value: 'Fantasy'},
 ];
 
-describe('renders Dropdown', () => {
-  it('should render Dropdown with select options', () => {
+describe('Dropdown', () => {
+  it('should render with the button "select options"', () => {
     const {getByText} = render(
       <Dropdown data={listOfOption} value="" onChange={() => {}} />,
     );
     getByText('Select options');
   });
 
-  it('should render Dropdown with Action', () => {
+  it('should render with the button "Action"', () => {
     const {getByText} = render(
       <Dropdown data={listOfOption} value="Action" onChange={() => {}} />,
     );
     getByText('Action');
   });
 
-  it('should open the dropdown when pressed', () => {
+  it('should open  dropdown by pressing a button "Select options"', () => {
     const {getByText} = render(
       <Dropdown data={listOfOption} value="" onChange={() => {}} />,
     );
@@ -37,7 +37,7 @@ describe('renders Dropdown', () => {
     getByText('Fantasy');
   });
 
-  it('should select an option when pressed', () => {
+  it('should render "Fantasy" option by pressing "Fantasy" button', () => {
     const {getByText, queryByText} = render(
       <Dropdown data={listOfOption} value="" onChange={() => {}} />,
     );
@@ -53,7 +53,7 @@ describe('renders Dropdown', () => {
     expect(queryByText('Adventure')).toBeFalsy();
   });
 
-  it('should select an option when textinput is submited', () => {
+  it('should call onChange function by submitting textinput', () => {
     const mockGOnSearch = jest.fn();
     const {getByText, getByPlaceholderText} = render(
       <Dropdown data={listOfOption} value="" onChange={mockGOnSearch} />,
@@ -67,7 +67,7 @@ describe('renders Dropdown', () => {
     expect(mockGOnSearch).toHaveBeenCalled();
   });
 
-  it('should change style with the empty list', () => {
+  it('should change style for flatlist if options are empty array', () => {
     const {getByText, getByTestId, getByPlaceholderText} = render(
       <Dropdown data={listOfOption} value="" onChange={() => {}} />,
     );

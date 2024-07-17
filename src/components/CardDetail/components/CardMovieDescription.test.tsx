@@ -54,7 +54,7 @@ describe('renders CardMovieDescription', () => {
       jest.useRealTimers();
     });
 
-    it('should change the height by 300 when onFinalize is called', async () => {
+    it('should change the height by 280 when onFinalize is called', async () => {
       const {getByTestId} = render(
         <CardMovieDescription data={mockCardDetails} />,
       );
@@ -67,12 +67,12 @@ describe('renders CardMovieDescription', () => {
         {state: State.END, x: 4, y: 14},
       ]);
 
-      jest.advanceTimersByTime(2000);
+      jest.advanceTimersByTime(300);
 
       expect(
         getByTestId(`DetailsPage-AnimatedView-${mockCardDetails.imdbID}`),
       ).toHaveAnimatedStyle({
-        height: 300,
+        height: 280,
       });
     });
 
@@ -87,7 +87,7 @@ describe('renders CardMovieDescription', () => {
         {state: State.ACTIVE, x: 0, y: 50, translationY: -40},
       ]);
 
-      jest.advanceTimersByTime(500);
+      jest.advanceTimersByTime(300);
 
       expect(
         getByTestId(`DetailsPage-AnimatedView-${mockCardDetails.imdbID}`),

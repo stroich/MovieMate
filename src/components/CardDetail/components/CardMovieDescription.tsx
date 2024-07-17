@@ -39,7 +39,7 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
       }
     })
     .onFinalize(() => {
-      heightDescription.value = withSpring(300);
+      heightDescription.value = withSpring(280);
     })
     .withTestId('pan');
 
