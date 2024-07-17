@@ -25,11 +25,13 @@ describe('renders MovieCard', () => {
       />,
     );
     getByText('Harry Potter and the Deathly Hallows: Part 2');
-    const image = getByTestId('Poster-tt1201607');
+    const image = getByTestId(`Poster-${mockListMovies[0].imdbID}`);
     expect(image.props.source).toEqual({
       uri: mockListMovies[0].Poster,
     });
-    const removeButton = queryByTestId('RemoveButton-tt1201607');
+    const removeButton = queryByTestId(
+      `RemoveButton-${mockListMovies[0].imdbID}`,
+    );
     expect(removeButton).toBeNull();
   });
 
@@ -42,7 +44,7 @@ describe('renders MovieCard', () => {
         hasDeleteButton={false}
       />,
     );
-    const titleButton = queryByText('Harry Potter and the Prisoner of Azkaban');
+    const titleButton = queryByText(mockListMovies[2].Title);
     expect(titleButton).toBeNull();
   });
 
@@ -55,10 +57,12 @@ describe('renders MovieCard', () => {
         hasDeleteButton={false}
       />,
     );
-    const cardButton = getByTestId('Button-tt1201607');
+    const cardButton = getByTestId(`Button-${mockListMovies[0].imdbID}`);
     fireEvent.press(cardButton);
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith('Details', {itemId: 'tt1201607'});
+    expect(mockNavigate).toHaveBeenCalledWith('Details', {
+      itemId: mockListMovies[0].imdbID,
+    });
   });
 
   it('should render MovieCard with remove button', async () => {
@@ -70,12 +74,12 @@ describe('renders MovieCard', () => {
         hasDeleteButton={true}
       />,
     );
-    getByText('Harry Potter and the Deathly Hallows: Part 2');
-    const image = getByTestId('Poster-tt1201607');
+    getByText(mockListMovies[0].Title);
+    const image = getByTestId(`Poster-${mockListMovies[0].imdbID}`);
     expect(image.props.source).toEqual({
       uri: mockListMovies[0].Poster,
     });
-    getByTestId('RemoveButton-tt1201607');
+    getByTestId(`RemoveButton-${mockListMovies[0].imdbID}`);
   });
 
   it('should delete the movie when you click on the delete button', async () => {
@@ -87,8 +91,10 @@ describe('renders MovieCard', () => {
         hasDeleteButton={true}
       />,
     );
-    const removeButton = getByTestId('RemoveButton-tt1201607');
+    const removeButton = getByTestId(
+      `RemoveButton-${mockListMovies[0].imdbID}`,
+    );
     fireEvent.press(removeButton);
-    expect(removeFavorites).toHaveBeenCalledWith('tt1201607');
+    expect(removeFavorites).toHaveBeenCalledWith(mockListMovies[0].imdbID);
   });
 });

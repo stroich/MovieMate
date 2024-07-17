@@ -2,19 +2,6 @@ import {render, renderHook} from '@testing-library/react-native';
 import {useSwipe} from './useSwipe';
 import React from 'react';
 import Animated from 'react-native-reanimated';
-import {PanGesture, State} from 'react-native-gesture-handler';
-
-const mockedEventHandlers = () => {
-  return {
-    begin: jest.fn(),
-    start: jest.fn(),
-    active: jest.fn(),
-    end: jest.fn(),
-    fail: jest.fn(),
-    cancel: jest.fn(),
-    finish: jest.fn(),
-  };
-};
 
 describe('useSwipe', () => {
   beforeEach(() => {
@@ -32,6 +19,7 @@ describe('useSwipe', () => {
         delay: 300,
         successfulSwipe: jest.fn(),
         unsuccessfulSwipe: jest.fn(),
+        testID: 'test',
       }),
     );
 
@@ -48,6 +36,7 @@ describe('useSwipe', () => {
         delay: 300,
         successfulSwipe: jest.fn(),
         unsuccessfulSwipe: jest.fn(),
+        testID: 'test',
       }),
     );
     const {getByTestId} = render(
