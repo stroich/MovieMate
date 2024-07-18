@@ -4,7 +4,7 @@ import {ListMoviesType} from '../../types/moviesTypes';
 import {AnimatedMovieCard} from './components/AnimatedMovieCard';
 import constants from '../../styles/constants';
 
-type MovieDeckProps = {
+export type MovieDeckProps = {
   data: ListMoviesType;
   handlePage: () => void;
 };

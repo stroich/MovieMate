@@ -20,6 +20,11 @@ export const mockListMovies = [
   },
 ];
 
+export const mockListMoviesWithPages = {
+  pages: [mockListMovies],
+  pageParams: [1],
+};
+
 export const mockCardDetails: MovieType = {
   Actors: 'Liam Neeson, Ed Harris, Joel Kinnaman',
   Country: 'United States',
