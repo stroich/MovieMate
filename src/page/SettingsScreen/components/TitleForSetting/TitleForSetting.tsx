@@ -21,7 +21,12 @@ function TitleForSetting({children, isEdit, onPressEdit}: ThemedTextProps) {
       <ThemedText>{children}</ThemedText>
       {isEdit && (
         <TouchableOpacity onPress={onPressEdit}>
-          <AntDesign name="edit" size={24} color={colors.colorText} />
+          <AntDesign
+            testID={'edit'}
+            name="edit"
+            size={24}
+            color={colors.colorText}
+          />
         </TouchableOpacity>
       )}
     </View>

@@ -1,4 +1,4 @@
-import {renderHook, waitFor} from '@testing-library/react-native';
+import {act, renderHook, waitFor} from '@testing-library/react-native';
 import {useFetchMovies} from './useFetchMovies';
 import {createWrapper} from '../../../mock/createWrapperForQuery';
 import {fetchQuery} from '../../../utils/api/apiMovies';
@@ -15,7 +15,10 @@ describe('useFetchMovies', () => {
     expect(result.current.data).toBeFalsy();
     expect(result.current.isLoading).toBe(false);
     expect(result.current.error).toBe(null);
-    result.current.fetchNextPage();
+
+    await act(async () => {
+      result.current.fetchNextPage();
+    });
 
     await waitFor(() => {
       expect(result.current.data).toBeTruthy();
