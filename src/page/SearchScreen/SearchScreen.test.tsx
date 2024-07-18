@@ -18,7 +18,7 @@ mockedUseFetchMovies.mockReturnValueOnce(mockUseQueryWithEmpty);
 jest.mock('@react-navigation/native');
 jest.mocked(useNavigation).mockReturnValue({goBack: jest.fn()});
 
-describe('FavoritesScreen', () => {
+describe('SearchScreen', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
