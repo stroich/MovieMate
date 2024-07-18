@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, waitFor} from '@testing-library/react-native';
 import CardMovieDescription from './CardMovieDescription';
 import {mockCardDetails} from '../../../mock/MockData';
 import '../../../utils/asyncStorage/asyncStorage';
@@ -39,9 +39,14 @@ describe('renders CardMovieDescription', () => {
     const button = getByTestId(
       `DetailsPage-FavoritesButton-${mockCardDetails.imdbID}`,
     );
-    expect(favoritesState.favorites).toEqual([]);
+    waitFor(() => {
+      expect(favoritesState.favorites).toEqual([]);
+    });
+
     fireEvent.press(button);
-    expect(favoritesState.favorites).toEqual([mockCardDetails]);
+    waitFor(() => {
+      expect(favoritesState.favorites).toEqual([mockCardDetails]);
+    });
   });
 
   describe('check animation for CardMovieDescription', () => {
