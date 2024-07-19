@@ -16,7 +16,7 @@ describe('GeneralSettings', () => {
     const {getByRole} = render(<GeneralSettings />);
     const switchElement = getByRole('switch');
 
-    await act(() => {
+    await act(async () => {
       fireEvent(switchElement, 'onValueChange', true);
     });
 
