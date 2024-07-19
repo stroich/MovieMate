@@ -8,10 +8,8 @@ jest.mocked(useNavigation).mockReturnValue({goBack: jest.fn()});
 
 describe('SettingsScreen', () => {
   it('should renders screen', () => {
-    const {getByRole} = render(<SettingsScreen />);
-    const mySwitch = getByRole('switch');
-    expect(mySwitch.props.thumbTintColor).toBe('#000000');
-    expect(mySwitch.props.onTintColor).toBe('#1a1c20');
-    expect(mySwitch.props.value).toBeFalsy();
+    const {getByText} = render(<SettingsScreen />);
+    getByText('General Settings');
+    getByText('Personal Settings');
   });
 });
