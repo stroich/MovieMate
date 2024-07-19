@@ -16,7 +16,7 @@ function GeneralSettings() {
 
   return (
     <View style={[styles.container]}>
-      <TitleForSetting>General Settings</TitleForSetting>
+      <TitleForSetting value="General Settings" />
       <View style={styles.containerSwitch}>
         <Text style={[styles.text, {color: state.colors.colorGray}]}>
           {' '}

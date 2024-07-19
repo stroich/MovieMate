@@ -1,5 +1,4 @@
-import React from 'react';
-import {ReactNode} from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {View} from 'react-native';
 import ThemedText from '../../../../components/ThemedText/ThemedText';
@@ -8,19 +7,22 @@ import {useSnapshot} from 'valtio';
 import themeState from '../../../../store/GlobalStores/themeState';
 
 type ThemedTextProps = {
-  children: ReactNode;
+  value: string;
   isEdit?: boolean;
   onPressEdit?: () => void;
 };
 
-function TitleForSetting({children, isEdit, onPressEdit}: ThemedTextProps) {
+function TitleForSetting({value, isEdit, onPressEdit}: ThemedTextProps) {
+  const testId = useMemo(() => value.split(' ').join(''), [value]);
   const {colors} = useSnapshot(themeState);
 
   return (
     <View style={[styles.containerText, {borderBottomColor: colors.colorText}]}>
-      <ThemedText>{children}</ThemedText>
+      <ThemedText>{value}</ThemedText>
       {isEdit && (
-        <TouchableOpacity onPress={onPressEdit}>
+        <TouchableOpacity
+          testID={`settingPage-button-${testId}`}
+          onPress={onPressEdit}>
           <AntDesign
             testID={'edit'}
             name="edit"
