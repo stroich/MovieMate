@@ -7,7 +7,8 @@ import {
   fireGestureHandler,
   getByGestureTestId,
 } from 'react-native-gesture-handler/jest-utils';
-import {PanGestureHandler, State} from 'react-native-gesture-handler';
+import {PanGestureHandler} from 'react-native-gesture-handler';
+import {stateForSwipe} from '../../mock/stateForSwipe';
 
 jest.mock('../../utils/asyncStorage/asyncStorage', () => ({
   getFavoriteMoviesToStorage: jest.fn(),
@@ -31,20 +32,7 @@ describe('renders MovieDeck', () => {
     const mockHandlePage = jest.fn();
     render(<MovieDeck data={mockListMovies} handlePage={mockHandlePage} />);
 
-    jest.advanceTimersByTime(2000);
-
-    const stateForSwipe = [
-      {state: State.BEGAN, translationX: 0},
-      {
-        state: State.ACTIVE,
-        translationX: 0,
-      },
-      {
-        state: State.ACTIVE,
-        translationX: 50,
-      },
-      {state: State.END, translationX: 50},
-    ];
+    jest.advanceTimersByTime(1000);
 
     fireGestureHandler<PanGestureHandler>(
       getByGestureTestId(`panSwipe-${mockListMovies[0].imdbID}`),
