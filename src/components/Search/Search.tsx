@@ -30,7 +30,9 @@ function Search({onSearch}: SearchProps) {
 
   return (
     <View style={[styles.container, {marginTop: insets.top}]}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        testID="SearchPage-backButton"
+        onPress={() => navigation.goBack()}>
         <AntDesign
           style={styles.icon}
           name="arrowleft"

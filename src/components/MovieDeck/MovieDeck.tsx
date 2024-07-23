@@ -11,7 +11,7 @@ type MovieDeckProps = {
 
 function MovieDeck({data, handlePage}: MovieDeckProps) {
   const newData = data.filter(item => item.Poster !== 'N/A');
-  const [numberOfCards, setNumberOfCards] = useState(data.length);
+  const [numberOfCards, setNumberOfCards] = useState(newData.length);
 
   const onChangeNumberOfCard = () => {
     setNumberOfCards(prevState => prevState - 1);

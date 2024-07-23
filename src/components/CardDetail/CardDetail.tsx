@@ -15,7 +15,11 @@ const isMovieType = (data: MovieType | CardType): data is MovieType => {
 function CardDetail({data}: CardDetailProps) {
   return (
     <View>
-      <Image style={styles.image} source={{uri: data.Poster}} />
+      <Image
+        testID={`DetailsPage-Poster-${data.imdbID}`}
+        style={styles.image}
+        source={{uri: data.Poster}}
+      />
       {isMovieType(data) && <CardMovieDescription data={data} />}
       <BackButton />
     </View>

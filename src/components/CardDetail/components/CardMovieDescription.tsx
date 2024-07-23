@@ -10,12 +10,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {isInMovieList} from '../../../utils/asyncStorage/asyncStorage';
 import {useSnapshot} from 'valtio';
 import themeState from '../../../store/GlobalStores/themeState';
 import favoritesState, {
   toggleFavorites,
 } from '../../../store/GlobalStores/favoritesState';
+import {isInMovieList} from '../../../utils/helpers';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
@@ -40,17 +40,21 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
     })
     .onFinalize(() => {
       heightDescription.value = withSpring(280);
-    });
+    })
+    .withTestId('pan');
 
   return (
     <GestureDetector gesture={pan}>
       <Animated.View
+        testID={`DetailsPage-AnimatedView-${data.imdbID}`}
         style={[
           styles.container,
           {backgroundColor: colors.colorOpasity75},
           animatedDescription,
         ]}>
-        <Text style={[styles.title, {color: colors.colorGold}]}>
+        <Text
+          testID={`DetailsPage-Title-${data.imdbID}`}
+          style={[styles.title, {color: colors.colorGold}]}>
           {data.Title}
         </Text>
         <Text style={[styles.textDetails, {color: colors.colorForDetails}]}>
@@ -68,6 +72,7 @@ function CardMovieDescription({data}: CardMovieDescriptionProps) {
         </View>
         <Text style={styles.text}>{data.Plot}</Text>
         <TouchableOpacity
+          testID={`DetailsPage-FavoritesButton-${data.imdbID}`}
           style={styles.addButton}
           onPress={() => toggleFavorites(data)}>
           <AntDesign

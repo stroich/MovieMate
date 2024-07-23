@@ -12,7 +12,7 @@ import themeState from '../../store/GlobalStores/themeState';
 
 function DetailsScreen({route}: DetailsScreenProps) {
   const {colors} = useSnapshot(themeState);
-  const {itemId, data: dataParam} = route.params;
+  const {itemId} = route.params;
   const insets = useSafeAreaInsets();
   const {data, isLoading, error} = useQuery({
     queryKey: ['movie', itemId],
@@ -27,7 +27,7 @@ function DetailsScreen({route}: DetailsScreenProps) {
       ]}>
       {isLoading && <Loading />}
       {error && <ErrorMessage error={error} />}
-      {data && <CardDetail data={data ?? dataParam} />}
+      {data && <CardDetail data={data} />}
     </View>
   );
 }

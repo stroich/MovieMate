@@ -26,9 +26,11 @@ function PersonalSetting() {
 
   return (
     <View style={[styles.container]}>
-      <TitleForSetting isEdit onPressEdit={changeVisible}>
-        Personal Settings
-      </TitleForSetting>
+      <TitleForSetting
+        isEdit
+        onPressEdit={changeVisible}
+        value="Personal Settings"
+      />
       <FlatList
         data={Object.entries(personalSettings)}
         renderItem={({item}) => <SettingItem data={item} />}

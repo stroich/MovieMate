@@ -1,0 +1,4 @@
+{
+    "jest.coverageFormatter": "GutterFormatter",
+    "jest.runMode": {"type": "on-demand"},
+}

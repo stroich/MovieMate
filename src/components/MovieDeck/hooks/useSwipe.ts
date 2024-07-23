@@ -8,17 +8,14 @@ import {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
+import {SwipeDirectionEnum} from './swipeType';
 
 type UseSwipeProps = {
   delay: number;
   successfulSwipe: () => void;
   unsuccessfulSwipe: () => void;
+  testID: string;
 };
-
-export enum SwipeDirectionEnum {
-  right,
-  left,
-}
 
 type SwipeDirectionType = null | SwipeDirectionEnum;
 
@@ -26,6 +23,7 @@ export function useSwipe({
   successfulSwipe,
   unsuccessfulSwipe,
   delay,
+  testID,
 }: UseSwipeProps) {
   const [isSwiped, setIsSwiped] = useState(false);
   const [swipeDirection, setSwipeDirection] =
@@ -61,7 +59,8 @@ export function useSwipe({
       }
       runOnJS(setIsSwiped)(false);
       runOnJS(setSwipeDirection)(null);
-    });
+    })
+    .withTestId(`panSwipe-${testID}`);
 
   const animatedCardStyle = useAnimatedStyle(() => {
     return {
