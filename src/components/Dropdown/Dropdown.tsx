@@ -10,6 +10,7 @@ import ThemedText from '../ThemedText/ThemedText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSnapshot} from 'valtio';
 import themeState from '../../store/GlobalStores/themeState';
+import constants from '../../styles/constants';
 
 type ItemType = {
   id: string;
@@ -95,7 +96,7 @@ function Dropdown({data, onChange, value}: DropdownProps) {
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => handlePressSelected(item)}>
-                <ThemedText style={[styles.text]}>{item.value}</ThemedText>
+                <ThemedText style={styles.text}>{item.value}</ThemedText>
               </TouchableOpacity>
             )}
             keyExtractor={item => item.id}
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     borderWidth: 1,
     borderRadius: 20,
-    borderColor: '#606265',
+    borderColor: constants.colorGray,
   },
   input: {
     height: 40,
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     paddingLeft: 40,
     borderWidth: 1,
     borderRadius: 20,
-    borderColor: '#606265',
+    borderColor: constants.colorGray,
   },
   beforeButton: {
     position: 'absolute',
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#606265',
+    borderColor: constants.colorGray,
   },
   containerEmptyList: {
     marginTop: 5,

@@ -37,10 +37,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
   },
-  loading: {
-    color: 'white',
-    textAlign: 'center',
-  },
 });
 
 export default DetailsScreen;

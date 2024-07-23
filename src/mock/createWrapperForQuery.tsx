@@ -12,6 +12,7 @@ const createTestQueryClient = () =>
 
 export function createWrapper() {
   const testQueryClient = createTestQueryClient();
+  // eslint-disable-next-line react/display-name -- disabled for working with tests
   return ({children}: {children: React.ReactNode}) => (
     <QueryClientProvider client={testQueryClient}>
       {children}

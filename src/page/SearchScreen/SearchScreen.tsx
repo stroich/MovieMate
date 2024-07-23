@@ -49,10 +49,6 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     flex: 1,
   },
-  loading: {
-    color: 'white',
-    textAlign: 'center',
-  },
 });
 
 export default SearchScreen;

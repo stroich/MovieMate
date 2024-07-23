@@ -25,7 +25,7 @@ function PersonalSetting() {
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <TitleForSetting
         isEdit
         onPressEdit={changeVisible}

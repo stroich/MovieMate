@@ -55,7 +55,7 @@ export function MovieCard({
         source={{uri: data.Poster}}
         testID={`Poster-${data.imdbID}`}
       />
-      <View style={[styles.containerTitle]}>
+      <View style={styles.containerTitle}>
         <ThemedText style={styles.title}>{data.Title}</ThemedText>
       </View>
       {hasDeleteButton && (

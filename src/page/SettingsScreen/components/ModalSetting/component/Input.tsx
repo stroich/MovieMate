@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     borderWidth: 1,
     borderRadius: 20,
-    borderColor: '#606265',
-    color: 'white',
+    borderColor: constants.colorGray,
+    color: constants.colorWhite,
   },
   text: {
     position: 'absolute',

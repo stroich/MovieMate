@@ -18,6 +18,7 @@ import ThemedText from '../../../../components/ThemedText/ThemedText';
 import DropdownForForm from './component/DropdownForForm';
 import {useSnapshot} from 'valtio';
 import themeState from '../../../../store/GlobalStores/themeState';
+import constants from '../../../../styles/constants';
 
 type ModalSettingsProps = {
   visible: boolean;
@@ -128,11 +129,11 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     borderWidth: 1,
     borderRadius: 20,
-    borderColor: '#606265',
-    color: 'white',
+    borderColor: constants.colorGray,
+    color: constants.colorWhite,
   },
   text: {
-    color: 'white',
+    color: constants.colorWhite,
     fontSize: 20,
   },
   containerIcon: {

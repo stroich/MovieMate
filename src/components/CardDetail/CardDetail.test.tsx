@@ -5,6 +5,7 @@ import {mockCardDetails, mockListMovies} from '../../mock/MockData';
 
 jest.mock('../BackButton/BackButton', () => {
   const {View} = require('react-native');
+  // eslint-disable-next-line react/display-name -- there is no need to use it in such a scenario
   return () => <View testID="BackButton" />;
 });
 

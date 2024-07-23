@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   text: {
-    color: '#ffffff',
+    color: constants.colorWhite,
     fontSize: 15,
   },
   textDetails: {

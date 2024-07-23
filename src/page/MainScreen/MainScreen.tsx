@@ -34,10 +34,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  loading: {
-    color: 'white',
-    textAlign: 'center',
-  },
 });
 
 export default MainScreen;

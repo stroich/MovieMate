@@ -12,6 +12,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 import {useSnapshot} from 'valtio';
 import themeState from '../../store/GlobalStores/themeState';
+import constants from '../../styles/constants';
 
 type SearchProps = {
   onSearch: (value: string) => void;
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderWidth: 1,
     borderRadius: 20,
-    borderColor: '#606265',
+    borderColor: constants.colorGray,
     paddingLeft: 20,
   },
 });
