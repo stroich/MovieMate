@@ -9,8 +9,7 @@
       "@styles/*": ["src/styles/*"],
       "@mock/*": ["src/mock/*"],
       "@page/*": ["src/page/*"],
-      "@type/*": ["src/types/*"]
+      "@type/*": ["src/type/*"]
     }
-  },
-  "include": ["./src/**/*"]
+  }
 }
