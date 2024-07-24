@@ -1,9 +1,11 @@
 import React from 'react';
-import {act, render} from '@testing-library/react-native';
+
 import {useNavigation} from '@react-navigation/native';
-import FavoritesScreen from './FavoritesScreen';
-import favoritesState from '../../store/GlobalStores/favoritesState';
-import {mockListMovies} from '../../mock/MockData';
+import {act, render} from '@testing-library/react-native';
+
+import {mockListMovies} from '@mock/MockData';
+import FavoritesScreen from '@page/FavoritesScreen/FavoritesScreen';
+import favoritesState from '@store/GlobalStores/favoritesState';
 
 jest.mock('@react-navigation/native');
 jest.mocked(useNavigation).mockReturnValue({goBack: jest.fn()});

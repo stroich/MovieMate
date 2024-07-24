@@ -1,14 +1,15 @@
+import {act, waitFor} from '@testing-library/react-native';
+
+import {mockListMovies} from '@mock/MockData';
 import favoritesState, {
   addFavorites,
   removeFavorites,
   toggleFavorites,
-} from './favoritesState';
+} from '@store/GlobalStores/favoritesState';
 import {
   getFavoriteMoviesToStorage,
   setFavoriteMoviesToStorage,
-} from '../../utils/asyncStorage/asyncStorage';
-import {mockListMovies} from '../../mock/MockData';
-import {act, waitFor} from '@testing-library/react-native';
+} from '@utils/asyncStorage/asyncStorage';
 
 jest.mock('../../utils/asyncStorage/asyncStorage', () => ({
   getFavoriteMoviesToStorage: jest.fn(),

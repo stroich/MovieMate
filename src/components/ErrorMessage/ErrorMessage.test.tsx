@@ -1,6 +1,8 @@
 import React from 'react';
+
 import {render} from '@testing-library/react-native';
-import ErrorMessage from './ErrorMessage';
+
+import ErrorMessage from '@components/ErrorMessage/ErrorMessage';
 
 describe('renders ErrorMessage', () => {
   it('should render ErrorMessage with error null', () => {

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import {fireEvent, render} from '@testing-library/react-native';
+
 import '@react-navigation/native';
-import Dropdown from './Dropdown';
+import Dropdown from '@components/Dropdown/Dropdown';
 
 const listOfOption = [
   {id: '1', value: 'Action'},

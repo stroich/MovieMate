@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
+
 import {StyleSheet, View, ViewStyle} from 'react-native';
-import {ListMoviesType} from '../../types/moviesTypes';
-import {AnimatedMovieCard} from './components/AnimatedMovieCard';
-import constants from '../../styles/constants';
+
+import {AnimatedMovieCard} from '@components/MovieDeck/components/AnimatedMovieCard';
+import constants from '@styles/constants';
+import {ListMoviesType} from '@type/moviesTypes';
 
 type MovieDeckProps = {
   data: ListMoviesType;

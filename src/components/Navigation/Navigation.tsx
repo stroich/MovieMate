@@ -1,11 +1,13 @@
 import React from 'react';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeStack from './HomeStack';
-import DetailsScreen from '../../page/DetailsScreen/DetailsScreen';
-import {RootStackParamList} from '../../types/navigationTypes';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState';
+
+import HomeStack from '@components/Navigation/HomeStack';
+import DetailsScreen from '@page/DetailsScreen/DetailsScreen';
+import themeState from '@store/GlobalStores/themeState';
+import {RootStackParamList} from '@type/navigationTypes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

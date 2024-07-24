@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
+
 import {StyleSheet} from 'react-native';
-import {CardType} from '../../../types/moviesTypes';
-import Animated, {FadeOut} from 'react-native-reanimated';
-import {MovieCard} from '../../MovieCard/MovieCard';
 import {GestureDetector} from 'react-native-gesture-handler';
-import CustomButton from './CustomButton/CustomButton';
-import {useSwipe} from '../hooks/useSwipe';
+import Animated, {FadeOut} from 'react-native-reanimated';
+
+import {MovieCard} from '@components/MovieCard/MovieCard';
+import CustomButton from '@components/MovieDeck/components/CustomButton/CustomButton';
+import {SwipeDirectionEnum} from '@components/MovieDeck/hooks/swipeType';
+import {useSwipe} from '@components/MovieDeck/hooks/useSwipe';
 import {
   addFavorites,
   removeFavorites,
-} from '../../../store/GlobalStores/favoritesState';
-import {SwipeDirectionEnum} from '../hooks/swipeType';
+} from '@store/GlobalStores/favoritesState';
+import {CardType} from '@type/moviesTypes';
 
 type MovieCardProps = {
   data: CardType;

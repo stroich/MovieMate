@@ -1,4 +1,5 @@
 import React, {useMemo, useState} from 'react';
+
 import {
   FlatList,
   StyleSheet,
@@ -6,11 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import ThemedText from '../ThemedText/ThemedText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState';
-import constants from '../../styles/constants';
+
+import ThemedText from '@components/ThemedText/ThemedText';
+import themeState from '@store/GlobalStores/themeState';
+import constants from '@styles/constants';
 
 type ItemType = {
   id: string;

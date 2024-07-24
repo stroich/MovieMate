@@ -1,7 +1,9 @@
 import React from 'react';
-import {act, fireEvent, render} from '@testing-library/react-native';
+
 import {useNavigation} from '@react-navigation/native';
-import PersonalSetting from './PersonalSettings';
+import {act, fireEvent, render} from '@testing-library/react-native';
+
+import PersonalSetting from '@page/SettingsScreen/components/PersonalSettings/PersonalSettings';
 
 jest.mock('@react-navigation/native');
 jest.mocked(useNavigation).mockReturnValue({goBack: jest.fn()});

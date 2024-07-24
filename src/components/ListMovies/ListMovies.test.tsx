@@ -1,9 +1,10 @@
 import React from 'react';
-import {render, userEvent} from '@testing-library/react-native';
-import List from './ListMovies';
 
-import {CardType} from '../../types/moviesTypes';
-import {mockListMovies} from '../../mock/MockData';
+import {render, userEvent} from '@testing-library/react-native';
+
+import List from '@components/ListMovies/ListMovies';
+import {mockListMovies} from '@mock/MockData';
+import {CardType} from '@type/moviesTypes';
 
 type mockProps = {
   data: CardType;

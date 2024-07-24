@@ -1,6 +1,8 @@
 import React from 'react';
+
 import {StyleSheet, View, Text} from 'react-native';
-import constants from '../../styles/constants';
+
+import constants from '@styles/constants';
 
 type ErrorMessageProps = {
   error: Error | null;

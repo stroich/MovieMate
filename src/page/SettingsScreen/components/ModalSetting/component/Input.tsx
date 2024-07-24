@@ -1,15 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+
 import {
   Control,
   Controller,
   FieldErrors,
   RegisterOptions,
 } from 'react-hook-form';
-import {PersonalSettingsType as SettingData} from '../../../../../types/settingType';
-import constants from '../../../../../styles/constants';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {useSnapshot} from 'valtio';
-import themeState from '../../../../../store/GlobalStores/themeState';
+
+import themeState from '@store/GlobalStores/themeState';
+import constants from '@styles/constants';
+import {PersonalSettingsType as SettingData} from 'src/type/settingType';
 
 type InputProps = {
   control: Control<SettingData, any>;

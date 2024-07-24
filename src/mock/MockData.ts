@@ -1,4 +1,4 @@
-import {MovieType} from '../types/moviesTypes';
+import {MovieType} from '@type/moviesTypes';
 
 export const mockListMovies = [
   {

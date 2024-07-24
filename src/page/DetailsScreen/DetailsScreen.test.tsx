@@ -1,11 +1,13 @@
 import React from 'react';
-import {render} from '@testing-library/react-native';
-import DetailsScreen from './DetailsScreen';
-import {mockCardDetails} from '../../mock/MockData';
-import {RootStackParamList} from '../../types/navigationTypes';
+
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {useQuery, UseQueryResult} from '@tanstack/react-query';
-import {getMovie} from '../../utils/api/apiMovies';
+import {render} from '@testing-library/react-native';
+
+import {mockCardDetails} from '@mock/MockData';
+import DetailsScreen from '@page/DetailsScreen/DetailsScreen';
+import {RootStackParamList} from '@type/navigationTypes';
+import {getMovie} from '@utils/api/apiMovies';
 
 jest.mock('@tanstack/react-query');
 const mockedUseQuery = jest.mocked(useQuery);

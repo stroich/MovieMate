@@ -1,7 +1,9 @@
 import React from 'react';
+
 import {render} from '@testing-library/react-native';
-import CardDetail from './CardDetail';
-import {mockCardDetails, mockListMovies} from '../../mock/MockData';
+
+import CardDetail from '@components/CardDetail/CardDetail';
+import {mockCardDetails, mockListMovies} from '@mock/MockData';
 
 jest.mock('../BackButton/BackButton', () => {
   const {View} = require('react-native');

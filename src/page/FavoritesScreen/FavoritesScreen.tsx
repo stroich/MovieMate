@@ -1,11 +1,13 @@
 import React from 'react';
+
 import {View, StyleSheet} from 'react-native';
-import List from '../../components/ListMovies/ListMovies';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import ThemedText from '../../components/ThemedText/ThemedText';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState';
-import favoritesState from '../../store/GlobalStores/favoritesState';
+
+import List from '@components/ListMovies/ListMovies';
+import ThemedText from '@components/ThemedText/ThemedText';
+import favoritesState from '@store/GlobalStores/favoritesState';
+import themeState from '@store/GlobalStores/themeState';
 
 function FavoritesScreen() {
   const insets = useSafeAreaInsets();

@@ -1,12 +1,17 @@
 import React from 'react';
+
 import {render, renderHook} from '@testing-library/react-native';
-import DropdownForForm from './DropdownForForm';
-import {verificationRules} from '../verificationRules';
 import {Control, useForm} from 'react-hook-form';
-import {PersonalSettingsType as SettingData} from '../../../../../types/settingType';
+
+import DropdownForForm from '@page/SettingsScreen/components/ModalSetting/component/DropdownForForm';
+import {verificationRules} from '@page/SettingsScreen/components/ModalSetting/verificationRules';
+import {PersonalSettingsType} from '@type/settingType';
 
 const {result} = renderHook(() => useForm());
-const control = result.current.control as unknown as Control<SettingData, any>;
+const control = result.current.control as unknown as Control<
+  PersonalSettingsType,
+  any
+>;
 
 describe('DropdownForForm', () => {
   it('should renders without errors', () => {

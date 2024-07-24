@@ -1,4 +1,6 @@
 import React from 'react';
+
+import {useForm} from 'react-hook-form';
 import {
   View,
   StyleSheet,
@@ -9,21 +11,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useForm} from 'react-hook-form';
-import Input from './component/Input';
-import {verificationRules} from './verificationRules';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {PersonalSettingsType as SettingData} from '../../../../types/settingType';
-import ThemedText from '../../../../components/ThemedText/ThemedText';
-import DropdownForForm from './component/DropdownForForm';
 import {useSnapshot} from 'valtio';
-import themeState from '../../../../store/GlobalStores/themeState';
-import constants from '../../../../styles/constants';
+
+import ThemedText from '@components/ThemedText/ThemedText';
+import DropdownForForm from '@page/SettingsScreen/components/ModalSetting/component/DropdownForForm';
+import Input from '@page/SettingsScreen/components/ModalSetting/component/Input';
+import {verificationRules} from '@page/SettingsScreen/components/ModalSetting/verificationRules';
+import themeState from '@store/GlobalStores/themeState';
+import constants from '@styles/constants';
+import {PersonalSettingsType} from '@type/settingType';
 
 type ModalSettingsProps = {
   visible: boolean;
   onCloseModal: () => void;
-  onSubmit: (value: SettingData) => void;
+  onSubmit: (value: PersonalSettingsType) => void;
 };
 
 function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
@@ -40,7 +42,7 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm<SettingData>({
+  } = useForm<PersonalSettingsType>({
     defaultValues: defaultValues,
   });
 
@@ -89,7 +91,9 @@ function ModalSettings({visible, onSubmit, onCloseModal}: ModalSettingsProps) {
 
           <Button
             title=" SAVE "
-            onPress={handleSubmit((data: SettingData) => onSubmit(data))}
+            onPress={handleSubmit((data: PersonalSettingsType) =>
+              onSubmit(data),
+            )}
             color={
               Platform.OS === 'ios' ? colors.colorText : colors.colorButton
             }

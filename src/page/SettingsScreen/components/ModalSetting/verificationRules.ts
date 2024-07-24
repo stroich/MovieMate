@@ -1,5 +1,6 @@
 import {RegisterOptions} from 'react-hook-form';
-import {PersonalSettingsType} from '../../../../types/settingType';
+
+import {PersonalSettingsType} from '@type/settingType';
 
 type RulesType = RegisterOptions<
   PersonalSettingsType,

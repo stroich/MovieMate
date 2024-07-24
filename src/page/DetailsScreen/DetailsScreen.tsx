@@ -1,15 +1,16 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {DetailsScreenProps} from '@type/navigationTypes';
-import ErrorMessage from '@components/ErrorMessage/ErrorMessage';
-import CardDetail from '@components/CardDetail/CardDetail';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Loading from '@components/Loading/Loading';
 
 import {useQuery} from '@tanstack/react-query';
-import {getMovie} from '@utils/api/apiMovies';
+import {View, StyleSheet} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useSnapshot} from 'valtio';
+
+import CardDetail from '@components/CardDetail/CardDetail';
+import ErrorMessage from '@components/ErrorMessage/ErrorMessage';
+import Loading from '@components/Loading/Loading';
 import themeState from '@store/GlobalStores/themeState';
+import {getMovie} from '@utils/api/apiMovies';
+import {DetailsScreenProps} from 'src/type/navigationTypes';
 
 function DetailsScreen({route}: DetailsScreenProps) {
   const {colors} = useSnapshot(themeState);

@@ -1,5 +1,6 @@
 import {proxy} from 'valtio';
-import {ColorType, constants} from '../../styles/ThemeColors';
+
+import {ColorType, constants} from '@styles/ThemeColors';
 
 export interface ThemeStateType {
   theme: 'dark' | 'light';

@@ -1,6 +1,7 @@
-import {mockCardDetails, mockListMovies} from '../../mock/MockData';
-import {fetchQuery, getMovie, getMovies} from './apiMovies';
 import fetchMock from 'jest-fetch-mock';
+
+import {mockListMovies, mockCardDetails} from '@mock/MockData';
+import {fetchQuery, getMovies, getMovie} from '@utils/api/apiMovies';
 
 fetchMock.enableMocks();
 

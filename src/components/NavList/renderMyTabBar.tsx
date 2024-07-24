@@ -1,10 +1,12 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import constants from '../../styles/constants';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState';
+
+import themeState from '@store/GlobalStores/themeState';
+import constants from '@styles/constants';
 
 interface MyTabBarProps extends BottomTabBarProps {}
 

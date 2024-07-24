@@ -1,10 +1,11 @@
 import {proxy, subscribe} from 'valtio';
-import {CardType, ListMoviesType} from '../../types/moviesTypes';
+
+import {ListMoviesType, CardType} from '@type/moviesTypes';
 import {
   getFavoriteMoviesToStorage,
   setFavoriteMoviesToStorage,
-} from '../../utils/asyncStorage/asyncStorage';
-import {isInMovieList} from '../../utils/helpers';
+} from '@utils/asyncStorage/asyncStorage';
+import {isInMovieList} from '@utils/helpers';
 
 interface FavoritesStateType {
   favorites: ListMoviesType;

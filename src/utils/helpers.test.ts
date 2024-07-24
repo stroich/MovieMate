@@ -1,5 +1,5 @@
-import {mockListMovies} from '../mock/MockData';
-import {isInMovieList} from './helpers';
+import {mockListMovies} from '@mock/MockData';
+import {isInMovieList} from '@utils/helpers';
 
 describe('isInMovieList', () => {
   it('should return true if the movie is in the favorites list', () => {

@@ -1,6 +1,8 @@
 import React from 'react';
+
 import {render} from '@testing-library/react-native';
-import ThemedText from './ThemedText';
+
+import ThemedText from '@components/ThemedText/ThemedText';
 
 describe('renders ThemedText', () => {
   it('renders ThemedText without style', () => {

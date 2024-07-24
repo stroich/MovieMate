@@ -1,6 +1,8 @@
 import React from 'react';
+
 import {render} from '@testing-library/react-native';
-import TitleForSetting from './TitleForSetting';
+
+import TitleForSetting from '@page/SettingsScreen/components/TitleForSetting/TitleForSetting';
 
 describe('GeneralSettings', () => {
   it('should has text without edit icon', () => {

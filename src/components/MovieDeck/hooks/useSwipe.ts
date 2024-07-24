@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+
 import {Gesture} from 'react-native-gesture-handler';
 import {
   useSharedValue,
@@ -8,7 +9,8 @@ import {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import {SwipeDirectionEnum} from './swipeType';
+
+import {SwipeDirectionEnum} from '@components/MovieDeck/hooks/swipeType';
 
 type UseSwipeProps = {
   delay: number;

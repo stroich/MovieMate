@@ -1,5 +1,5 @@
-import {constants} from '../../styles/ThemeColors';
-import themeState, {toggleTheme} from './themeState';
+import themeState, {toggleTheme} from '@store/GlobalStores/themeState';
+import {constants} from '@styles/ThemeColors';
 
 describe('ThemeState tests', () => {
   beforeEach(() => {

@@ -1,15 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+
 import {
   Control,
   Controller,
   FieldErrors,
   RegisterOptions,
 } from 'react-hook-form';
-import {PersonalSettingsType as SettingData} from '../../../../../types/settingType';
-import constants from '../../../../../styles/constants';
-import Dropdown from '../../../../../components/Dropdown/Dropdown';
-import {VideoType} from '../verificationRules';
+import {StyleSheet, Text, View} from 'react-native';
+
+import Dropdown from '@components/Dropdown/Dropdown';
+import {VideoType} from '@page/SettingsScreen/components/ModalSetting/verificationRules';
+import constants from '@styles/constants';
+import {PersonalSettingsType} from '@type/settingType';
 
 const listOfOption = [
   {id: '1', value: VideoType.Episode},
@@ -18,10 +20,10 @@ const listOfOption = [
 ];
 
 type InputProps = {
-  control: Control<SettingData, any>;
-  name: keyof SettingData;
-  errors: FieldErrors<SettingData>[keyof FieldErrors<SettingData>];
-  rules: RegisterOptions<SettingData, keyof SettingData>;
+  control: Control<PersonalSettingsType, any>;
+  name: keyof PersonalSettingsType;
+  errors: FieldErrors<PersonalSettingsType>[keyof FieldErrors<PersonalSettingsType>];
+  rules: RegisterOptions<PersonalSettingsType, keyof PersonalSettingsType>;
 };
 
 function DropdownForForm({control, name, errors, rules}: InputProps) {

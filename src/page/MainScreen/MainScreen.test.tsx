@@ -1,16 +1,18 @@
 import React from 'react';
-import {render, waitFor} from '@testing-library/react-native';
-import {mockListMovies} from '../../mock/MockData';
+
 import {useNavigation} from '@react-navigation/native';
 import {useQuery, UseQueryResult} from '@tanstack/react-query';
-import {getMovie} from '../../utils/api/apiMovies';
-import MainScreen from './MainScreen';
+import {render, waitFor} from '@testing-library/react-native';
+import {PanGestureHandler} from 'react-native-gesture-handler';
 import {
   fireGestureHandler,
   getByGestureTestId,
 } from 'react-native-gesture-handler/jest-utils';
-import {PanGestureHandler} from 'react-native-gesture-handler';
-import {stateForSwipe} from '../../mock/stateForSwipe.ts';
+
+import {mockListMovies} from '@mock/MockData';
+import {stateForSwipe} from '@mock/stateForSwipe';
+import MainScreen from '@page/MainScreen/MainScreen';
+import {getMovie} from '@utils/api/apiMovies';
 
 jest.mock('@tanstack/react-query');
 const mockedUseQuery = jest.mocked(useQuery);

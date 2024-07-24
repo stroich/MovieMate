@@ -1,4 +1,6 @@
 import React from 'react';
+
+import {useNavigation} from '@react-navigation/native';
 import {
   View,
   StyleSheet,
@@ -6,14 +8,14 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {UseNavigationProps} from '../../types/navigationTypes';
-import {CardType} from '../../types/moviesTypes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import ThemedText from '../ThemedText/ThemedText';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState';
-import {removeFavorites} from '../../store/GlobalStores/favoritesState';
+
+import ThemedText from '@components/ThemedText/ThemedText';
+import {removeFavorites} from '@store/GlobalStores/favoritesState';
+import themeState from '@store/GlobalStores/themeState';
+import {CardType} from '@type/moviesTypes';
+import {UseNavigationProps} from '@type/navigationTypes';
 
 type MovieCardProps = {
   data: CardType;

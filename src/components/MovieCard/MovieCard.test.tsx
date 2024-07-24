@@ -1,9 +1,11 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
-import {MovieCard} from './MovieCard';
-import {mockListMovies} from '../../mock/MockData';
-import {removeFavorites} from '../../store/GlobalStores/favoritesState';
+
 import {useNavigation} from '@react-navigation/native';
+import {fireEvent, render} from '@testing-library/react-native';
+
+import {MovieCard} from '@components/MovieCard/MovieCard';
+import {mockListMovies} from '@mock/MockData';
+import {removeFavorites} from '@store/GlobalStores/favoritesState';
 
 const mockNavigate = jest.fn();
 

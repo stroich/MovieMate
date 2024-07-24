@@ -1,8 +1,9 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
-import '@react-navigation/native';
-import BackButton from './BackButton';
+
 import {useNavigation} from '@react-navigation/native';
+import {fireEvent, render} from '@testing-library/react-native';
+
+import BackButton from '@components/BackButton/BackButton';
 
 const mockGoBack = jest.fn();
 
