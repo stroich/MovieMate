@@ -1,5 +1,16 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@store/*": ["src/store/*"],
+      "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/styles/*"],
+      "@mock/*": ["src/mock/*"],
+      "@page/*": ["src/page/*"],
+      "@type/*": ["src/types/*"]
+    }
+  },
+  "include": ["./src/**/*"]
 }
