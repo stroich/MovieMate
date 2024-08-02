@@ -1,4 +1,4 @@
-import {mockListMoviesWithPages} from '../../../mock/MockData';
+import {mockListMoviesWithPages} from '@mock/MockData';
 
 export const mockUseQueryWithEmpty = {
   data: undefined,

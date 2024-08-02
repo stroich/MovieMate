@@ -1,4 +1,5 @@
 {
-    "jest.coverageFormatter": "GutterFormatter",
-    "jest.runMode": {"type": "on-demand"},
+  "jest.coverageFormatter": "GutterFormatter",
+  "jest.runMode": {"type": "on-demand"},
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

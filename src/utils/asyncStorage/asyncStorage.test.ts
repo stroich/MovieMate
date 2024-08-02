@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {mockListMovies} from '@mock/MockData';
 import {
   getFavoriteMoviesToStorage,
   setFavoriteMoviesToStorage,
-} from './asyncStorage';
-import {mockListMovies} from '../../mock/MockData';
+} from '@utils/asyncStorage/asyncStorage';
 
 describe('AsyncStorage functions', () => {
   describe('getFavoriteMoviesToStorage', () => {

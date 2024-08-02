@@ -1,10 +1,12 @@
 import React from 'react';
+
 import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import GeneralSettings from './components/GeneralSettings/GeneralSettings';
-import PersonalSetting from './components/PersonalSettings/PersonalSettings';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState';
+
+import GeneralSettings from '@page/SettingsScreen/components/GeneralSettings/GeneralSettings';
+import PersonalSetting from '@page/SettingsScreen/components/PersonalSettings/PersonalSettings';
+import themeState from '@store/GlobalStores/themeState';
 
 function SettingsScreen() {
   const insets = useSafeAreaInsets();

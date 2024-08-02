@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+
 import {View, StyleSheet, FlatList} from 'react-native';
-import constants from '../../../../styles/constants';
-import {PersonalSettingsType} from '../../../../types/settingType';
-import TitleForSetting from '../TitleForSetting/TitleForSetting';
-import SettingItem from '../SettingItem/SettingItem';
-import ModalSettings from '../ModalSetting/ModalSetting';
+
+import ModalSettings from '@page/SettingsScreen/components/ModalSetting/ModalSetting';
+import SettingItem from '@page/SettingsScreen/components/SettingItem/SettingItem';
+import TitleForSetting from '@page/SettingsScreen/components/TitleForSetting/TitleForSetting';
+import constants from '@styles/constants';
+import {PersonalSettingsType} from '@type/settingType';
 
 function PersonalSetting() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,7 +27,7 @@ function PersonalSetting() {
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <TitleForSetting
         isEdit
         onPressEdit={changeVisible}

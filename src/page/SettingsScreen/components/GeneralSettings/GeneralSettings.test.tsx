@@ -1,7 +1,9 @@
 import React from 'react';
+
 import {act, fireEvent, render, waitFor} from '@testing-library/react-native';
-import GeneralSettings from './GeneralSettings';
-import themeState from '../../../../store/GlobalStores/themeState';
+
+import GeneralSettings from '@page/SettingsScreen/components/GeneralSettings/GeneralSettings';
+import themeState from '@store/GlobalStores/themeState';
 
 describe('GeneralSettings', () => {
   it('should has style for black theme', async () => {

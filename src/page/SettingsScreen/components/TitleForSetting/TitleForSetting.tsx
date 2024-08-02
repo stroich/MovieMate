@@ -1,10 +1,12 @@
 import React, {useMemo} from 'react';
+
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {View} from 'react-native';
-import ThemedText from '../../../../components/ThemedText/ThemedText';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSnapshot} from 'valtio';
-import themeState from '../../../../store/GlobalStores/themeState';
+
+import ThemedText from '@components/ThemedText/ThemedText';
+import themeState from '@store/GlobalStores/themeState';
 
 type ThemedTextProps = {
   value: string;

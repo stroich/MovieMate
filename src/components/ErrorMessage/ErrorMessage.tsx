@@ -1,5 +1,8 @@
 import React from 'react';
+
 import {StyleSheet, View, Text} from 'react-native';
+
+import constants from '@styles/constants';
 
 type ErrorMessageProps = {
   error: Error | null;
@@ -22,7 +25,7 @@ const styles = StyleSheet.create({
   text: {
     padding: 20,
     textAlign: 'center',
-    color: 'white',
+    color: constants.colorWhite,
     fontSize: 20,
   },
 });

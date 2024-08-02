@@ -1,6 +1,8 @@
 import React from 'react';
+
 import {act, fireEvent, render} from '@testing-library/react-native';
-import ModalSettings from './ModalSetting';
+
+import ModalSettings from '@page/SettingsScreen/components/ModalSetting/ModalSetting';
 
 const RN = jest.requireActual('react-native');
 

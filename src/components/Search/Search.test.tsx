@@ -1,7 +1,9 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
-import Search from './Search';
+
 import {useNavigation} from '@react-navigation/native';
+import {fireEvent, render} from '@testing-library/react-native';
+
+import Search from '@components/Search/Search';
 
 const mockGoBack = jest.fn();
 

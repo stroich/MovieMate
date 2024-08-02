@@ -7,4 +7,5 @@ export default {
   colorDarkGray: '#3e3e3e',
   colorOpasity50: '#282c3480',
   colorOpasity75: '#282c34cc',
+  colorGray: '#606265',
 };

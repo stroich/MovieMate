@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
-import Loading from '../../components/Loading/Loading.tsx';
-import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.tsx';
-import MovieDeck from '../../components/MovieDeck/MovieDeck.tsx';
+
 import {useQuery} from '@tanstack/react-query';
-import {getMovies} from '../../utils/api/apiMovies.ts';
+import {StyleSheet, View} from 'react-native';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState.ts';
+
+import ErrorMessage from '@components/ErrorMessage/ErrorMessage';
+import Loading from '@components/Loading/Loading';
+import MovieDeck from '@components/MovieDeck/MovieDeck.tsx';
+import themeState from '@store/GlobalStores/themeState.ts';
+import {getMovies} from '@utils/api/apiMovies.ts';
 
 function MainScreen() {
   const {colors} = useSnapshot(themeState);
@@ -33,10 +35,6 @@ function MainScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  loading: {
-    color: 'white',
-    textAlign: 'center',
   },
 });
 

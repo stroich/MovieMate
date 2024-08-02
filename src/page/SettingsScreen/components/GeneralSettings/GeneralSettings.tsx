@@ -1,11 +1,11 @@
 import React from 'react';
+
 import {StyleSheet, Switch, Text, View} from 'react-native';
-import constants from '../../../../styles/constants';
-import TitleForSetting from '../TitleForSetting/TitleForSetting';
 import {useSnapshot} from 'valtio';
-import themeState, {
-  toggleTheme,
-} from '../../../../store/GlobalStores/themeState';
+
+import TitleForSetting from '@page/SettingsScreen/components/TitleForSetting/TitleForSetting';
+import themeState, {toggleTheme} from '@store/GlobalStores/themeState';
+import constants from '@styles/constants';
 
 function GeneralSettings() {
   const state = useSnapshot(themeState);
@@ -15,7 +15,7 @@ function GeneralSettings() {
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <TitleForSetting value="General Settings" />
       <View style={styles.containerSwitch}>
         <Text style={[styles.text, {color: state.colors.colorGray}]}>

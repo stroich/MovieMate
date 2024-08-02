@@ -1,8 +1,10 @@
 import React from 'react';
+
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native';
 import {useSnapshot} from 'valtio';
-import themeState from '../../../../store/GlobalStores/themeState';
+
+import themeState from '@store/GlobalStores/themeState';
 
 type SettingItemProps = {
   data: [string, string];

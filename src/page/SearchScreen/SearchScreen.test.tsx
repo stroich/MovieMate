@@ -1,15 +1,17 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
+
 import {useNavigation} from '@react-navigation/native';
-import SearchScreen from './SearchScreen';
-import {useFetchMovies} from './hooks/useFetchMovies.ts';
+import {fireEvent, render} from '@testing-library/react-native';
+
+import {mockListMovies} from '@mock/MockData';
+import SearchScreen from '@page/SearchScreen/SearchScreen';
 import {
   mockUseQueryWithEmpty,
   mockUseQueryWithError,
   mockUseQueryWithLoading,
   mockUseQueryWithMovies,
-} from './hooks/mockResultQuery.ts';
-import {mockListMovies} from '../../mock/MockData.ts';
+} from '@page/SearchScreen/hooks/mockResultQuery';
+import {useFetchMovies} from '@page/SearchScreen/hooks/useFetchMovies';
 
 jest.mock('./hooks/useFetchMovies.ts');
 const mockedUseFetchMovies = jest.mocked(useFetchMovies);

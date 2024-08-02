@@ -1,7 +1,9 @@
-import {render, renderHook} from '@testing-library/react-native';
-import {useSwipe} from './useSwipe';
 import React from 'react';
+
+import {render, renderHook} from '@testing-library/react-native';
 import Animated from 'react-native-reanimated';
+
+import {useSwipe} from '@components/MovieDeck/hooks/useSwipe';
 
 describe('useSwipe', () => {
   beforeEach(() => {

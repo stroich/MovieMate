@@ -1,14 +1,15 @@
 import React from 'react';
+
 import {fireEvent, render, waitFor} from '@testing-library/react-native';
-import CardMovieDescription from './CardMovieDescription';
-import {mockCardDetails} from '../../../mock/MockData';
-import '../../../utils/asyncStorage/asyncStorage';
 import {PanGesture, State} from 'react-native-gesture-handler';
 import {
   fireGestureHandler,
   getByGestureTestId,
 } from 'react-native-gesture-handler/jest-utils';
-import favoritesState from '../../../store/GlobalStores/favoritesState';
+
+import CardMovieDescription from '@components/CardDetail/components/CardMovieDescription';
+import {mockCardDetails} from '@mock/MockData';
+import favoritesState from '@store/GlobalStores/favoritesState';
 
 jest.mock('../../../utils/asyncStorage/asyncStorage', () => ({
   getFavoriteMoviesToStorage: jest.fn(),

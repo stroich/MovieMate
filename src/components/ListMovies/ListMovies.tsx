@@ -1,8 +1,10 @@
 import React from 'react';
+
 import {FlatList, StyleSheet} from 'react-native';
-import {MovieCard} from '../MovieCard/MovieCard';
-import {ListMoviesType} from '../../types/moviesTypes';
-import ThemedText from '../ThemedText/ThemedText';
+
+import {MovieCard} from '@components/MovieCard/MovieCard';
+import ThemedText from '@components/ThemedText/ThemedText';
+import {ListMoviesType} from '@type/moviesTypes';
 
 type ListProps = {
   data: ListMoviesType;

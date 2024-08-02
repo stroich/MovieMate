@@ -1,5 +1,6 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
-import {getMovies} from '../../../utils/api/apiMovies';
+
+import {getMovies} from '@utils/api/apiMovies';
 
 export function useFetchMovies(queryText: string) {
   const {data, isLoading, error, fetchNextPage} = useInfiniteQuery({

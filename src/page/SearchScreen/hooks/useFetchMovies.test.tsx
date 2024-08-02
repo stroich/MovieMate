@@ -1,7 +1,8 @@
 import {act, renderHook, waitFor} from '@testing-library/react-native';
-import {useFetchMovies} from './useFetchMovies';
-import {createWrapper} from '../../../mock/createWrapperForQuery';
-import {fetchQuery} from '../../../utils/api/apiMovies';
+
+import {createWrapper} from '@mock/createWrapperForQuery';
+import {useFetchMovies} from '@page/SearchScreen/hooks/useFetchMovies';
+import {fetchQuery} from '@utils/api/apiMovies';
 
 const mockData = {Search: []};
 jest.mock('../../../utils/api/apiMovies');

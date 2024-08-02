@@ -1,15 +1,17 @@
 import React from 'react';
-import {render, renderHook, waitFor} from '@testing-library/react-native';
-import {AnimatedMovieCard} from './AnimatedMovieCard';
-import {mockListMovies} from '../../../mock/MockData';
-import * as swipe from '../hooks/useSwipe';
-import {SwipeDirectionEnum} from '../hooks/swipeType';
+
 import {useNavigation} from '@react-navigation/native';
+import {render, renderHook, waitFor} from '@testing-library/react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import {
   fireGestureHandler,
   getByGestureTestId,
 } from 'react-native-gesture-handler/jest-utils';
+
+import {AnimatedMovieCard} from '@components/MovieDeck/components/AnimatedMovieCard';
+import {SwipeDirectionEnum} from '@components/MovieDeck/hooks/swipeType';
+import * as swipe from '@components/MovieDeck/hooks/useSwipe';
+import {mockListMovies} from '@mock/MockData';
 
 jest.mock('../../../utils/asyncStorage/asyncStorage', () => ({
   getFavoriteMoviesToStorage: jest.fn(),

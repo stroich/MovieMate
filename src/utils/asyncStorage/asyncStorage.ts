@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ListMoviesType} from '../../types/moviesTypes';
+
+import {ListMoviesType} from '@type/moviesTypes';
 
 export async function getFavoriteMoviesToStorage(): Promise<ListMoviesType | null> {
   const value = await AsyncStorage.getItem('favorites');

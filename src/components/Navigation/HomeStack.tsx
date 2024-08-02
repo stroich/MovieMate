@@ -1,10 +1,12 @@
 import React from 'react';
-import MainScreen from '../../page/MainScreen/MainScreen';
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MyTabBar from '../NavList/renderMyTabBar';
-import SearchScreen from '../../page/SearchScreen/SearchScreen';
-import FavoritesScreen from '../../page/FavoritesScreen/FavoritesScreen';
-import SettingsScreen from '../../page/SettingsScreen/SettingsScreen';
+
+import MyTabBar from '@components/NavList/renderMyTabBar';
+import FavoritesScreen from '@page/FavoritesScreen/FavoritesScreen';
+import MainScreen from '@page/MainScreen/MainScreen';
+import SearchScreen from '@page/SearchScreen/SearchScreen';
+import SettingsScreen from '@page/SettingsScreen/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 

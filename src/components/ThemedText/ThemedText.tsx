@@ -1,8 +1,10 @@
 import React from 'react';
 import {ReactNode} from 'react';
+
 import {StyleSheet, Text, TextStyle} from 'react-native';
 import {useSnapshot} from 'valtio';
-import themeState from '../../store/GlobalStores/themeState';
+
+import themeState from '@store/GlobalStores/themeState';
 
 type ThemedTextProps = {
   children: ReactNode;

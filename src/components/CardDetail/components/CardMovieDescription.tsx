@@ -1,21 +1,23 @@
 import React from 'react';
+
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-import {MovieType} from '../../../types/moviesTypes';
-import constants from '../../../styles/constants';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Animated, {
   clamp,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSnapshot} from 'valtio';
-import themeState from '../../../store/GlobalStores/themeState';
+
 import favoritesState, {
   toggleFavorites,
-} from '../../../store/GlobalStores/favoritesState';
-import {isInMovieList} from '../../../utils/helpers';
+} from '@store/GlobalStores/favoritesState';
+import themeState from '@store/GlobalStores/themeState';
+import constants from '@styles/constants';
+import {MovieType} from '@type/moviesTypes';
+import {isInMovieList} from '@utils/helpers';
 
 type CardMovieDescriptionProps = {
   data: MovieType;
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   text: {
-    color: '#ffffff',
+    color: constants.colorWhite,
     fontSize: 15,
   },
   textDetails: {
